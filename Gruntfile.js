@@ -28,12 +28,21 @@ module.exports = function(grunt) {
                         'src/js/vendor/jquery-*.js',
                         'src/js/vendor/angular.*.js',
                         'src/js/vendor/angular-*.js'
+                    ],
+                    'bin/js/app.min.js': [
+                        'src/js/**/app.*.js', // apps first
+                        'src/js/**/fac.*.js', // then factories
+                        'src/js/**/svc.*.js', // then services
+                        'src/js/**/ctl.*.js', // then controllers
+                        'src/js/**/dir.*.js', // then directives
+                        'src/js/**/data.*.js',// then data
+                        '!**/vendor/*'    // excluding the whole vendor directory
                     ]
                 }
             },
             vendor_css: {
                 files: {
-                    'bin/css/vendors.min.css': ['src/css/vendor/**/*.css']
+                    'bin/css/vendors.min.css': ['src/less/vendor/**/*.css']
                 }
             }
         },
@@ -42,14 +51,7 @@ module.exports = function(grunt) {
                 sourceMap: true
             },
             app: {
-                files: {
-                    'bin/js/app.min.js': [
-                        'src/js/**/app.*.js', // apps first
-                        'src/js/**/svc.*.js', // then services
-                        'src/js/**/ctl.*.js', // then controllers
-                        '!**/vendor/*'    // excluding the whole vendor directory
-                    ]
-                }
+                files: { }
             }
         },
         less: {
@@ -60,7 +62,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'bin/css/app.min.css': [
-                        'src/css/**/*.{less,css}',
+                        'src/{less,css}/**/*.{less,css}',
                         '!**/variables.less', // Exclude Variables
                         '!**/vendor/*'        // Exclude Vendor CSS
                     ]
@@ -92,7 +94,7 @@ module.exports = function(grunt) {
                 tasks: ['jshint', 'uglify:app']
             },
             less: {
-                files: ['src/css/**/*.less', '!**/vendor/*'],
+                files: ['src/{less,css}/**/*.less', '!**/vendor/*'],
                 tasks: ['less:development']
             },
             html: {
