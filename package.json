@@ -28,7 +28,9 @@
     "watchify": "^3.3.0"
   },
   "dependencies": {
+    "express": "^4.13.3",
     "flux-react": "^2.6.6",
+    "gulp-less": "^3.0.3",
     "react": "^0.13.3"
   }
 }

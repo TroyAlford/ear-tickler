@@ -12,6 +12,7 @@ var cssmin = require('gulp-cssmin');
 var gutil = require('gulp-util');
 var shell = require('gulp-shell');
 var glob = require('glob');
+var less = require('gulp-less');
 var livereload = require('gulp-livereload');
 var jasminePhantomJs = require('gulp-jasmine2-phantomjs');
 
@@ -96,8 +97,7 @@ var browserifyTask = function (options) {
     testBundler.on('update', rebundleTests);
     rebundleTests();
 
-    // Remove react-addons when deploying, as it is only for
-    // testing
+    // Remove react-addons when deploying, as it is only for testing
     if (!options.development) {
       dependencies.splice(dependencies.indexOf('react/addons'), 1);
     }
@@ -130,6 +130,7 @@ var cssTask = function (options) {
         var start = new Date();
         console.log('Building CSS bundle');
         gulp.src(options.src)
+          .pipe(less())
           .pipe(concat('main.css'))
           .pipe(gulp.dest(options.dest))
           .pipe(notify(function () {
@@ -140,7 +141,7 @@ var cssTask = function (options) {
       gulp.watch(options.src, run);
     } else {
       gulp.src(options.src)
-        .pipe(concat('main.css'))
+        .pipe(concat('main.less'))
         .pipe(cssmin())
         .pipe(gulp.dest(options.dest));   
     }
@@ -157,7 +158,7 @@ gulp.task('default', function () {
   
   cssTask({
     development: true,
-    src: './styles/**/*.css',
+    src: ['./styles/**/*.css','./styles/**/*.less'],
     dest: './build'
   });
 

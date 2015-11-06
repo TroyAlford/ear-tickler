@@ -1,0 +1,83 @@
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css);
+
+@header-bg: url(/images/irongrip.png);
+@header-font: Ubuntu, sans-serif;
+@header-font-color: #eee;
+@body-bg: url(/images/concrete_seamless.png);
+
+html, body {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0; padding: 0;
+}
+body {
+  background-image: @body-bg;
+}
+.ear-tickler.application {
+  position: relative;
+
+  .header-bar, .filtered-track-list, .sound-board {
+    position: absolute;
+  }
+  .header-bar {
+    display: block;
+    width: 100%;
+  }
+
+  .filtered-track-list, .sound-board {
+    display: inline-block;
+    height: calc(100vh - 50px);
+  }
+  .filtered-track-list {
+    margin-top: 50px;
+    width: 200px;
+  }
+  .sound-board {
+    margin: 50px 0 0 200px;
+    width: calc(100% - 200px);
+  }
+}
+
+.header-bar {
+  background-image: @header-bg;
+  color: @header-font-color;
+  height: 50px;
+
+  .title {
+    margin: 10px;
+    font-family: @header-font;
+    font-size: 30px;
+    font-weight: bold;
+  }
+}
+.filtered-track-list {
+  background-image: @header-bg;
+  border-radius: 0 0 25px 0;
+  font-family: @header-font;
+  color: @header-font-color;
+  padding: 5px;
+
+  input[type=text] {
+    border-radius: 5px;
+    border: 3px double;
+    padding: 3px;
+    width: 188px;
+  }
+
+  ul {
+    font-size: 0.9rem;
+    list-style: none;
+    margin: 5px;
+    padding: 0;
+
+    li {
+      width: 100%;
+      i { margin-right: 5px; }
+    }
+  }
+}
+.sound-board {
+
+}

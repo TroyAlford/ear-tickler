@@ -1,3 +1,74 @@
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css);
+html,
 body {
-	background-color: #EAEAEA;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-image: url(/images/concrete_seamless.png);
+}
+.ear-tickler.application {
+  position: relative;
+}
+.ear-tickler.application .header-bar,
+.ear-tickler.application .filtered-track-list,
+.ear-tickler.application .sound-board {
+  position: absolute;
+}
+.ear-tickler.application .header-bar {
+  display: block;
+  width: 100%;
+}
+.ear-tickler.application .filtered-track-list,
+.ear-tickler.application .sound-board {
+  display: inline-block;
+  height: calc(50vh);
+}
+.ear-tickler.application .filtered-track-list {
+  margin-top: 50px;
+  width: 200px;
+}
+.ear-tickler.application .sound-board {
+  margin: 50px 0 0 200px;
+  width: calc(-100%);
+}
+.header-bar {
+  background-image: url(/images/irongrip.png);
+  color: #eee;
+  height: 50px;
+}
+.header-bar .title {
+  margin: 10px;
+  font-family: Ubuntu, sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+}
+.filtered-track-list {
+  background-image: url(/images/irongrip.png);
+  border-radius: 0 0 25px 0;
+  font-family: Ubuntu, sans-serif;
+  color: #eee;
+  padding: 5px;
+}
+.filtered-track-list input[type=text] {
+  border-radius: 5px;
+  border: 3px double;
+  padding: 3px;
+  width: 188px;
+}
+.filtered-track-list ul {
+  font-size: 0.9rem;
+  list-style: none;
+  margin: 5px;
+  padding: 0;
+}
+.filtered-track-list ul li {
+  width: 100%;
+}
+.filtered-track-list ul li i {
+  margin-right: 5px;
 }
