@@ -11,6 +11,7 @@ var SoundBoard = React.createClass({
     this.props.tracks.forEach(function(track) {
       tracks.push(
         <AudioPlayer
+          key={track.id}
           track={track}
         />
       );

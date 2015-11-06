@@ -28,7 +28,7 @@ var App = React.createClass({
           tracks={this.props.trackStore.getTracks()}
         />
         <SoundBoard
-          tracks={[]}
+          tracks={this.props.trackStore.getTracks()}
         />
       </div>
     );

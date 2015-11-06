@@ -12,6 +12,7 @@ var cssmin = require('gulp-cssmin');
 var gutil = require('gulp-util');
 var shell = require('gulp-shell');
 var glob = require('glob');
+var express = require('gulp-express');
 var less = require('gulp-less');
 var livereload = require('gulp-livereload');
 var jasminePhantomJs = require('gulp-jasmine2-phantomjs');

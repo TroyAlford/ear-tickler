@@ -10,7 +10,7 @@ var AudioProgressBar = React.createClass({
       <div className="audio-progress-bar">
         <div
           className="audio-progress-bar-fill"
-          style={"width: " + this.props.seekPercentage + "%;"}
+          style={{width: this.props.seekPercentage + '%'}}
         ></div>
       </div>
     );

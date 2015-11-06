@@ -5,7 +5,7 @@ var http = require('http'),
   fs = require('fs'),
   port = 80;
 
-var app = express();
+var app = module.exports.app = exports.app = express();
 app.use(express.static('build'));
 app.use('/audio', express.static(path.join(__dirname, '/audio')));
 app.use('/images', express.static(path.join(__dirname, '/images')));

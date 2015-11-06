@@ -17,7 +17,7 @@
     "gulp-cssmin": "^0.1.7",
     "gulp-if": "^1.2.5",
     "gulp-jasmine2-phantomjs": "^0.2.0",
-    "gulp-livereload": "^3.8.0",
+    "gulp-livereload": "^3.8.1",
     "gulp-notify": "^2.2.0",
     "gulp-shell": "^0.4.2",
     "gulp-streamify": "0.0.5",
@@ -30,6 +30,7 @@
   "dependencies": {
     "express": "^4.13.3",
     "flux-react": "^2.6.6",
+    "gulp-express": "^0.3.5",
     "gulp-less": "^3.0.3",
     "react": "^0.13.3"
   }

@@ -12,7 +12,9 @@ var AudioPlayer = React.createClass({
     };
   },
 
-  handleClose: function() {},
+  handleClose: function() {
+    console.log('close');
+  },
   handlePause: function() {},
   handlePlay:  function() {},
   handleStop:  function() {},
@@ -21,6 +23,10 @@ var AudioPlayer = React.createClass({
     return (
       <div className="audio-player">
         <div className="track-name">{this.props.track.name}</div>
+        <i
+          className="fa fa-close close-button"
+          onClick={this.handleClose}
+        ></i>
         <AudioProgressBar
           percentage={this.state.seekPercentage}
         />

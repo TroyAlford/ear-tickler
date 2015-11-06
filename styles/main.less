@@ -2,9 +2,12 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css);
 
 @header-bg: url(/images/irongrip.png);
-@header-font: Ubuntu, sans-serif;
-@header-font-color: #eee;
+@font: Ubuntu, sans-serif;
+@font-color: #eee;
 @body-bg: url(/images/concrete_seamless.png);
+
+@lo-header-height: 50px;
+@lo-sidebar-width: 150px;
 
 html, body {
   -webkit-box-sizing: border-box;
@@ -31,39 +34,44 @@ body {
     height: calc(100vh - 50px);
   }
   .filtered-track-list {
-    margin-top: 50px;
-    width: 200px;
+    position: absolute;
+    left: 0;
+    top: @lo-header-height;
+    width: @lo-sidebar-width;
   }
   .sound-board {
-    margin: 50px 0 0 200px;
-    width: calc(100% - 200px);
+    padding: 10px;
+    position: absolute;
+    left: calc(@lo-sidebar-width + 10px);
+    right: 0;
+    top: @lo-header-height;
   }
 }
 
 .header-bar {
   background-image: @header-bg;
-  color: @header-font-color;
-  height: 50px;
+  color: @font-color;
+  height: @lo-header-height;
 
   .title {
     margin: 10px;
-    font-family: @header-font;
-    font-size: 30px;
+    font-family: @font;
+    font-size: calc(@lo-header-height - 20px);
     font-weight: bold;
   }
 }
 .filtered-track-list {
   background-image: @header-bg;
   border-radius: 0 0 25px 0;
-  font-family: @header-font;
-  color: @header-font-color;
+  font-family: @font;
+  color: @font-color;
   padding: 5px;
 
   input[type=text] {
     border-radius: 5px;
     border: 3px double;
     padding: 3px;
-    width: 188px;
+    width: calc(@lo-sidebar-width - 12px);
   }
 
   ul {
@@ -79,5 +87,52 @@ body {
   }
 }
 .sound-board {
+  .audio-player {
+    background: #eee;
+    border: 1px solid #ddd;
+    border-radius: 10px 10px 5px 5px;
+    display: inline-block;
+    font-family: @font;
+    margin: 5px;
+    position: relative;
+    width: @lo-sidebar-width;
 
+    .track-name {
+      background: #666;
+      border-radius: 5px;
+      color: #eee;
+      font-weight: 700;
+      font-size: .9rem;
+      margin: 2px;
+      padding: 2px 0 2px 5px;
+    }
+    .close-button {
+      color: #eee;
+      cursor: pointer;
+      font-size: .7rem;
+      position: absolute;
+      padding: 5px;
+      right: 2px; top: 2px;
+    }
+    .audio-progress-bar {
+      border: 1px solid #ccc;
+      height: 12px;
+      margin: 0 auto;
+      position: relative;
+      width: 95%;
+
+      .audio-progress-bar-fill {
+        background-color: #9cf;
+        border-right: 1px solid #ccc;
+        position: absolute;
+        left: 0; top: 0; bottom: 0;
+      }
+    }
+    .audio-timer {
+      display: inline-block;
+      float: right;
+      font-size: .6rem;
+      margin: 5px;
+    }
+  }
 }
