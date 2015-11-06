@@ -1,6 +1,7 @@
 var React = require('react');
 var TrackStore = require('./TrackStore.js');
 var FilteredTrackList = require('./FilteredTrackList.js');
+var SoundBoard = require('./soundboard/SoundBoard.js');
 var actions = require('./actions.js');
 
 var App = React.createClass({
@@ -19,7 +20,17 @@ var App = React.createClass({
   },
   render: function() {
     return(
-      <FilteredTrackList tracks={this.props.tracks}/>
+      <div className="ear-tickler application">
+        <div className="header-bar">
+          <div className="title">Ear Tickler</div>
+        </div>
+        <FilteredTrackList
+          tracks={this.props.trackStore.getTracks()}
+        />
+        <SoundBoard
+          tracks={[]}
+        />
+      </div>
     );
   }
 });

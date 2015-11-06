@@ -1,21 +1,17 @@
 var React = require('react');
-var ProgressBar = require('./ProgressBar.js');
+var TimeFormatterMixin = require('../mixins/TimeFormatterMixin.js');
 
-var AudioProgressBar = React.createClass({
-  getInitialState: function() {
-    return {};
-  },
+var AudioTimer = React.createClass({
+  mixins: [TimeFormatterMixin],
 
   render: function() {
     return (
-      <div className="audio-progress-bar">
-        <div
-          className="audio-progress-bar-fill"
-          style={"width: " + this.props.percentage + "%;"}
-        ></div>
+      <div className="audio-timer">
+        {this.secondsToTime(this.props.seekCurrent)} /
+        {this.secondsToTime(this.props.seekDuration)}
       </div>
     );
   }
 });
 
-module.exports = AudioProgressBar;
+module.exports = AudioTimer;
