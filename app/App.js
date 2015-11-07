@@ -1,8 +1,7 @@
 var React = require('react');
-var TrackStore = require('./TrackStore.js');
-var FilteredTrackList = require('./FilteredTrackList.js');
+var TrackStore = require('./data/TrackStore.js');
+var FilteredTrackList = require('./navigation/FilteredTrackList.js');
 var SoundBoard = require('./soundboard/SoundBoard.js');
-var actions = require('./actions.js');
 
 var App = React.createClass({
   getInitialState: function () {

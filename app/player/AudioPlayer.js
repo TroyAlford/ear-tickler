@@ -31,7 +31,7 @@ var AudioPlayer = React.createClass({
     this.setState({ playState: 'loading' });
 
     this.audio = new Howl({
-      urls: [this.props.track.url],
+      urls: [this.props.track.origin],
       loop: this.state.loop,
       volume: this.state.volume,
       onload: this.handleAudioLoaded,
