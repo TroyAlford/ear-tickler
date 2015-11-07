@@ -5,6 +5,10 @@ This project's is structured after [`flux-react-boilerplate`](https://github.com
 by [Christian Alfoni](https://github.com/christianalfoni), and uses [Howler.js](https://github.com/goldfire/howler.js) 
 in order to interact with the WebAudio API.
 
+Also, much love to [humanhighway](https://github.com/humanhighway) for the inspiring work at 
+[react-audio-player](https://github.com/humanhighway/react-audio-player), which gave me a huge edge in building the 
+first versions and getting them working.
+
 ### More Info:
 * [Facebook React](http://facebook.github.io/react/)
 * [Facebook Flux](http://facebook.github.io/flux/)
@@ -13,12 +17,8 @@ in order to interact with the WebAudio API.
 ## Development
 * Clone the repo to your working directory
 * Run `npm install`
-* Run `gulp`
-* Start a webservice in the `build` folder, f.ex. `python -m SimpleHTTPServer 80`
-* Go to `localhost` to display the app
-* Go to `localhost/testrunner.html` to see your tests
-* Any changes to `app` or `styles` folder will automatically rebuild to `build` folder
-* Both tests and application changes will refresh automatically in the browser
+* Run `gulp` - this makes any change to `app` or `styles` automatically rebuild
+* Run `dev-server.js` for testing. It defaults to port 80, so you can just use `http://localhost`
 * Run `gulp test` to run all tests with phantomJS and produce XML reports
 
 ## Production Build (minified)
