@@ -6,7 +6,7 @@ by [Christian Alfoni](https://github.com/christianalfoni), and uses [Howler.js](
 in order to interact with the WebAudio API.
 
 Also, much love to [humanhighway](https://github.com/humanhighway) for the inspiring work at 
-[react-audio-player](https://github.com/humanhighway/react-audio-player), which gave me a huge edge in building the 
+[`react-audio-player`](https://github.com/humanhighway/react-audio-player), which gave me a huge edge in building the 
 first versions and getting them working.
 
 ### More Info:
