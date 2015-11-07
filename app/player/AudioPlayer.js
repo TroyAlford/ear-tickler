@@ -66,6 +66,7 @@ var AudioPlayer = React.createClass({
     this.setState({ playState: 'paused' });
     this.audio.pause();
     clearInterval(this.refresh || 0);
+    this.updatePosition();
   },
   handlePlay: function() {
     this.setState({ playState: 'playing' });
@@ -76,9 +77,10 @@ var AudioPlayer = React.createClass({
     this.audio.pos(this.state.duration * percent);
   },
   handleStop: function() {
+    this.setState({ playState: 'stopped' });
     this.audio.stop();
     clearInterval(this.refresh || 0);
-    this.setState({ playState: 'stopped' });
+    this.updatePosition();
   },
   handleLoopToggle: function(loopSetting) {
     if (this.state.playState == 'playing') {
@@ -86,7 +88,7 @@ var AudioPlayer = React.createClass({
       // * Setting .loop(true) while playing doesn't cause it to loop at the end.
       //   Subsequent plays will honor the setting, though - so we simply force it
       //   once to overcome the limitation.
-      this.setState({forceLoop: true});
+      this.setState({forceLoop: loopSetting});
     }
 
     this.setState({ loop: loopSetting });
@@ -102,14 +104,20 @@ var AudioPlayer = React.createClass({
 
   handleAudioEnded: function() {
     this.audio.pos(0);
-    if (this.audio.loop() && this.state.forceLoop) {
+    if (this.state.playState == 'playing' && this.audio.loop() && this.state.forceLoop) {
       // This is necessary due to a bug in Howler.js.
       // * Setting .loop(true) while playing doesn't cause it to loop at the end.
       //   Subsequent plays will honor the setting, though - so we simply force it
       //   once to overcome the limitation.
       this.audio.stop();
       this.audio.play();
-      this.setState({ forceLoop: false }); // Only force it once.
+      this.setState({forceLoop: null}); // Only force it once.
+    } else if (this.state.playState == 'playing' && !this.audio.loop() && !this.state.forceLoop) {
+      this.audio.stop();
+      this.setState({
+        forceLoop: null,
+        playState: 'paused'
+      }); // Only force stopping once.
     } else if (!this.audio.loop())
       this.setState({playState: 'paused'});
   },
