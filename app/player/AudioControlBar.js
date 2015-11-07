@@ -3,10 +3,15 @@ var Helper = require('../Helper.js');
 
 var AudioControlBar = React.createClass({
   handleClick: function() {
-    if (this.props.playState == 'playing')
-      this.props.onPause();
-    else
-      this.props.onPlay();
+    switch (this.props.playState) {
+      case 'loading':
+        break;
+      case 'playing':
+        this.props.onPause();
+        break;
+      default:
+        this.props.onPlay();
+    }
   },
   handleLoopToggle: function() {
     this.props.onLoopToggle(
@@ -19,12 +24,21 @@ var AudioControlBar = React.createClass({
       case 'playing':
         return 'pause';
       case 'loading':
-        return 'hidden';
+        return 'spinner';
       case 'paused':
       case 'stopped':
       default:
         return 'play';
         return 'play';
+    }
+  },
+  getButtonIconClass: function() {
+    var button_class = this.getButtonClass();
+    switch (button_class) {
+      case 'spinner':
+        return 'spinner fa-spin';
+      default:
+        return button_class;
     }
   },
 
@@ -36,7 +50,7 @@ var AudioControlBar = React.createClass({
           className={this.getButtonClass()}
           onClick={this.handleClick}
         >
-          <i className={"fa fa-" + this.getButtonClass()}></i>
+          <i className={"fa fa-" + this.getButtonIconClass()}></i>
         </button>
         <input
           id={loop_toggle_id}

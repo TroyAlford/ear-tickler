@@ -1,6 +1,6 @@
 var React = require('react');
-var TrackSearchBar = require('./../TrackSearchBar.js');
-var TrackList = require('./../TrackList.js');
+var TrackSearchBar = require('./TrackSearchBar.js');
+var TrackList = require('./TrackList.js');
 
 var FilteredTrackList = React.createClass({
     getInitialState: function() {

@@ -1,5 +1,5 @@
 var React = require('react');
-var TrackStore = require('./../TrackStore.js');
+var TrackStore = require('../data/TrackStore.js');
 
 var TrackList = React.createClass({
   render: function() {

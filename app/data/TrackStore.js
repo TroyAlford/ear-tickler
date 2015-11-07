@@ -1,9 +1,8 @@
 var flux = require('flux-react');
-var actions = require('./../actions.js');
-var Helper = require('./../Helper.js');
+var Helper = require('../Helper.js');
 
 module.exports = function() {
-  var raw_tracks = require('../../audio/tracks.js');
+  var raw_tracks = require('./Tracks.js');
   var tracks = raw_tracks.map(function(track) {
       return Helper.extend({
           id: Helper.guid(),
@@ -15,10 +14,6 @@ module.exports = function() {
 
   return flux.createStore({
     tracks: tracks,
-    actions: [
-      actions.upsertTrack,
-      actions.deleteTrack
-    ],
     upsertTrack: function(track) {
         this.tracks.push(track);
         this.emit('tracks.updated');
