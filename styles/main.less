@@ -1,0 +1,248 @@
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css);
+
+@header-bg: url(/images/irongrip.png);
+@font: Ubuntu, sans-serif;
+@font-color: #eee;
+@body-bg: url(/images/concrete_seamless.png);
+
+@lo-header-height: 50px;
+@lo-sidebar-width: 150px;
+
+@keyframes playing {
+  0% {
+    box-shadow:
+      2px  2px 2px green,
+      2px -2px 2px green,
+     -2px -2px 2px green,
+     -2px  2px 2px green;
+  }
+  50% {
+    box-shadow: 0 0 0;
+  }
+  100% {
+    box-shadow:
+      2px  2px 2px green,
+      2px -2px 2px green,
+     -2px -2px 2px green,
+     -2px  2px 2px green;
+  }
+}
+
+html, body {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0; padding: 0;
+}
+body {
+  background-image: @body-bg;
+}
+.ear-tickler.application {
+  position: relative;
+
+  .header-bar, .filtered-track-list, .sound-board {
+    position: absolute;
+  }
+  .header-bar {
+    display: block;
+    width: 100%;
+  }
+
+  .filtered-track-list, .sound-board {
+    display: inline-block;
+    height: calc(100vh - 50px);
+  }
+  .filtered-track-list {
+    position: absolute;
+    left: 0;
+    top: @lo-header-height;
+    width: @lo-sidebar-width;
+  }
+  .sound-board {
+    padding: 10px;
+    position: absolute;
+    left: calc(@lo-sidebar-width + 10px);
+    right: 0;
+    top: @lo-header-height;
+  }
+}
+
+.header-bar {
+  background-image: @header-bg;
+  color: @font-color;
+  height: @lo-header-height;
+
+  .title {
+    margin: 10px;
+    font-family: @font;
+    font-size: calc(@lo-header-height - 20px);
+    font-weight: bold;
+  }
+}
+.filtered-track-list {
+  background-image: @header-bg;
+  border-radius: 0 0 25px 0;
+  font-family: @font;
+  color: @font-color;
+  padding: 5px;
+
+  input[type=text] {
+    border-radius: 5px;
+    border: 3px double;
+    padding: 3px;
+    width: calc(@lo-sidebar-width - 12px);
+  }
+
+  ul {
+    font-size: 0.9rem;
+    list-style: none;
+    margin: 5px;
+    padding: 0;
+
+    li {
+      width: 100%;
+      i { margin-right: 5px; }
+    }
+  }
+}
+.sound-board {
+  .audio-player {
+    background: #eee;
+    border: 1px solid #666;
+    border-radius: 5px;
+    display: inline-block;
+    font-family: @font;
+    margin: 5px;
+    position: relative;
+    height: 55px;
+    width: @lo-sidebar-width;
+
+    &.playing {
+      animation: playing 1.5s linear infinite;
+    }
+
+    .track-name {
+      font-weight: 700;
+      font-size: .7rem;
+      margin: 2px;
+      padding: 2px 0 2px 5px;
+    }
+    .close-button {
+      cursor: pointer;
+      font-size: .7rem;
+      position: absolute;
+      padding: 3px;
+      right: 2px; top: 2px;
+    }
+    .audio-control-bar {
+      position: absolute;
+      height: 20px;
+      font-size: 0;
+      left: 0; right: 0;
+
+      > button {
+        font-size: .6rem;
+        padding: 1px 5px;
+        position: absolute;
+        left: 3px; right: 23px;
+
+        &.hidden {
+          display: none;
+        }
+      }
+      > .loop-toggle {
+        display: none; // replacing with an icon checkbox
+
+        & + .loop-toggle-label {
+          color: #aaa;
+          content: '&#xf01e;';
+          cursor: pointer;
+          display: inline-block;
+          font: normal normal normal 12px/1 FontAwesome;
+          line-height: 18px;
+          position: absolute;
+          height: 20px; width: 20px;
+          right: 0;
+          text-align: center;
+        }
+        &:checked + .loop-toggle-label {
+          color: #000;
+        }
+      }
+    }
+    .audio-progress-bar {
+      background: #fff;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      height: 15px;
+      margin: 0 auto;
+      position: absolute;
+      left: 23px; right: 20px;
+
+      .audio-timer {
+        display: inline-block;
+        position: absolute;
+        left: 23px; right: 20px;
+        line-height: 18px;
+        font-size: .6rem;
+        text-align: center;
+      }
+
+      .audio-progress-bar-fill {
+        background-color: #369;
+        border-right: 1px solid #ccc;
+        position: absolute;
+        left: 0; top: 0; bottom: 0;
+        overflow: hidden;
+
+        .audio-timer {
+          padding: 0 3px;
+          color: #fff;
+        }
+      }
+    }
+    .audio-volume-wrapper {
+      bottom: 4px;
+      height: 10px;
+      left: 3px; right: 3px;
+      position: absolute;
+      font-size: 0;
+
+      i.fa {
+        font-size: 10px;
+        height: 10px;
+        width: 10px;
+        text-align: center;
+
+        &.fa {
+          position: absolute;
+          color: #ccc;
+        }
+        &.fa-volume-off  {
+          margin-right: 3px;
+          &.muted { color: #000; }
+        }
+        &.fa-volume-down { left: 15px; }
+        &.fa-volume-up   { right: 3px; }
+      }
+
+      .audio-volume-bar {
+        border: 1px solid #ccc;
+        height: 8px; margin: 0;
+        left: 30px;
+        right: 17px;
+        top: 0;
+        position: absolute;
+
+        .audio-volume-bar-fill {
+          background: #ccc;
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+        }
+      }
+    }
+  }
+}
