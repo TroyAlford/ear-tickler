@@ -43,12 +43,12 @@ body {
   position: absolute;
   left: 0;
   top: 50px;
-  width: 150px;
+  width: 175px;
 }
 .ear-tickler.application .sound-board {
   padding: 10px;
   position: absolute;
-  left: calc(160px);
+  left: calc(185px);
   right: 0;
   top: 50px;
 }
@@ -74,10 +74,10 @@ body {
   border-radius: 5px;
   border: 3px double;
   padding: 3px;
-  width: calc(138px);
+  width: calc(163px);
 }
 .filtered-track-list ul {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   list-style: none;
   margin: 5px;
   padding: 0;
@@ -97,7 +97,7 @@ body {
   margin: 5px;
   position: relative;
   height: 55px;
-  width: 150px;
+  width: 175px;
 }
 .sound-board .audio-player.playing {
   animation: playing 1.5s linear infinite;
@@ -165,8 +165,8 @@ body {
 .sound-board .audio-player .audio-progress-bar .audio-timer {
   display: inline-block;
   position: absolute;
-  left: 23px;
-  right: 20px;
+  left: 0;
+  right: 0;
   line-height: 18px;
   font-size: .6rem;
   text-align: center;
@@ -181,8 +181,9 @@ body {
   overflow: hidden;
 }
 .sound-board .audio-player .audio-progress-bar .audio-progress-bar-fill .audio-timer {
-  padding: 0 3px;
+  padding: 0;
   color: #fff;
+  width: 130px;
 }
 .sound-board .audio-player .audio-volume-wrapper {
   bottom: 4px;
