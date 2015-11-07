@@ -28,4 +28,40 @@ module.exports = [{
 },{
   name: 'Roar, Ogre 2',
   origin: 'https://www.freesound.org/data/previews/103/103535_1757489-hq.mp3'
+},{
+  name: "BG: Forest @ Night",
+  origin: 'https://s3-us-west-2.amazonaws.com/tta1/sounds/69_Forest_Night.mp3'
+},{
+  name: 'BG: Dungeon',
+  origin: 'https://s3-us-west-2.amazonaws.com/tta1/sounds/65_Dungeon_I.mp3'
+},{
+  name: 'BG: Stormy',
+  origin: 'https://s3-us-west-2.amazonaws.com/tta1/sounds/60_Dark_and_Stormy.mp3'
+},{
+  name: 'BG: Jungle',
+  origin: 'https://s3-us-west-2.amazonaws.com/tta1/sounds/59_Dinotopia.mp3'
+},{
+  name: 'BG: Ominous',
+  origin: 'https://s3-us-west-2.amazonaws.com/tta1/sounds/58_Terror.mp3'
+},{
+  name: 'BG: Medieval Town',
+  origin: 'https://s3-us-west-2.amazonaws.com/tta1/sounds/56_Medieval_Town.mp3'
+},{
+  name: 'BG: Windy Cavern',
+  origin: 'https://s3-us-west-2.amazonaws.com/tta1/sounds/55_Ice_Cavern.mp3'
+},{
+  name: 'BG: Quiet Tavern',
+  origin: 'https://s3-us-west-2.amazonaws.com/tta1/sounds/54_Mountain_Tavern.mp3'
+},{
+  name: 'BG: Monastic Chanting',
+  origin: 'https://s3-us-west-2.amazonaws.com/tta1/sounds/46_Cathedral.mp3'
+},{
+  name: 'BG: Swamp',
+  origin: 'https://s3-us-west-2.amazonaws.com/tta1/sounds/35_Swamplandia.mp3'
+},{
+  name: 'BG: Windy Desert',
+  origin: 'https://s3-us-west-2.amazonaws.com/tta1/sounds/31_Frozen_Wastes.mp3'
+},{
+  name: 'BG: Jungle @ Night',
+  origin: 'https://s3-us-west-2.amazonaws.com/tta1/sounds/27_Xingu_Nights.mp3'
 }];
