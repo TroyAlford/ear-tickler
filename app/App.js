@@ -4,16 +4,8 @@ var FilteredTrackList = require('./navigation/FilteredTrackList.js');
 var SoundBoard = require('./soundboard/SoundBoard.js');
 
 var App = React.createClass({
-  getInitialState: function () {
-    return {}; // tracks: TrackStore.getTracks() };
-  },
   tracks: TrackStore.getTracks(),
-  componentWillMount: function () {
-    //Store.addChangeListener(this.changeState);
-  },
-  componentWillUnmount: function () {
-    //Store.removeChangeListener(this.changeState);
-  },
+
   changeState: function () {
     this.setState({});
   },
@@ -29,7 +21,7 @@ var App = React.createClass({
           tracks={this.props.trackStore.getTracks()}
         />
         <SoundBoard
-          tracks={this.props.trackStore.getTracks()}
+          tracks={[this.tracks[5]]}
         />
       </div>
     );

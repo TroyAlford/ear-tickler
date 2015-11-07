@@ -147,10 +147,12 @@ var AudioPlayer = React.createClass({
           onSeek={this.handleSeek}
         />
         <AudioVolumeBar
-          volume={this.state.volume}
+          audioNode={this.audio._audioNode[0]}
           muted={this.state.muted}
           onMuteToggle={this.handleMuteToggle}
           onSetVolume={this.handleSetVolume}
+          playState={this.state.playState}
+          volume={this.state.volume}
         />
       </div>
     );

@@ -226,8 +226,9 @@ body {
 }
 .sound-board .audio-player .audio-volume-wrapper .audio-volume-bar .audio-volume-bar-fill {
   background: #ccc;
-  position: absolute;
-  left: 0;
-  top: 0;
   bottom: 0;
+  height: 8px;
+  left: 0;
+  position: absolute;
+  top: 0;
 }
