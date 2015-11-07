@@ -32,6 +32,7 @@
     "flux-react": "^2.6.6",
     "gulp-express": "^0.3.5",
     "gulp-less": "^3.0.3",
+    "howler": "^1.1.28",
     "react": "^0.13.3"
   }
 }

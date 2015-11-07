@@ -22,7 +22,9 @@ var App = React.createClass({
     return(
       <div className="ear-tickler application">
         <div className="header-bar">
-          <div className="title">Ear Tickler</div>
+          <div className="title">
+            <i className="fa fa-headphones"></i> Ear Tickler
+          </div>
         </div>
         <FilteredTrackList
           tracks={this.props.trackStore.getTracks()}
