@@ -7,7 +7,7 @@
 @body-bg: url(/images/concrete_seamless.png);
 
 @lo-header-height: 50px;
-@lo-sidebar-width: 150px;
+@lo-sidebar-width: 175px;
 
 @keyframes playing {
   0% {
@@ -95,7 +95,7 @@ body {
   }
 
   ul {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     list-style: none;
     margin: 5px;
     padding: 0;
@@ -183,7 +183,7 @@ body {
       .audio-timer {
         display: inline-block;
         position: absolute;
-        left: 23px; right: 20px;
+        left: 0; right: 0;
         line-height: 18px;
         font-size: .6rem;
         text-align: center;
@@ -197,8 +197,9 @@ body {
         overflow: hidden;
 
         .audio-timer {
-          padding: 0 3px;
+          padding: 0;
           color: #fff;
+          width: 130px;
         }
       }
     }

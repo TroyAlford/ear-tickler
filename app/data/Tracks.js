@@ -20,6 +20,12 @@ module.exports = [{
   name: 'Thunder Storm',
   origin: 'https://www.freesound.org/data/previews/2/2523_1112-hq.mp3'
 },{
-  name: 'Roar - Monster (Slow)',
+  name: 'Roar, Monster (Slow)',
   origin: 'https://www.freesound.org/data/previews/267/267454_3415022-hq.mp3'
+},{
+  name: 'Roar, Ogre',
+  origin: 'https://www.freesound.org/data/previews/103/103534_1757489-hq.mp3'
+},{
+  name: 'Roar, Ogre 2',
+  origin: 'https://www.freesound.org/data/previews/103/103535_1757489-hq.mp3'
 }];

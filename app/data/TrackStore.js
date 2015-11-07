@@ -2,7 +2,10 @@ var flux = require('flux-react');
 var Helper = require('../Helper.js');
 
 module.exports = function() {
-  var raw_tracks = require('./Tracks.js');
+  var raw_tracks = require('./Tracks.js')
+    .sort(function(a, b) {
+      return a.name.localeCompare(b.name);
+    });
   var tracks = raw_tracks.map(function(track) {
       return Helper.extend({
           id: Helper.guid(),
