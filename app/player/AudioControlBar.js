@@ -39,11 +39,10 @@ var AudioControlBar = React.createClass({
           <i className={"fa fa-" + this.getButtonClass()}></i>
         </button>
         <input
-          className="loop-toggle"
           id={loop_toggle_id}
-          ref="loop_enabled"
-          name="loop-toggle"
+          className="loop-toggle"
           type="checkbox"
+          ref="loop_enabled"
           onChange={this.handleLoopToggle}
         />
         <label

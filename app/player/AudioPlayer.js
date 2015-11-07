@@ -1,6 +1,7 @@
 var React = require('react');
-var AudioControlBar = require('./AudioControlBar.js');
+var AudioControlBar  = require('./AudioControlBar.js');
 var AudioProgressBar = require('./AudioProgressBar.js');
+var AudioVolumeBar   = require('./AudioVolumeBar.js');
 
 var Howl = require('howler').Howl;
 
@@ -8,6 +9,7 @@ var AudioPlayer = React.createClass({
   getInitialState: function() {
     return {
       loop: false,
+      muted: false,
       playState: 'loading',
       position: 0,
       duration: 0,
@@ -51,7 +53,14 @@ var AudioPlayer = React.createClass({
   },
 
   handleClose: function() {
-    console.log('close');
+    // TODO: allow the close-button to work.
+  },
+  handleMuteToggle: function(muteSetting) {
+    if (muteSetting)
+      this.audio.mute();
+    else
+      this.audio.unmute();
+    this.setState({ muted: muteSetting });
   },
   handlePause: function() {
     this.setState({ playState: 'paused' });
@@ -82,6 +91,13 @@ var AudioPlayer = React.createClass({
 
     this.setState({ loop: loopSetting });
     this.audio.loop(loopSetting);
+  },
+  handleSetVolume: function(volume) {
+    this.setState({
+      volume: volume,
+      muted: false
+    });
+    this.audio.volume(volume);
   },
 
   handleAudioEnded: function() {
@@ -121,6 +137,12 @@ var AudioPlayer = React.createClass({
           position={this.state.position}
           duration={this.state.duration}
           onSeek={this.handleSeek}
+        />
+        <AudioVolumeBar
+          volume={this.state.volume}
+          muted={this.state.muted}
+          onMuteToggle={this.handleMuteToggle}
+          onSetVolume={this.handleSetVolume}
         />
       </div>
     );

@@ -3,10 +3,10 @@ var TimeFormatterMixin = require('../mixins/TimeFormatterMixin.js');
 
 var AudioProgressBar = React.createClass({
   mixins: [TimeFormatterMixin],
-  handleClick: function(ev, a, b) {
+  handleClick: function(event) {
     var bar_el  = this.getDOMNode(),
         coords  = bar_el.getClientRects()[0],
-        click_x = ev.pageX - coords.left,
+        click_x = event.pageX - coords.left,
         percent = click_x / (coords.right - coords.left);
 
     this.props.onSeek(percent);

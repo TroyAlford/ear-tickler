@@ -96,7 +96,7 @@ body {
   font-family: Ubuntu, sans-serif;
   margin: 5px;
   position: relative;
-  height: 40px;
+  height: 55px;
   width: 150px;
 }
 .sound-board .audio-player.playing {
@@ -183,4 +183,50 @@ body {
 .sound-board .audio-player .audio-progress-bar .audio-progress-bar-fill .audio-timer {
   padding: 0 3px;
   color: #fff;
+}
+.sound-board .audio-player .audio-volume-wrapper {
+  bottom: 4px;
+  height: 10px;
+  left: 3px;
+  right: 3px;
+  position: absolute;
+  font-size: 0;
+}
+.sound-board .audio-player .audio-volume-wrapper i.fa {
+  font-size: 10px;
+  height: 10px;
+  width: 10px;
+  text-align: center;
+}
+.sound-board .audio-player .audio-volume-wrapper i.fa.fa {
+  position: absolute;
+  color: #ccc;
+}
+.sound-board .audio-player .audio-volume-wrapper i.fa.fa-volume-off {
+  margin-right: 3px;
+}
+.sound-board .audio-player .audio-volume-wrapper i.fa.fa-volume-off.muted {
+  color: #000;
+}
+.sound-board .audio-player .audio-volume-wrapper i.fa.fa-volume-down {
+  left: 15px;
+}
+.sound-board .audio-player .audio-volume-wrapper i.fa.fa-volume-up {
+  right: 3px;
+}
+.sound-board .audio-player .audio-volume-wrapper .audio-volume-bar {
+  border: 1px solid #ccc;
+  height: 8px;
+  margin: 0;
+  left: 30px;
+  right: 17px;
+  top: 0;
+  position: absolute;
+}
+.sound-board .audio-player .audio-volume-wrapper .audio-volume-bar .audio-volume-bar-fill {
+  background: #ccc;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
 }
