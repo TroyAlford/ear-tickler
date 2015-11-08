@@ -26,24 +26,26 @@ body {
   position: relative;
 }
 .ear-tickler.application .header-bar,
-.ear-tickler.application .filtered-track-list,
-.ear-tickler.application .sound-board {
-  position: absolute;
+.ear-tickler.application .filtered-track-list {
+  position: fixed;
 }
 .ear-tickler.application .header-bar {
   display: block;
-  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 50px;
+  left: 0;
+  z-index: 1;
 }
 .ear-tickler.application .filtered-track-list,
 .ear-tickler.application .sound-board {
   display: inline-block;
-  height: calc(50vh);
 }
 .ear-tickler.application .filtered-track-list {
-  position: absolute;
-  left: 0;
   top: 50px;
   width: 175px;
+  bottom: 0;
+  left: 0;
 }
 .ear-tickler.application .sound-board {
   padding: 10px;
@@ -65,10 +67,9 @@ body {
 }
 .filtered-track-list {
   background-image: url(/images/irongrip.png);
-  border-radius: 0 0 25px 0;
-  font-family: Ubuntu, sans-serif;
   color: #eee;
-  padding: 5px;
+  font-family: Ubuntu, sans-serif;
+  padding: 0 5px;
 }
 .filtered-track-list input[type=text] {
   border-radius: 5px;
@@ -81,8 +82,15 @@ body {
   list-style: none;
   margin: 5px;
   padding: 0;
+  position: absolute;
+  top: 25px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
 }
 .filtered-track-list ul li {
+  padding: 3px 0;
   width: 100%;
 }
 .filtered-track-list ul li i {
@@ -231,4 +239,47 @@ body {
   left: 0;
   position: absolute;
   top: 0;
+}
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-button {
+  width: 2px;
+  height: 2px;
+}
+::-webkit-scrollbar-thumb {
+  background: #777;
+  border: none;
+  border-radius: 25px;
+}
+::-webkit-scrollbar-track {
+  background: #555;
+  border: none;
+  border-radius: 25px;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-button {
+  width: 2px;
+  height: 2px;
+}
+::-webkit-scrollbar-thumb {
+  background: #777;
+  border: none;
+  border-radius: 25px;
+}
+::-webkit-scrollbar-track {
+  background: #555;
+  border: none;
+  border-radius: 25px;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
