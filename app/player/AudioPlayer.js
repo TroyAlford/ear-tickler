@@ -53,7 +53,7 @@ var AudioPlayer = React.createClass({
   },
 
   handleClose: function() {
-    // TODO: allow the close-button to work.
+    this.props.onClose(this.props.unique);
   },
   handleMuteToggle: function(muteSetting) {
     if (muteSetting)
