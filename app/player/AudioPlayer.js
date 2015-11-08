@@ -47,13 +47,14 @@ var AudioPlayer = React.createClass({
   },
   clearAudio: function() {
     if (this.audio) {
+      clearInterval(this.refresh);
       this.audio.stop();
       this.audio = {};
     }
   },
 
   handleClose: function() {
-    this.props.onClose(this.props.unique);
+    this.props.onClose(this.props.player_id);
   },
   handleMuteToggle: function(muteSetting) {
     if (muteSetting)

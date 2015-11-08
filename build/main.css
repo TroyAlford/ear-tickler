@@ -94,7 +94,23 @@ body {
   width: 100%;
 }
 .filtered-track-list ul li i {
-  margin-right: 5px;
+  margin: 0 5px;
+}
+.filtered-track-list ul li .fa-music {
+  color: #666;
+}
+.filtered-track-list ul li .fa-plus {
+  color: #666;
+  float: right;
+}
+.filtered-track-list ul li .fa-plus:hover {
+  color: inherit;
+}
+.filtered-track-list ul li.added .fa-music {
+  color: inherit;
+}
+.filtered-track-list ul li.added .fa-plus {
+  display: none;
 }
 .sound-board .audio-player {
   background: #eee;

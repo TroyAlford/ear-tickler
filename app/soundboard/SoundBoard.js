@@ -1,35 +1,27 @@
 var React = require('react');
-var Helper = require('../Helper.js');
 var AudioPlayer = require('../player/AudioPlayer.js');
 
 var SoundBoard = React.createClass({
-  getInitialState: function() {
-    var me = this;
-    return {
-      players: this.props.tracks.map(function (track) {
-        var guid = Helper.guid();
-        return (
-          <AudioPlayer
-            unique={guid} key={guid}
-            track={track}
-            onClose={me.removePlayer}
-          />
-        );
-      })
-    };
-  },
-
-  removePlayer: function(unique) {
-    this.setState({
-      players: this.state.players.filter(function(player) {
-        return player.key !== unique;
-      })
-    });
+  handleCloseClicked: function(player_id) {
+    this.props.onCloseClicked(player_id);
   },
 
   render: function() {
     return (
-      <div className="sound-board">{this.state.players}</div>
+      <div className="sound-board">{this.renderPlayers()}</div>
+    );
+  },
+  renderPlayers: function() {
+    return (
+      this.props.tracks.map(function(track) {
+        return (
+          <AudioPlayer
+            player_id={track.player_id} key={track.player_id}
+            track={track}
+            onClose={this.handleCloseClicked.bind(null, track.player_id)}
+          />
+        );
+      }, this)
     );
   }
 });

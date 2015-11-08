@@ -101,7 +101,20 @@ body {
     li {
       padding: 3px 0;
       width: 100%;
-      i { margin-right: 5px; }
+      i { margin: 0 5px; }
+
+      .fa-music { color: #666; }
+      .fa-plus {
+        color: #666;
+        float: right;
+
+        &:hover { color: inherit; }
+      }
+
+      &.added {
+        .fa-music { color: inherit; }
+        .fa-plus  { display: none; }
+      }
     }
   }
 }
