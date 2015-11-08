@@ -23,19 +23,20 @@ var AudioPlayer = React.createClass({
     this.clearAudio();
   },
 
-  audio: null,   // The Howler.js Howl object
-  refresh: null, // Interval for refreshing play time & progress
+  audio: { _duration: 0 },   // The Howler.js Howl object
+  refresh: null,             // Interval for refreshing play time & progress
 
   loadAudio: function() {
-    this.clearAudio();
-    this.setState({ playState: 'loading' });
-
     this.audio = new Howl({
       urls: [this.props.track.origin],
       loop: this.state.loop,
       volume: this.state.volume,
       onload: this.handleAudioLoaded,
       onend: this.handleAudioEnded
+    });
+    this.setState({
+      playState: this.audio._loaded ? 'paused' : 'loading',
+      duration: this.audio._duration
     });
   },
 
@@ -46,11 +47,7 @@ var AudioPlayer = React.createClass({
     });
   },
   clearAudio: function() {
-    if (this.audio) {
-      clearInterval(this.refresh);
-      this.audio.stop();
-      this.audio = {};
-    }
+    this.handleStop();
   },
 
   handleClose: function() {
@@ -72,7 +69,7 @@ var AudioPlayer = React.createClass({
   handlePlay: function() {
     this.setState({ playState: 'playing' });
     this.audio.play();
-    this.refresh = setInterval(this.updatePosition, 200);
+    this.refresh = setInterval(this.updatePosition, 50);
   },
   handleSeek: function(percent) {
     this.audio.pos(this.state.duration * percent);

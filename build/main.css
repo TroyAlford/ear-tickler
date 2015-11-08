@@ -109,9 +109,6 @@ body {
 .filtered-track-list ul li.added .fa-music {
   color: inherit;
 }
-.filtered-track-list ul li.added .fa-plus {
-  display: none;
-}
 .sound-board .audio-player {
   background: #eee;
   border: 1px solid #666;
