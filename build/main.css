@@ -180,7 +180,7 @@ body {
   display: none;
 }
 .sound-board .audio-player .audio-control-bar > .loop-toggle + .loop-toggle-label {
-  color: #666;
+  color: #aaa;
   content: '&#xf01e;';
   cursor: pointer;
   display: inline-block;
@@ -193,7 +193,7 @@ body {
   text-align: center;
 }
 .sound-board .audio-player .audio-control-bar > .loop-toggle:checked + .loop-toggle-label {
-  color: #aaa;
+  color: #666;
 }
 .sound-board .audio-player .audio-progress-bar {
   background: #fff;
