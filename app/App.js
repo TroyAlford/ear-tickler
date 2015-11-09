@@ -1,19 +1,20 @@
 var React = require('react');
 var FilteredTrackList = require('./navigation/FilteredTrackList.js');
 var Helper = require('./Helper.js');
+var Oscilloscope = require('./visualization/Oscilloscope.js');
 var SoundBoard = require('./soundboard/SoundBoard.js');
 var TrackStore = require('./data/TrackStore.js');
 
 var App = React.createClass({
   getInitialState: function() {
     return ({
-      tracks_all: TrackStore.getTracks(),
-      tracks_playing: []
+      allTracks: TrackStore.getTracks(),
+      loadedTracks: []
     });
   },
 
   handleAddAudioPlayer: function(track_id) {
-    var matches = this.state.tracks_all.filter(function(track) {
+    var matches = this.state.allTracks.filter(function(track) {
       return track.id == track_id;
     });
 
@@ -23,19 +24,19 @@ var App = React.createClass({
     track.player_id = Helper.guid();
 
     this.setState({
-      tracks_playing: this.state.tracks_playing.concat(track)
+      loadedTracks: this.state.loadedTracks.concat(track)
     });
   },
   handleCloseAudioPlayer: function(player_id) {
     this.setState({
-      tracks_playing: this.state.tracks_playing.filter(function(track) {
+      tracks_playing: this.state.loadedTracks.filter(function(track) {
         return track.player_id !== player_id;
       })
     });
   },
 
   render: function() {
-    var addedTrackIds = this.state.tracks_playing.map(function(track) {
+    var addedTrackIds = this.state.loadedTracks.map(function(track) {
       return track.id;
     });
     return(
@@ -44,14 +45,17 @@ var App = React.createClass({
           <div className="title">
             <i className="fa fa-headphones"></i> Ear Tickler
           </div>
+          <Oscilloscope
+            tracks={this.state.loadedTracks}
+          />
         </div>
         <FilteredTrackList
-          tracks={this.state.tracks_all}
+          tracks={this.state.allTracks}
           addedTrackIds={addedTrackIds}
           onAddClicked={this.handleAddAudioPlayer}
         />
         <SoundBoard
-          tracks={this.state.tracks_playing}
+          tracks={this.state.loadedTracks}
           onCloseClicked={this.handleCloseAudioPlayer}
         />
       </div>

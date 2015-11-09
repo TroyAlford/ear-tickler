@@ -59,11 +59,33 @@ body {
   color: #eee;
   height: 50px;
 }
+.header-bar .title,
+.header-bar .audio-visualizer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
 .header-bar .title {
-  margin: 10px;
   font-family: Ubuntu, sans-serif;
   font-size: calc(30px);
   font-weight: bold;
+  margin: 10px;
+  left: 0;
+  right: 200px;
+}
+.header-bar .audio-visualizer {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 200px;
+  color: #596e83;
+}
+.header-bar .audio-visualizer > canvas {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 }
 .filtered-track-list {
   background: #3d3c4c;

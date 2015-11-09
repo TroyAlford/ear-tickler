@@ -69,7 +69,7 @@ var AudioPlayer = React.createClass({
   handlePlay: function() {
     this.setState({ playState: 'playing' });
     this.audio.play();
-    this.refresh = setInterval(this.updatePosition, 50);
+    this.refresh = setInterval(this.updatePosition, 100);
   },
   handleSeek: function(percent) {
     this.audio.pos(this.state.duration * percent);
@@ -145,7 +145,6 @@ var AudioPlayer = React.createClass({
           onSeek={this.handleSeek}
         />
         <AudioVolumeBar
-          audioNode={this.audio._audioNode[0]}
           muted={this.state.muted}
           onMuteToggle={this.handleMuteToggle}
           onSetVolume={this.handleSetVolume}
