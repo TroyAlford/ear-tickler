@@ -64,4 +64,7 @@ module.exports = [{
 },{
   name: 'BG: Jungle @ Night',
   origin: 'https://s3-us-west-2.amazonaws.com/tta1/sounds/27_Xingu_Nights.mp3'
+},{
+  name: 'BG: Cicadas, Crickets, Owls',
+  origin: 'https://www.freesound.org/data/previews/178/178504_881494-hq.mp3'
 }];
