@@ -1,10 +1,19 @@
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css);
 
-@header-bg: url(/images/irongrip.png);
 @font: Ubuntu, sans-serif;
-@font-color: #eee;
-@body-bg: url(/images/concrete_seamless.png);
+@color-background-main: #000;
+@color-background-alternate: #3d3c4c;
+@color-trim: #2b2951;
+@color-accent-subtle: #596e83;
+@color-accent-bold: #0de5ff;
+@color-text: #eee;
+@color-text-highlight: #fff;
+@color-text-disabled: #666;
+
+@color-inverse-text: #666;
+@color-inverse-text-highlight: #000;
+@color-inverse-text-disabled: #aaa;
 
 @lo-header-height: 50px;
 @lo-sidebar-width: 175px;
@@ -12,20 +21,24 @@
 @keyframes playing {
   0% {
     box-shadow:
-      2px  2px 2px green,
-      2px -2px 2px green,
-     -2px -2px 2px green,
-     -2px  2px 2px green;
+      3px  3px 3px @color-accent-bold,
+      3px -3px 3px @color-accent-bold,
+     -3px -3px 3px @color-accent-bold,
+     -3px  3px 3px @color-accent-bold;
   }
   50% {
-    box-shadow: 0 0 0;
+    box-shadow:
+      1px  1px 1px @color-accent-bold,
+      1px -1px 1px @color-accent-bold,
+     -1px -1px 1px @color-accent-bold,
+     -1px  1px 1px @color-accent-bold;
   }
   100% {
     box-shadow:
-      2px  2px 2px green,
-      2px -2px 2px green,
-     -2px -2px 2px green,
-     -2px  2px 2px green;
+      3px  3px 3px @color-accent-bold,
+      3px -3px 3px @color-accent-bold,
+     -3px -3px 3px @color-accent-bold,
+     -3px  3px 3px @color-accent-bold;
   }
 }
 
@@ -36,7 +49,7 @@ html, body {
   margin: 0; padding: 0;
 }
 body {
-  background-image: @body-bg;
+  background: @color-background-main;
 }
 .ear-tickler.application {
   position: relative;
@@ -66,8 +79,8 @@ body {
 }
 
 .header-bar {
-  background-image: @header-bg;
-  color: @font-color;
+  background: @color-background-alternate;
+  color: @color-text;
   height: @lo-header-height;
 
   .title {
@@ -78,8 +91,8 @@ body {
   }
 }
 .filtered-track-list {
-  background-image: @header-bg;
-  color: @font-color;
+  background: @color-background-alternate;
+  color: @color-text;
   font-family: @font;
   padding: 0 5px;
 
@@ -103,9 +116,9 @@ body {
       width: 100%;
       i { margin: 0 5px; }
 
-      .fa-music { color: #666; }
+      .fa-music { color: @color-text-disabled; }
       .fa-plus {
-        color: #666;
+        color: @color-text-disabled;
         float: right;
 
         &:hover { color: inherit; }
@@ -119,8 +132,8 @@ body {
 }
 .sound-board {
   .audio-player {
-    background: #eee;
-    border: 1px solid #666;
+    background: @color-text;
+    border: 1px solid @color-text-disabled;
     border-radius: 5px;
     display: inline-block;
     font-family: @font;
@@ -166,7 +179,7 @@ body {
         display: none; // replacing with an icon checkbox
 
         & + .loop-toggle-label {
-          color: #aaa;
+          color: @color-inverse-text;
           content: '&#xf01e;';
           cursor: pointer;
           display: inline-block;
@@ -178,13 +191,13 @@ body {
           text-align: center;
         }
         &:checked + .loop-toggle-label {
-          color: #000;
+          color: @color-inverse-text-disabled;
         }
       }
     }
     .audio-progress-bar {
       background: #fff;
-      border: 1px solid #ccc;
+      border: 1px solid @color-trim;
       cursor: pointer;
       height: 15px;
       margin: 0 auto;
@@ -201,8 +214,8 @@ body {
       }
 
       .audio-progress-bar-fill {
-        background-color: #369;
-        border-right: 1px solid #ccc;
+        background-color: @color-trim;
+        border-right: 1px solid @color-trim;
         position: absolute;
         left: 0; top: 0; bottom: 0;
         overflow: hidden;
@@ -229,18 +242,21 @@ body {
 
         &.fa {
           position: absolute;
-          color: #ccc;
+          color: @color-inverse-text;
         }
         &.fa-volume-off  {
+          color: @color-inverse-text-disabled;
           margin-right: 3px;
-          &.muted { color: #000; }
+          &.muted {
+            color: @color-inverse-text;
+          }
         }
         &.fa-volume-down { left: 15px; }
         &.fa-volume-up   { right: 3px; }
       }
 
       .audio-volume-bar {
-        border: 1px solid #ccc;
+        border: 1px solid @color-inverse-text-disabled;
         height: 8px; margin: 0;
         left: 30px;
         right: 17px;
@@ -248,7 +264,7 @@ body {
         position: absolute;
 
         .audio-volume-bar-fill {
-          background: #ccc;
+          background: @color-inverse-text;
           bottom: 0;
           height: 8px;
           left: 0;

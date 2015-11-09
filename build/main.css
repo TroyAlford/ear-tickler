@@ -2,13 +2,13 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css);
 @keyframes playing {
   0% {
-    box-shadow: 2px 2px 2px green, 2px -2px 2px green, -2px -2px 2px green, -2px 2px 2px green;
+    box-shadow: 3px 3px 3px #0de5ff, 3px -3px 3px #0de5ff, -3px -3px 3px #0de5ff, -3px 3px 3px #0de5ff;
   }
   50% {
-    box-shadow: 0 0 0;
+    box-shadow: 1px 1px 1px #0de5ff, 1px -1px 1px #0de5ff, -1px -1px 1px #0de5ff, -1px 1px 1px #0de5ff;
   }
   100% {
-    box-shadow: 2px 2px 2px green, 2px -2px 2px green, -2px -2px 2px green, -2px 2px 2px green;
+    box-shadow: 3px 3px 3px #0de5ff, 3px -3px 3px #0de5ff, -3px -3px 3px #0de5ff, -3px 3px 3px #0de5ff;
   }
 }
 html,
@@ -20,7 +20,7 @@ body {
   padding: 0;
 }
 body {
-  background-image: url(/images/concrete_seamless.png);
+  background: #000;
 }
 .ear-tickler.application {
   position: relative;
@@ -55,7 +55,7 @@ body {
   top: 50px;
 }
 .header-bar {
-  background-image: url(/images/irongrip.png);
+  background: #3d3c4c;
   color: #eee;
   height: 50px;
 }
@@ -66,7 +66,7 @@ body {
   font-weight: bold;
 }
 .filtered-track-list {
-  background-image: url(/images/irongrip.png);
+  background: #3d3c4c;
   color: #eee;
   font-family: Ubuntu, sans-serif;
   padding: 0 5px;
@@ -158,7 +158,7 @@ body {
   display: none;
 }
 .sound-board .audio-player .audio-control-bar > .loop-toggle + .loop-toggle-label {
-  color: #aaa;
+  color: #666;
   content: '&#xf01e;';
   cursor: pointer;
   display: inline-block;
@@ -171,11 +171,11 @@ body {
   text-align: center;
 }
 .sound-board .audio-player .audio-control-bar > .loop-toggle:checked + .loop-toggle-label {
-  color: #000;
+  color: #aaa;
 }
 .sound-board .audio-player .audio-progress-bar {
   background: #fff;
-  border: 1px solid #ccc;
+  border: 1px solid #2b2951;
   cursor: pointer;
   height: 15px;
   margin: 0 auto;
@@ -193,8 +193,8 @@ body {
   text-align: center;
 }
 .sound-board .audio-player .audio-progress-bar .audio-progress-bar-fill {
-  background-color: #369;
-  border-right: 1px solid #ccc;
+  background-color: #2b2951;
+  border-right: 1px solid #2b2951;
   position: absolute;
   left: 0;
   top: 0;
@@ -222,13 +222,14 @@ body {
 }
 .sound-board .audio-player .audio-volume-wrapper i.fa.fa {
   position: absolute;
-  color: #ccc;
+  color: #666;
 }
 .sound-board .audio-player .audio-volume-wrapper i.fa.fa-volume-off {
+  color: #aaa;
   margin-right: 3px;
 }
 .sound-board .audio-player .audio-volume-wrapper i.fa.fa-volume-off.muted {
-  color: #000;
+  color: #666;
 }
 .sound-board .audio-player .audio-volume-wrapper i.fa.fa-volume-down {
   left: 15px;
@@ -237,7 +238,7 @@ body {
   right: 3px;
 }
 .sound-board .audio-player .audio-volume-wrapper .audio-volume-bar {
-  border: 1px solid #ccc;
+  border: 1px solid #aaa;
   height: 8px;
   margin: 0;
   left: 30px;
@@ -246,7 +247,7 @@ body {
   position: absolute;
 }
 .sound-board .audio-player .audio-volume-wrapper .audio-volume-bar .audio-volume-bar-fill {
-  background: #ccc;
+  background: #666;
   bottom: 0;
   height: 8px;
   left: 0;
