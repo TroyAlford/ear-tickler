@@ -29,7 +29,7 @@ var App = React.createClass({
   },
   handleCloseAudioPlayer: function(player_id) {
     this.setState({
-      tracks_playing: this.state.loadedTracks.filter(function(track) {
+      loadedTracks: this.state.loadedTracks.filter(function(track) {
         return track.player_id !== player_id;
       })
     });
