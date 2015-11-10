@@ -22,7 +22,7 @@ var TrackList = React.createClass({
         return (
           <li key={track.id} track={track} className={className}>
             <i className="fa fa-music"></i>
-            {track.name}
+            <span className="track-name">{track.name}</span>
             <i className="fa fa-plus"
                onClick={this.handleAddClicked.bind(null, track)}
             ></i>

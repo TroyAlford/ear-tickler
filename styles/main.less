@@ -135,9 +135,17 @@ body {
       i { margin: 0 5px; }
 
       .fa-music { color: @color-text-disabled; }
+      .track-name {
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: pre;
+        width: @lo-sidebar-width - 40px;
+      }
       .fa-plus {
         color: @color-text-disabled;
-        float: right;
+        position: absolute;
+        right: 0;
 
         &:hover { color: inherit; }
       }

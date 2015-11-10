@@ -121,9 +121,17 @@ body {
 .filtered-track-list ul li .fa-music {
   color: #666;
 }
+.filtered-track-list ul li .track-name {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre;
+  width: 135px;
+}
 .filtered-track-list ul li .fa-plus {
   color: #666;
-  float: right;
+  position: absolute;
+  right: 0;
 }
 .filtered-track-list ul li .fa-plus:hover {
   color: inherit;
