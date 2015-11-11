@@ -170,14 +170,20 @@ gulp.task('deploy', function () {
   browserifyTask({
     development: false,
     src: './app/main.js',
-    dest: './dist'
+    dest: './deploy'
   });
   
   cssTask({
     development: false,
     src: './styles/**/*.css',
-    dest: './dist'
+    dest: './deploy'
   });
+
+  gulp.src('./app/**/*.html')
+    .pipe(gulp.dest('./deploy'));
+
+  gulp.src('./images/**/*.png')
+    .pipe(gulp.dest('./deploy/images'))
 
 });
 
