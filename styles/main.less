@@ -18,6 +18,7 @@
 @lo-header-height: 50px;
 @lo-header-title-width: 200px;
 @lo-sidebar-width: 175px;
+@lo-sidebar-controls-height: 20px;
 
 @keyframes playing {
   0% {
@@ -126,7 +127,7 @@ body {
     list-style: none;
     margin: 5px; padding: 0;
     position: absolute;
-    top: 25px; right: 0; bottom: 0; left: 0;
+    top: 25px; right: 0; bottom: @lo-sidebar-controls-height; left: 0;
     overflow-y: auto;
 
     li {
@@ -153,6 +154,27 @@ body {
       &.added {
         .fa-music { color: inherit; }
       }
+    }
+  }
+
+  .track-list-controls {
+    border-top: 2px groove;
+    display: block;
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: @lo-sidebar-controls-height;
+    text-align: center;
+
+    .button {
+      color: @color-text;
+      cursor: pointer;
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: bold;
+      line-height: 16px; height: 16px;
+      padding: 0;
+      text-align: center;
+      text-decoration: none;
     }
   }
 }

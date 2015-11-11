@@ -1,6 +1,7 @@
 var React = require('react');
-var TrackSearchBar = require('./TrackSearchBar.js');
 var TrackList = require('./TrackList.js');
+var TrackListControls = require('./TrackListControls.js');
+var TrackSearchBar = require('./TrackSearchBar.js');
 
 var FilteredTrackList = React.createClass({
   getInitialState: function() {
@@ -30,6 +31,9 @@ var FilteredTrackList = React.createClass({
           addedTrackIds={this.props.addedTrackIds}
           tracks={this.props.tracks}
           onAddClicked={this.handleAddClicked}
+        />
+        <TrackListControls
+          tracks={this.props.tracks}
         />
       </div>
     );

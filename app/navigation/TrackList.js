@@ -1,6 +1,5 @@
 var React = require('react');
 var _ = require('lodash');
-var TrackStore = require('../data/TrackStore.js');
 
 var TrackList = React.createClass({
   handleAddClicked: function(track) {

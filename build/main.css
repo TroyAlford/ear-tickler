@@ -107,7 +107,7 @@ body {
   position: absolute;
   top: 25px;
   right: 0;
-  bottom: 0;
+  bottom: 20px;
   left: 0;
   overflow-y: auto;
 }
@@ -138,6 +138,28 @@ body {
 }
 .filtered-track-list ul li.added .fa-music {
   color: inherit;
+}
+.filtered-track-list .track-list-controls {
+  border-top: 2px groove;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  text-align: center;
+}
+.filtered-track-list .track-list-controls .button {
+  color: #eee;
+  cursor: pointer;
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: bold;
+  line-height: 16px;
+  height: 16px;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
 }
 .sound-board .audio-player {
   background: #eee;
