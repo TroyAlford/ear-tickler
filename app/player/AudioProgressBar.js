@@ -18,12 +18,12 @@ var AudioProgressBar = React.createClass({
       <div
         className="audio-progress-bar"
         onClick={this.handleClick}>
-        <div className="audio-timer">{current}&nbsp;/&nbsp;{duration}</div>
+        <div className="audio-timer">{current} / {duration}</div>
         <div
           className="audio-progress-bar-fill"
           style={{width: (this.props.percentage * 100) + '%'}}
         >
-          <div className="audio-timer">{current}&nbsp;/&nbsp;{duration}</div>
+          <div className="audio-timer">{current} / {duration}</div>
         </div>
       </div>
     );
