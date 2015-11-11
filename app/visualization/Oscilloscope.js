@@ -51,15 +51,13 @@ var Oscilloscope = React.createClass({
   start: function() {
     this.stop();
     this.attachInterval = setInterval(this.refreshAudioNodes, 500);
-    this.animationFrame = this.getAnimationFrame(this.updateCanvas);
+    this.updateInterval = setInterval(this.updateCanvas, 33); // 30 fps
   },
   stop: function() {
     clearInterval(this.attachInterval || 0);
-    this.cancelAnimationFrame(this.animationFrame);
+    clearInterval(this.updateInterval || 0);
   },
 
-  _lastDataArray: [],
-  _dataRepetitions: 0,
   updateCanvas: function() {
     var canvasHeight = this.canvas.height,
         canvasWidth = this.canvas.width;
@@ -67,36 +65,23 @@ var Oscilloscope = React.createClass({
     var bufferLength = this.analyzer.frequencyBinCount;
     var dataArray = new Uint8Array(bufferLength);
 
-    this.animationFrame = this.getAnimationFrame(this.updateCanvas);
     this.analyzer.getByteTimeDomainData(dataArray);
 
     this.drawingContext.clearRect(0, 0, canvasWidth, canvasHeight);
-
-    if (_.eq(this._lastDataArray, dataArray)) {
-      this._dataRepetitions++;
-      if (this._dataRepetitions >= 5) {
-        dataArray = [];
-      }
-    } else
-      this._lastDataArray = dataArray;
 
     var sliceWidth = canvasWidth / bufferLength;
     var x = 0;
     this.drawingContext.moveTo(x, canvasHeight / 2);
     this.drawingContext.beginPath();
 
-    if (_.any(dataArray, function(el) { return el != 128 })) {
-      dataArray.forEach(function (entry) {
-        var distance = entry - 128;
-        var y = (canvasHeight / 2) + (distance * 1.5);
-        this.drawingContext.lineTo(x, y);
-        x += sliceWidth;
-      }, this);
-      this.drawingContext.lineTo(canvasWidth, canvasHeight / 2);
-      this.drawingContext.stroke();
-    } else {
-      this.drawingContext.clearRect(0, 0, canvasWidth, canvasHeight);
-    }
+    dataArray.forEach(function (entry) {
+      var distance = entry - 128;
+      var y = (canvasHeight / 2) + (distance * 1.5);
+      this.drawingContext.lineTo(x, y);
+      x += sliceWidth;
+    }, this);
+    this.drawingContext.lineTo(canvasWidth, canvasHeight / 2);
+    this.drawingContext.stroke();
   },
 
   loadVisualizer: function() {
@@ -109,8 +94,18 @@ var Oscilloscope = React.createClass({
 
     this.canvas = this.refs.canvas.getDOMNode();
     this.drawingContext = this.canvas.getContext('2d');
+    this.drawingContext.imageSmoothingEnabled = true;
     this.drawingContext.lineWidth = 5;
-    this.drawingContext.strokeStyle = '#fff';
+    var gradient = this.drawingContext.createLinearGradient(0, 0, this.canvas.width, this.canvas.height);
+        gradient.addColorStop(0.00,'red');
+        gradient.addColorStop(0.16,'orange');
+        gradient.addColorStop(0.33,'yellow');
+        gradient.addColorStop(0.50,'green');
+        gradient.addColorStop(0.66,'blue');
+        gradient.addColorStop(0.83,'indigo');
+        gradient.addColorStop(1.00,'violet');
+    this.drawingContext.strokeStyle = gradient;
+    this.drawingContext.fillStyle = 'rgba('
   },
   unloadVisualizer: function() {
     clearInterval(this.refresh || 0);
