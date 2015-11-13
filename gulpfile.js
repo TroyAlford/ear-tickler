@@ -183,7 +183,10 @@ gulp.task('deploy', function () {
     .pipe(gulp.dest('./deploy'));
 
   gulp.src('./images/**/*.png')
-    .pipe(gulp.dest('./deploy/images'))
+    .pipe(gulp.dest('./deploy/images'));
+
+  gulp.src('./api/**/*')
+    .pipe(gulp.dest('./deploy/api'));
 
 });
 

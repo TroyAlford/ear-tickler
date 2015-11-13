@@ -1,6 +1,7 @@
 var React = require('react');
 var App = require('./App.js');
 window._ = require('lodash');
+window.Ajax = require('./ajax/AjaxHelper.js');
 
 var trackStore = require('./data/TrackStore.js');
 React.render(
