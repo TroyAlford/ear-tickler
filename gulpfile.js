@@ -153,37 +153,46 @@ gulp.task('default', function () {
 
   browserifyTask({
     development: true,
-    src: './app/main.js',
+    src:  './app/main.js',
     dest: './build'
   });
   
   cssTask({
     development: true,
-    src: ['./styles/**/*.css','./styles/**/*.less'],
-    dest: './build'
+    src:  './styles/**/*.{css,less}',
+    dest: './build/css'
   });
+  gulp.src('./fontello/font/**/*')
+    .pipe(gulp.dest('./build/font'));
 
+  gulp.src('./app/**/*.html')
+    .pipe(gulp.dest('./build'));
+
+  gulp.src('./images/**/*.{gif,jpg,png}')
+    .pipe(gulp.dest('./build/images'));
 });
 
 gulp.task('deploy', function () {
 
   browserifyTask({
     development: false,
-    src: './app/main.js',
+    src:  './app/main.js',
     dest: './deploy'
   });
   
   cssTask({
     development: false,
-    src: './styles/**/*.css',
-    dest: './deploy'
+    src:  './styles/**/*.{less,css}',
+    dest: './deploy/css'
   });
+  gulp.src('./fontello/font/**/*')
+    .pipe(gulp.dest('./deploy/font'));
 
   gulp.src('./app/**/*.html')
     .pipe(gulp.dest('./deploy'));
 
-  gulp.src('./images/**/*.png')
-    .pipe(gulp.dest('./deploy/images'))
+  gulp.src('./images/**/*.{gif,jpg,png}')
+    .pipe(gulp.dest('./deploy/images'));
 
 });
 

@@ -129,7 +129,7 @@ var AudioPlayer = React.createClass({
       <div className={"audio-player " + this.state.playState}>
         <div className="track-name">{this.props.track.name}</div>
         <i
-          className="fa fa-close close-button"
+          className="tickle-close close-button"
           onClick={this.handleClose}>
         </i>
         <AudioControlBar

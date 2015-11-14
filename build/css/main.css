@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700);
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css);
 @keyframes playing {
   0% {
     box-shadow: 3px 3px 3px #0de5ff, 3px -3px 3px #0de5ff, -3px -3px 3px #0de5ff, -3px 3px 3px #0de5ff;
@@ -43,14 +42,14 @@ body {
 }
 .ear-tickler.application .filtered-track-list {
   top: 50px;
-  width: 175px;
+  width: 225px;
   bottom: 0;
   left: 0;
 }
 .ear-tickler.application .sound-board {
   padding: 10px;
   position: absolute;
-  left: calc(185px);
+  left: calc(235px);
   right: 0;
   top: 50px;
 }
@@ -69,9 +68,8 @@ body {
   font-family: Ubuntu, sans-serif;
   font-size: calc(30px);
   font-weight: bold;
-  margin: 10px;
   left: 0;
-  right: 200px;
+  margin: 10px;
 }
 .header-bar .audio-visualizer {
   display: inline-block;
@@ -79,7 +77,7 @@ body {
   top: 0;
   right: 0;
   bottom: 0;
-  left: 200px;
+  left: 225px;
   color: #596e83;
 }
 .header-bar .audio-visualizer > canvas {
@@ -97,7 +95,7 @@ body {
   border-radius: 5px;
   border: 3px double;
   padding: 3px;
-  width: calc(163px);
+  width: calc(213px);
 }
 .filtered-track-list ul {
   font-size: 0.8rem;
@@ -118,25 +116,19 @@ body {
 .filtered-track-list ul li i {
   margin: 0 5px;
 }
-.filtered-track-list ul li .fa-music {
-  color: #666;
-}
 .filtered-track-list ul li .track-name {
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: pre;
-  width: 135px;
+  width: 185px;
 }
-.filtered-track-list ul li .fa-plus {
+.filtered-track-list ul li .tickle-add {
   color: #666;
   position: absolute;
   right: 0;
 }
-.filtered-track-list ul li .fa-plus:hover {
-  color: inherit;
-}
-.filtered-track-list ul li.added .fa-music {
+.filtered-track-list ul li .tickle-add:hover {
   color: inherit;
 }
 .filtered-track-list .track-list-controls {
@@ -170,7 +162,7 @@ body {
   margin: 5px;
   position: relative;
   height: 55px;
-  width: 175px;
+  width: 225px;
 }
 .sound-board .audio-player.playing {
   animation: playing 1.5s linear infinite;
@@ -196,15 +188,22 @@ body {
   left: 0;
   right: 0;
 }
-.sound-board .audio-player .audio-control-bar > button {
+.sound-board .audio-player .audio-control-bar > .play-button {
+  border: 1px solid #666;
+  border-radius: 3px 0 0 3px;
+  cursor: pointer;
   font-size: .6rem;
-  padding: 1px 5px;
-  position: absolute;
+  height: 15px;
+  width: 20px;
   left: 3px;
-  right: 23px;
+  top: 0;
+  line-height: 15px;
+  padding: 0;
+  position: absolute;
+  text-align: center;
 }
-.sound-board .audio-player .audio-control-bar > button.hidden {
-  display: none;
+.sound-board .audio-player .audio-control-bar > .play-button.animate-spin {
+  border: none;
 }
 .sound-board .audio-player .audio-control-bar > .loop-toggle {
   display: none;
@@ -266,31 +265,30 @@ body {
   position: absolute;
   font-size: 0;
 }
-.sound-board .audio-player .audio-volume-wrapper i.fa {
+.sound-board .audio-player .audio-volume-wrapper i[class^=tickle-] {
+  cursor: pointer;
   font-size: 10px;
   height: 10px;
   width: 10px;
   text-align: center;
 }
-.sound-board .audio-player .audio-volume-wrapper i.fa.fa {
+.sound-board .audio-player .audio-volume-wrapper i[class^=tickle-][class^=tickle-] {
   position: absolute;
   color: #666;
 }
-.sound-board .audio-player .audio-volume-wrapper i.fa.fa-volume-off {
-  color: #aaa;
+.sound-board .audio-player .audio-volume-wrapper i[class^=tickle-].tickle-volume-mute,
+.sound-board .audio-player .audio-volume-wrapper i[class^=tickle-].tickle-volume-muted {
   margin-right: 3px;
 }
-.sound-board .audio-player .audio-volume-wrapper i.fa.fa-volume-off.muted {
-  color: #666;
-}
-.sound-board .audio-player .audio-volume-wrapper i.fa.fa-volume-down {
+.sound-board .audio-player .audio-volume-wrapper i[class^=tickle-].tickle-volume-down {
   left: 15px;
 }
-.sound-board .audio-player .audio-volume-wrapper i.fa.fa-volume-up {
+.sound-board .audio-player .audio-volume-wrapper i[class^=tickle-].tickle-volume-up {
   right: 3px;
 }
 .sound-board .audio-player .audio-volume-wrapper .audio-volume-bar {
   border: 1px solid #aaa;
+  cursor: pointer;
   height: 8px;
   margin: 0;
   left: 30px;
@@ -327,6 +325,170 @@ body {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
+@font-face {
+  font-family: 'ear-tickler';
+  src: url('../font/ear-tickler.eot?72980294');
+  src: url('../font/ear-tickler.eot?72980294#iefix') format('embedded-opentype'),
+       url('../font/ear-tickler.woff?72980294') format('woff'),
+       url('../font/ear-tickler.ttf?72980294') format('truetype'),
+       url('../font/ear-tickler.svg?72980294#ear-tickler') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'ear-tickler';
+    src: url('../font/ear-tickler.svg?72980294#ear-tickler') format('svg');
+  }
+}
+*/
+ 
+ [class^="tickle-"]:before, [class*=" tickle-"]:before {
+  font-family: "ear-tickler";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.tickle-play:before { content: '\e800'; } /* '' */
+.tickle-stop:before { content: '\e801'; } /* '' */
+.tickle-pause:before { content: '\e802'; } /* '' */
+.tickle-close:before { content: '\e803'; } /* '' */
+.tickle-logo:before { content: '\e804'; } /* '' */
+.tickle-track-playing:before { content: '\e805'; } /* '' */
+.tickle-volume-muted:before { content: '\e806'; } /* '' */
+.tickle-volume-down:before { content: '\e807'; } /* '' */
+.tickle-volume-up:before { content: '\e808'; } /* '' */
+.tickle-volume-mute:before { content: '\e809'; } /* '' */
+.tickle-loading:before { content: '\e80a'; } /* '' */
+.tickle-unstarred:before { content: '\e80b'; } /* '' */
+.tickle-starred:before { content: '\e80c'; } /* '' */
+.tickle-search:before { content: '\e80d'; } /* '' */
+.tickle-settings:before { content: '\e80e'; } /* '' */
+.tickle-loop:before { content: '\e80f'; } /* '' */
+.tickle-download:before { content: '\e810'; } /* '' */
+.tickle-upload:before { content: '\e811'; } /* '' */
+.tickle-waves:before { content: '\e812'; } /* '' */
+.tickle-github:before { content: '\e813'; } /* '' */
+.tickle-track:before { content: '\e814'; } /* '' */
+.tickle-add:before { content: '\e815'; } /* '' */
+/*
+   Animation example, for spinners
+*/
+.animate-spin {
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  -webkit-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+  display: inline-block;
+}
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -moz-transform: rotate(359deg);
+    -o-transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -moz-transform: rotate(359deg);
+    -o-transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -moz-transform: rotate(359deg);
+    -o-transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@-ms-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -moz-transform: rotate(359deg);
+    -o-transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -moz-transform: rotate(359deg);
+    -o-transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
 
 ::-webkit-scrollbar {
   width: 7px;

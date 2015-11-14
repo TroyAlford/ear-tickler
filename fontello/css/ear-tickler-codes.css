@@ -1,0 +1,23 @@
+
+.tickle-play:before { content: '\e800'; } /* '' */
+.tickle-stop:before { content: '\e801'; } /* '' */
+.tickle-pause:before { content: '\e802'; } /* '' */
+.tickle-close:before { content: '\e803'; } /* '' */
+.tickle-logo:before { content: '\e804'; } /* '' */
+.tickle-track-playing:before { content: '\e805'; } /* '' */
+.tickle-volume-muted:before { content: '\e806'; } /* '' */
+.tickle-volume-down:before { content: '\e807'; } /* '' */
+.tickle-volume-up:before { content: '\e808'; } /* '' */
+.tickle-volume-mute:before { content: '\e809'; } /* '' */
+.tickle-loading:before { content: '\e80a'; } /* '' */
+.tickle-unstarred:before { content: '\e80b'; } /* '' */
+.tickle-starred:before { content: '\e80c'; } /* '' */
+.tickle-search:before { content: '\e80d'; } /* '' */
+.tickle-settings:before { content: '\e80e'; } /* '' */
+.tickle-loop:before { content: '\e80f'; } /* '' */
+.tickle-download:before { content: '\e810'; } /* '' */
+.tickle-upload:before { content: '\e811'; } /* '' */
+.tickle-waves:before { content: '\e812'; } /* '' */
+.tickle-github:before { content: '\e813'; } /* '' */
+.tickle-track:before { content: '\e814'; } /* '' */
+.tickle-add:before { content: '\e815'; } /* '' */
