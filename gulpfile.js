@@ -154,7 +154,7 @@ gulp.task('default', function () {
   browserifyTask({
     development: true,
     src:  './app/main.js',
-    dest: './build'
+    dest: './build/js'
   });
   
   cssTask({
@@ -177,7 +177,7 @@ gulp.task('deploy', function () {
   browserifyTask({
     development: false,
     src:  './app/main.js',
-    dest: './deploy'
+    dest: './deploy/js'
   });
   
   cssTask({
