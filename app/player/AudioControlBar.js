@@ -2,6 +2,12 @@ var React = require('react');
 var Helper = require('../Helper.js');
 
 var AudioControlBar = React.createClass({
+  getInitialState: function() {
+    return {
+      loopToggleId: Helper.guid()
+    };
+  },
+
   handleClick: function() {
     switch (this.props.playState) {
       case 'loading':
@@ -24,7 +30,7 @@ var AudioControlBar = React.createClass({
       case 'playing':
         return 'pause';
       case 'loading':
-        return 'spinner';
+        return 'loading animate-spin';
       case 'paused':
       case 'stopped':
       default:
@@ -32,28 +38,15 @@ var AudioControlBar = React.createClass({
         return 'play';
     }
   },
-  getButtonIconClass: function() {
-    var button_class = this.getButtonClass();
-    switch (button_class) {
-      case 'spinner':
-        return 'spinner fa-spin';
-      default:
-        return button_class;
-    }
-  },
 
   render: function() {
-    var loop_toggle_id = Helper.guid();
     return (
       <div className="audio-control-bar">
-        <button
-          className={this.getButtonClass()}
-          onClick={this.handleClick}
-        >
-          <i className={"fa fa-" + this.getButtonIconClass()}></i>
-        </button>
+        <i className={"play-button tickle-" + this.getButtonClass()}
+           onClick={this.handleClick}>
+        </i>
         <input
-          id={loop_toggle_id}
+          id={this.state.loopToggleId}
           className="loop-toggle"
           type="checkbox"
           ref="loop_enabled"
@@ -61,8 +54,8 @@ var AudioControlBar = React.createClass({
         />
         <label
           className="loop-toggle-label"
-          htmlFor={loop_toggle_id}>
-          <i className="fa fa-repeat"></i>
+          htmlFor={this.state.loopToggleId}>
+          <i className="tickle-loop"></i>
         </label>
       </div>
     );

@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700);
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css);
 
 @font: Ubuntu, sans-serif;
 @color-background-main: #000;
@@ -17,7 +16,7 @@
 
 @lo-header-height: 50px;
 @lo-header-title-width: 200px;
-@lo-sidebar-width: 175px;
+@lo-sidebar-width: 225px;
 @lo-sidebar-controls-height: 20px;
 
 @keyframes playing {
@@ -94,13 +93,13 @@ body {
     font-family: @font;
     font-size: calc(@lo-header-height - 20px);
     font-weight: bold;
+    left: 0;
     margin: 10px;
-    left: 0; right: @lo-header-title-width;
   }
   .audio-visualizer {
     display: inline-block;
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: @lo-header-title-width;
+    top: 0; right: 0; bottom: 0; left: @lo-sidebar-width;
     color: @color-accent-subtle;
 
     > canvas {
@@ -135,7 +134,6 @@ body {
       width: 100%;
       i { margin: 0 5px; }
 
-      .fa-music { color: @color-text-disabled; }
       .track-name {
         display: inline-block;
         overflow: hidden;
@@ -143,16 +141,12 @@ body {
         white-space: pre;
         width: @lo-sidebar-width - 40px;
       }
-      .fa-plus {
+      .tickle-add {
         color: @color-text-disabled;
         position: absolute;
         right: 0;
 
         &:hover { color: inherit; }
-      }
-
-      &.added {
-        .fa-music { color: inherit; }
       }
     }
   }
@@ -213,14 +207,20 @@ body {
       font-size: 0;
       left: 0; right: 0;
 
-      > button {
+      > .play-button {
+        border: 1px solid @color-inverse-text;
+        border-radius: 3px 0 0 3px;
+        cursor: pointer;
         font-size: .6rem;
-        padding: 1px 5px;
+        height: 15px; width: 20px;
+        left: 3px; top: 0;
+        line-height: 15px;
+        padding: 0;
         position: absolute;
-        left: 3px; right: 23px;
+        text-align: center;
 
-        &.hidden {
-          display: none;
+        &.animate-spin {
+          border: none;
         }
       }
       > .loop-toggle {
@@ -282,29 +282,26 @@ body {
       position: absolute;
       font-size: 0;
 
-      i.fa {
+      i[class^=tickle-] {
+        cursor: pointer;
         font-size: 10px;
         height: 10px;
         width: 10px;
         text-align: center;
 
-        &.fa {
+        &[class^=tickle-] {
           position: absolute;
           color: @color-inverse-text;
         }
-        &.fa-volume-off  {
-          color: @color-inverse-text-disabled;
-          margin-right: 3px;
-          &.muted {
-            color: @color-inverse-text;
-          }
-        }
-        &.fa-volume-down { left: 15px; }
-        &.fa-volume-up   { right: 3px; }
+        &.tickle-volume-mute,
+        &.tickle-volume-muted { margin-right: 3px; }
+        &.tickle-volume-down { left: 15px; }
+        &.tickle-volume-up   { right: 3px; }
       }
 
       .audio-volume-bar {
         border: 1px solid @color-inverse-text-disabled;
+        cursor: pointer;
         height: 8px; margin: 0;
         left: 30px;
         right: 17px;
@@ -325,3 +322,5 @@ body {
 }
 
 @import 'scrollbars';
+@import (inline) '../fontello/css/ear-tickler.css';
+@import (inline) '../fontello/css/animation.css';

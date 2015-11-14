@@ -43,7 +43,7 @@ var App = React.createClass({
       <div className="ear-tickler application">
         <div className="header-bar">
           <div className="title">
-            <i className="fa fa-headphones"></i> Ear Tickler
+            <i className="tickle-logo"></i> Ear Tickler
           </div>
           <Oscilloscope
             tracks={this.state.loadedTracks}
