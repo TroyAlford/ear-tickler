@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var source = require('vinyl-source-stream'); // Used to stream bundle for further handling
 var browserify = require('browserify');
 var watchify = require('watchify');
-var babelify = require('babelify'); 
+var babelify = require('babelify');
 var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
 var streamify = require('gulp-streamify');
@@ -28,7 +28,7 @@ var bundlerForApplicationJS = browserify({
 
   cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
 }).external([
-  // Do not rebundle these into main.
+// Do not rebundle these into main.
   'react', 'react/addons', 'flux-react'
 ]);
 var bundlerForVendorJS = browserify({
@@ -88,8 +88,8 @@ function rebuildCss() {
     .pipe(cssmin())
     .pipe(gulp.dest(paths.release + '/css'))
     .pipe(notify(function() {
-        var finishTime = Date.now();
-        console.log('RELEASE: main.css produced in ' + (finishTime - startTime) + 'ms');
+      var finishTime = Date.now();
+      console.log('RELEASE: main.css produced in ' + (finishTime - startTime) + 'ms');
     }));
 }
 
