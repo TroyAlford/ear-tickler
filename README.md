@@ -17,16 +17,12 @@ first versions and getting them working.
 ## Development
 * Clone the repo to your working directory
 * Run `npm install`
-* Run `gulp` - this makes any change to `app` or `styles` automatically rebuild
+* Run `gulp` - this builds, then starts a watcher to rebuild on any change
+  * If you just want to build, use `gulp build`
+  * If you just want to watch, use `gulp watch`
 * Run `dev-server.js` for testing. It defaults to port 80, so you can just use `http://localhost`
-* Run `gulp test` to run all tests with phantomJS and produce XML reports
 
-## Production Build (minified)
-* Run `gulp deploy`
-
-### Directory
-* **build/**: Where your automatically builds to. This is where you launch your app in development
-* **dist/**: Where the deployed code exists, ready for production
-* **styles/**: Where you put your css files
-* **specs/**: Where you put your test files
-* **gulpfile**: Gulp configuration
+## Testing & Releasing
+Grunt will output the following directories:
+* **builds/develop/**: All assets, compiled - but not minified, for ease in testing.
+* **builds/release/**: All assets, compiled and minified, ready for production.
