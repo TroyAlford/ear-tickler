@@ -1,4 +1,3 @@
-/.idea
-/bin
-/deploy
-/node_modules
+.idea
+builds
+node_modules

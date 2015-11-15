@@ -29,13 +29,12 @@ var AudioVolumeBar = React.createClass({
   },
 
   render: function() {
-    var mute_button_id = Helper.guid();
     return (
       <div className="audio-volume-wrapper">
-        <i className={"fa fa-volume-off " + (this.props.muted ? "muted" : "")}
+        <i className={"tickle-volume-" + (this.props.muted ? "muted muted" : "mute")}
            onClick={this.handleMuteToggle}
         ></i>
-        <i className="fa fa-volume-down"
+        <i className="tickle-volume-down"
            onClick={this.handleVolumeDown}
         ></i>
         <div
@@ -51,7 +50,7 @@ var AudioVolumeBar = React.createClass({
           >
           </div>
         </div>
-        <i className="fa fa-volume-up"
+        <i className="tickle-volume-up"
            onClick={this.handleVolumeUp}
         ></i>
       </div>

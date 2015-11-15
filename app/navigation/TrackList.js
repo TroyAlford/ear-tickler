@@ -14,15 +14,15 @@ var TrackList = React.createClass({
         return trackName.indexOf(filter) > -1;
       }, this)
       .map(function(track) {
-        var className = [
-          _.includes(this.props.addedTrackIds, track.id) ? 'added' : ''
-        ].join(' ');
+        var className = 'tickle-track';
+        if (_.includes(this.props.addedTrackIds, track.id))
+          className += '-playing';
 
         return (
-          <li key={track.id} track={track} className={className}>
-            <i className="fa fa-music"></i>
+          <li key={track.id} track={track}>
+            <i className={className}></i>
             <span className="track-name">{track.name}</span>
-            <i className="fa fa-plus"
+            <i className="tickle-add"
                onClick={this.handleAddClicked.bind(null, track)}
             ></i>
           </li>
