@@ -94,9 +94,11 @@ function rebuildCss() {
 }
 
 var assetMap = [
-  { name: 'HTML Pages',   src: './app/**/*.html',             dest: '' },
-  { name: 'Font Assets',  src: './fontello/font/**/*',        dest: '/font' },
-  { name: 'Image Assets', src: './images/**/*.{gif,jpg,png}', dest: '/images' }
+  { dest: '',        name: 'HTML Pages',   src: './app/**/*.html'             },
+  { dest: '/api',    name: 'API Files',    src: './api/**/*.php'              },
+  { dest: '/data',   name: 'Data Files',   src: './data/**/*.json'            },
+  { dest: '/font',   name: 'Font Assets',  src: './fontello/font/**/*'        },
+  { dest: '/images', name: 'Image Assets', src: './images/**/*.{gif,jpg,png}' }
 ];
 function rebuildAssets() {
   assetMap.forEach(function(mapping) {

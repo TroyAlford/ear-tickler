@@ -1,0 +1,61 @@
+var Helper = require('../Helper.js');
+
+module.exports = {
+  ajax: function(url, options) {
+    options = Helper.extend({
+      verb: 'GET',
+      success: function() {},
+      failure: function() {},
+      done: function() {}
+    }, options);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open(options.verb.toUpperCase(), encodeURI(url || ''));
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+      var response = {
+        status: xhr.status,
+        message: xhr.responseText
+      };
+
+      if (xhr.status === 200)
+        options.success(response);
+      else
+        options.failure(response);
+
+      options.done(response);
+    };
+    xhr.send(JSON.stringify(options.data || {}));
+  },
+
+  delete: function(url, options) {
+    return this.ajax(url, Helper.extend({
+      verb: 'DELETE'
+    }, options));
+  },
+  get: function(url, options) {
+    return this.ajax(url, Helper.extend({
+      verb: 'GET'
+    }, options));
+  },
+  head: function(url, options) {
+    return this.ajax(url, Helper.extend({
+      verb: 'HEAD'
+    }, options));
+  },
+  options: function(url, options) {
+    return this.ajax(url, Helper.extend({
+      verb: 'OPTIONS'
+    }, options));
+  },
+  post: function(url, options) {
+    return this.ajax(url, Helper.extend({
+      verb: 'POST'
+    }, options));
+  },
+  put: function(url, options) {
+    return this.ajax(url, Helper.extend({
+      verb: 'PUT'
+    }, options));
+  }
+};

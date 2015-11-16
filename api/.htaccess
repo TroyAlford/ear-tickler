@@ -1,0 +1,2 @@
+RewriteEngine On # Turn on the rewriting engine
+RewriteRule ^api/([a-zA-Z]+)/?$ api/$1.php [NC,L] # Converts ~/path/ to ~/path.php
