@@ -96,6 +96,7 @@ function rebuildCss() {
 var assetMap = [
   { dest: '',        name: 'HTML Pages',   src: './app/**/*.html'             },
   { dest: '/api',    name: 'API Files',    src: './api/**/*.php'              },
+  { dest: '/data',   name: 'Data Files',   src: './data/**/*.json'            },
   { dest: '/font',   name: 'Font Assets',  src: './fontello/font/**/*'        },
   { dest: '/images', name: 'Image Assets', src: './images/**/*.{gif,jpg,png}' }
 ];

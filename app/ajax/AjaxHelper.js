@@ -1,7 +1,7 @@
 var Helper = require('../Helper.js');
 
 module.exports = {
-  ajax: function(options) {
+  ajax: function(url, options) {
     options = Helper.extend({
       verb: 'GET',
       success: function() {},
@@ -10,7 +10,7 @@ module.exports = {
     }, options);
 
     var xhr = new XMLHttpRequest();
-    xhr.open(options.verb.toUpperCase(), encodeURI(options.uri || ''));
+    xhr.open(options.verb.toUpperCase(), encodeURI(url || ''));
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function() {
       var response = {
@@ -28,28 +28,34 @@ module.exports = {
     xhr.send(JSON.stringify(options.data || {}));
   },
 
-  delete: function(options) {
-    options.verb = 'DELETE';
-    return this.ajax(options);
+  delete: function(url, options) {
+    return this.ajax(url, Helper.extend({
+      verb: 'DELETE'
+    }, options));
   },
-  get: function(options) {
-    options.verb = 'GET';
-    return this.ajax(options);
+  get: function(url, options) {
+    return this.ajax(url, Helper.extend({
+      verb: 'GET'
+    }, options));
   },
-  head: function(options) {
-    options.verb = 'HEAD';
-    return this.ajax(options);
+  head: function(url, options) {
+    return this.ajax(url, Helper.extend({
+      verb: 'HEAD'
+    }, options));
   },
-  options: function(options) {
-    options.verb = 'OPTIONS';
-    return this.ajax(options);
+  options: function(url, options) {
+    return this.ajax(url, Helper.extend({
+      verb: 'OPTIONS'
+    }, options));
   },
-  post: function(options) {
-    options.verb = 'POST';
-    return this.ajax(options);
+  post: function(url, options) {
+    return this.ajax(url, Helper.extend({
+      verb: 'POST'
+    }, options));
   },
-  put: function(options) {
-    options.verb = 'PUT';
-    return this.ajax(options);
+  put: function(url, options) {
+    return this.ajax(url, Helper.extend({
+      verb: 'PUT'
+    }, options));
   }
 };

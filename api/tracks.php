@@ -1,22 +1,45 @@
 <?php
+  if (file_exists('../../data/settings.php'))
+    require_once('../../data/settings.php');
+
+  require_once('authentication.php');
 	require_once('database.php');
+  require_once('default_settings.php');
 	require_once('parser.php');
 
 	$functions = [
     '$get' => function($args) {
-      header('Content-type: application/json');
-
       $params = $args['$params'];
       $body = $args['$body'];
 
-      $db = new DB()->$db;
+      $user_id = $_COOKIE[USER_ID_COOKIE] != '' ?
+                 $_COOKIE[USER_ID_COOKIE] : 0;
 
-
-      echo 'This is the response from GET.';
+      $db = GetDatabase();
+	    $json = $db->querySingle(
+	      "SELECT json FROM profiles WHERE user_id = {$user_id}"
+      );
+	    if (is_null($json)) {
+	      $json = $db->querySingle(
+	        "SELECT json FROM profiles WHERE user_id = 0"
+	      );
+	    }
+      header('Content-type: application/json');
+      echo $json;
     },
     '$post' => function($args) {
       $params = $args['$params'];
       $body = $args['$body'];
+
+      $tracks = json_decode($body);
+      echo 'You passed in...<br/>';
+      foreach($tracks as $key => $value) {
+        echo '&nbsp;&bull;&nbsp;', $key, ': ', $value, '<br/>';
+      }
+
+			//$db = GetDatabase();
+
+      header('Content-type: application/json');
       echo 'This is the response from POST.';
     }
   ];
