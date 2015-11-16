@@ -14,11 +14,11 @@
 		  if (ALLOW_CROSS_DOMAIN_REQUESTS)
 		    header('Access-Control-Allow-Origin: *');
 
+		  $user_id = $_COOKIE[USER_ID_COOKIE] != '' ?
+		             $_COOKIE[USER_ID_COOKIE] : 0;
+
       $params = $args['$params'];
       $body = $args['$body'];
-
-      $user_id = $_COOKIE[USER_ID_COOKIE] != '' ?
-                 $_COOKIE[USER_ID_COOKIE] : 0;
 
       $db = GetDatabase();
 	    $json = $db->querySingle(
@@ -33,19 +33,29 @@
       echo $json;
     },
     '$post' => function($args) {
+		  $user_id = $_COOKIE[USER_ID_COOKIE] != '' ?
+		             $_COOKIE[USER_ID_COOKIE] : 0;
+
       $params = $args['$params'];
       $body = $args['$body'];
 
       $tracks = json_decode($body);
-      echo 'You passed in...<br/>';
-      foreach($tracks as $key => $value) {
-        echo '&nbsp;&bull;&nbsp;', $key, ': ', $value, '<br/>';
+      foreach($tracks as $index => $track) {
+        if (!property_exists($track, 'name') || !isset($track->name))
+          $track->name = 'Unnamed Track';
+        if (!property_exists($track, 'origin'))
+          $track->origin = '';
       }
 
-			//$db = GetDatabase();
+			$json = json_encode($tracks);
+
+			$db = GetDatabase();
+			$db->exec(
+				"INSERT OR REPLACE INTO profiles (user_id, json)".
+				"VALUES ({$user_id}, '{$json}')"
+			);
 
       header('Content-type: application/json');
-      echo 'This is the response from POST.';
     }
   ];
 
