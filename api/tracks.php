@@ -7,6 +7,11 @@
   require_once('default_settings.php');
 	require_once('parser.php');
 
+  if (ALLOW_CROSS_DOMAIN_REQUESTS)
+    header('Access-Control-Allow-Origin: *');
+
+  header('Access-Control-Allow-Headers: Content-Type');
+
 	$functions = [
     '$get' => function($args) {
       $params = $args['$params'];
