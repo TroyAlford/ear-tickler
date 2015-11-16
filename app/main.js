@@ -3,9 +3,4 @@ var App = require('./App.js');
 window._ = require('lodash');
 window.Ajax = require('./ajax/AjaxHelper.js');
 
-var trackStore = require('./data/TrackStore.js');
-React.render(
-  <App
-    trackStore={trackStore}
-  />, document.getElementById('application')
-);
+React.render(<App />, document.getElementById('application'));

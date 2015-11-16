@@ -1,5 +1,4 @@
 var React = require('react');
-var TrackStore = require('../data/TrackStore.js');
 
 var TrackList = React.createClass({
     handleFilterChange: function() {

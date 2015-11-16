@@ -16,7 +16,7 @@ var TrackListControls = React.createClass({
         <a className="button backup"
            download="track-list-backup.json"
            href={this.getBackupUrl()}
-        ><i className="tickle-download"></i> Save</a>
+        ><i className="tickle-download"></i> Export</a>
       </div>
     );
   }
