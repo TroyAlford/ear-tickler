@@ -75,9 +75,13 @@ var App = React.createClass({
     }
   },
   saveTrackList: function () {
-    Ajax.post('api/tracks', {
-      data: this.tracks
-    });
+    if (this.state.offlineMode) {
+      localStorage.setItem('tracks', JSON.stringify(this.state.allTracks));
+    } else {
+      Ajax.post('api/tracks', {
+        data: this.tracks
+      });
+    }
   },
 
   render: function() {
