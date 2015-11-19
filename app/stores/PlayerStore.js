@@ -3,10 +3,12 @@ var Fluxxor = require('fluxxor'),
 
 var Guid = require('../helpers/Guid.js');
 
-var events = {
-  Add:    'store.player.add',
-  Remove: 'store.player.delete',
-  Update: 'store.player.update'
+var messages = {
+  AddPlayer:    'store.player.add',
+  ClearPlayers: 'store.players.clear',
+  RemovePlayer: 'store.player.remove',
+
+  UpdateTrackInfo: 'store.track.update'
 };
 
 module.exports = Fluxxor.createStore({
@@ -15,43 +17,58 @@ module.exports = Fluxxor.createStore({
     this.actions = {
       addPlayer: function(track) {
         track = track || {};
-        this.dispatch(events.Add, {
-          name: track.name,
-          url:  track.url || track.origin,
-          tags: track.tags || []
+        this.dispatch(messages.AddPlayer, {
+          track_id: track.id,
+          title: track.name,
+          url: track.url
         });
+      },
+      clearPlayers: function() {
+        this.dispatch(messages.ClearPlayers);
       },
       removePlayer: function(id) {
-        this.dispatch(events.Remove, id);
+        this.dispatch(messages.RemovePlayer, id);
       },
-      updatePlayer: function(track) {
+      trackUpdated: function(track) {
         track = track || {};
-        this.dispatch(events.Update, {
-          id:   track.id,
-          name: track.name,
-          url:  track.url || track.origin,
-          tags: track.tags || []
+        this.dispatch(messages.UpdateTrackInfo, {
+          track_id: track.id,
+          title: track.name,
+          url: track.url
         });
       }
-    },
+    };
+    Object.keys(this.actions).forEach(function(key) {
+      this.actions[key] = this.actions[key].bind(this);
+    }.bind(this));
 
     this.bindActions(
-      events.Add,    this.onAddPlayer,
-      events.Remove, this.onRemovePlayer,
-      events.Update, this.onUpdatePlayer
+      messages.AddPlayer,    this.onAddPlayer,
+      messages.ClearPlayers, this.onClearPlayers,
+      messages.RemovePlayer, this.onRemovePlayer,
+      messages.UpdateTrackInfo, this.onUpdateTrackInfo
     );
+  },
+  dispatch: function(type, payload) {
+    flux.dispatcher.dispatch({type: type, payload: payload});
   },
 
   onAddPlayer: function(player) {
-    var id = Guid.generate();
-    this.players[player.id] = _.extend({}, player, { id: id });;
+    player.id = Guid.generate();
+    this.players[player.id] = player;
+    this.emit('change');
+  },
+  onClearPlayers: function() {
+    Object.keys(this.players).forEach(function(player) {
+      delete this.players[player.id];
+    }.bind(this));
     this.emit('change');
   },
   onRemovePlayer: function(id) {
     delete this.players[id];
     this.emit('change');
   },
-  onUpdatePlayer: function(player) {
+  onUpdateTrackInfo: function(player) {
     this.players[player.id] = player;
     this.emit('change');
   }

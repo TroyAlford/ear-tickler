@@ -25,25 +25,10 @@ module.exports = React.createClass({
   },
 
   handleAddAudioPlayer: function(track_id) {
-    var matches = this.state.allTracks.filter(function(track) {
-      return track.id == track_id;
-    });
-
-    if (matches.length == 0) return;
-
-    var track = _.extend({}, matches[0]);
-    track.player_id = Guid.generate();
-
-    this.setState({
-      loadedTracks: this.state.loadedTracks.concat(track)
-    });
+    this.getFlux().actions.addPlayer(this.state.tracks[track_id]);
   },
   handleCloseAudioPlayer: function(player_id) {
-    this.setState({
-      loadedTracks: this.state.loadedTracks.filter(function(track) {
-        return track.player_id !== player_id;
-      })
-    });
+    this.getFlux().actions.removePlayer(player_id);
   },
 
   _as_array: function(state_object) {
@@ -61,9 +46,6 @@ module.exports = React.createClass({
           <div className="title">
             <i className="tickle-logo"></i> Ear Tickler
           </div>
-          <Oscilloscope
-            tracks={this.state.loadedTracks}
-          />
         </div>
         <FilteredTrackList
           tracks={this._as_array('tracks')}
