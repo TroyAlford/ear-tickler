@@ -1,5 +1,5 @@
 var React = require('react');
-var AudioPlayer = require('../player/AudioPlayer.js');
+var AudioPlayer = require('../playback/AudioPlayer.js');
 
 module.exports = React.createClass({
   handleCloseClicked: function(player_id) {

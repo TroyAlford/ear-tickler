@@ -1,24 +1,27 @@
 var React = require('react');
-var _ = require('lodash');
+var Fluxxor = require('fluxxor');
+var _        = require('lodash');
 
 var FilteredTrackList = require('./components/navigation/FilteredTrackList.js');
-var Oscilloscope = require('./components/visualization/Oscilloscope.js');
-var SoundBoard = require('./components/soundboard/SoundBoard.js');
+var Oscilloscope      = require('./components/visualization/Oscilloscope.js');
+var SoundBoard        = require('./components/soundboard/SoundBoard.js');
 
-var Guid = require('./helpers/Guid.js');
-var XHR = require('./helpers/XHR.js');
+var Guid     = require('./helpers/Guid.js');
+var XHR      = require('./helpers/XHR.js');
 
 module.exports = React.createClass({
-  getInitialState: function() {
-    return ({
-      allTracks: [],
-      loadedTracks: [],
-      offlineMode: false
-    });
-  },
+  mixins: [
+    Fluxxor.FluxMixin(React),
+    Fluxxor.StoreWatchMixin('TrackStore', 'PlayerStore', 'VisualizerStore')
+  ],
 
-  componentWillMount() {
-    this.loadTrackList();
+  getStateFromFlux: function() {
+    var flux = this.getFlux();
+    return {
+      tracks:      flux.store('TrackStore').tracks,
+      players:     flux.store('PlayerStore').players,
+      visualizers: flux.store('VisualizerStore').visualizers
+    };
   },
 
   handleAddAudioPlayer: function(track_id) {
@@ -43,54 +46,15 @@ module.exports = React.createClass({
     });
   },
 
-  handleTrackDelete: function() {},
-  handleTrackInsert: function() {},
-  handleTrackUpdate: function() {},
-
-  formatTracks: function (tracks) {
-    return tracks.map(function (track) {
-      return _.extend({
-        id: Guid.generate(),
-        name: 'New Track',
-        origin: ''
-      }, track);
-    }).sort(function (a, b) {
-      return a.name.localeCompare(b.name);
-    });
-  },
-
-  loadTrackList: function () {
-    var raw_tracks = [];
-    if (this.state.offlineMode) {
-      raw_tracks = JSON.parse(localStorage.getItem('tracks') || '[]');
-      this.setState({ allTracks: this.formatTracks(raw_tracks) });
-    } else {
-      XHR.get('api/tracks', {
-        success: function (response) {
-          raw_tracks = response.message;
-          this.setState({ allTracks: this.formatTracks(raw_tracks) });
-        }.bind(this),
-        failure: function (response) {
-          this.setState({ offlineMode: true });
-          this.loadTrackList();
-        }.bind(this)
-      });
-    }
-  },
-  saveTrackList: function () {
-    if (this.state.offlineMode) {
-      localStorage.setItem('tracks', JSON.stringify(this.state.allTracks));
-    } else {
-      XHR.post('api/tracks', {
-        data: this.tracks
-      });
-    }
+  _as_array: function(state_object) {
+    return Object.keys(this.state[state_object]).map(function(key) {
+      return this.state[state_object][key]
+    }.bind(this));
   },
 
   render: function() {
-    var addedTrackIds = this.state.loadedTracks.map(function(track) {
-      return track.id;
-    });
+    var addedTrackIds = Object.keys(this.state.tracks);
+
     return(
       <div className="ear-tickler application">
         <div className="header-bar">
@@ -102,12 +66,12 @@ module.exports = React.createClass({
           />
         </div>
         <FilteredTrackList
-          tracks={this.state.allTracks}
+          tracks={this._as_array('tracks')}
           addedTrackIds={addedTrackIds}
           onAddClicked={this.handleAddAudioPlayer}
         />
         <SoundBoard
-          tracks={this.state.loadedTracks}
+          tracks={this._as_array('players')}
           onCloseClicked={this.handleCloseAudioPlayer}
         />
       </div>
