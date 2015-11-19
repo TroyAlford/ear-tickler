@@ -1,7 +1,7 @@
 var React = require('react');
 var AudioPlayer = require('../player/AudioPlayer.js');
 
-var SoundBoard = React.createClass({
+module.exports = React.createClass({
   handleCloseClicked: function(player_id) {
     this.props.onCloseClicked(player_id);
   },
@@ -25,5 +25,3 @@ var SoundBoard = React.createClass({
     );
   }
 });
-
-module.exports = SoundBoard;

@@ -1,8 +1,9 @@
 var React = require('react');
-var Helper = require('../Helper.js');
 var _ = require('lodash');
 
-var Oscilloscope = React.createClass({
+var Guid = require('../../helpers/Guid.js');
+
+module.exports = React.createClass({
   componentDidMount: function() {
     this.loadVisualizer();
     this.start();
@@ -12,7 +13,7 @@ var Oscilloscope = React.createClass({
     this.unloadVisualizer();
   },
 
-  uniqueId: 'oscilloscope.' + Helper.guid(),
+  uniqueId: 'oscilloscope.' + Guid.generate(),
   analyzer: null,       // A Web Audio API AnalyserNode object, for analyzing audio output
   merger: null,         // A Web Audio API ChannelMergerNode, for combining Audio outputs to analyze
 
@@ -124,5 +125,3 @@ var Oscilloscope = React.createClass({
     );
   }
 });
-
-module.exports = Oscilloscope;

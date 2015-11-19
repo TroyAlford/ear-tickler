@@ -1,10 +1,10 @@
 var React = require('react');
-var Helper = require('../Helper.js');
+var Guid = require('../../helpers/Guid.js');
 
-var AudioControlBar = React.createClass({
+module.exports = React.createClass({
   getInitialState: function() {
     return {
-      loopToggleId: Helper.guid()
+      loopToggleId: Guid.generate()
     };
   },
 
@@ -61,5 +61,3 @@ var AudioControlBar = React.createClass({
     );
   }
 });
-
-module.exports = AudioControlBar;

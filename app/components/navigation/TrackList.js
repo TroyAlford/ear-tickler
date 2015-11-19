@@ -1,7 +1,7 @@
 var React = require('react');
 var _ = require('lodash');
 
-var TrackList = React.createClass({
+module.exports = React.createClass({
   handleAddClicked: function(track) {
     this.props.onAddClicked(track.id);
   },
@@ -35,5 +35,3 @@ var TrackList = React.createClass({
     );
   }
 });
-
-module.exports = TrackList;

@@ -1,6 +1,7 @@
 var React = require('react');
-var App = require('./Application.js');
-window._ = require('lodash');
-window.Ajax = require('./ajax/AjaxHelper.js');
+var Application = require('./Application.js');
 
-React.render(<App />, document.getElementById('application'));
+//window._ = require('lodash');
+//window.Ajax = require('./helpers/XHR.js');
+
+React.render(<Application />, document.getElementById('application'));

@@ -1,8 +1,8 @@
-var Helper = require('../Helper.js');
+var _ = require('lodash');
 
 module.exports = {
   ajax: function(url, options) {
-    options = Helper.extend({
+    options = _.extend({
       verb: 'GET',
       success: function() {},
       failure: function() {},
@@ -29,32 +29,32 @@ module.exports = {
   },
 
   delete: function(url, options) {
-    return this.ajax(url, Helper.extend({
+    return this.ajax(url, _.extend({
       verb: 'DELETE'
     }, options));
   },
   get: function(url, options) {
-    return this.ajax(url, Helper.extend({
+    return this.ajax(url, _.extend({
       verb: 'GET'
     }, options));
   },
   head: function(url, options) {
-    return this.ajax(url, Helper.extend({
+    return this.ajax(url, _.extend({
       verb: 'HEAD'
     }, options));
   },
   options: function(url, options) {
-    return this.ajax(url, Helper.extend({
+    return this.ajax(url, _.extend({
       verb: 'OPTIONS'
     }, options));
   },
   post: function(url, options) {
-    return this.ajax(url, Helper.extend({
+    return this.ajax(url, _.extend({
       verb: 'POST'
     }, options));
   },
   put: function(url, options) {
-    return this.ajax(url, Helper.extend({
+    return this.ajax(url, _.extend({
       verb: 'PUT'
     }, options));
   }

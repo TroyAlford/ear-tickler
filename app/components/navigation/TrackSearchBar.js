@@ -1,6 +1,6 @@
 var React = require('react');
 
-var TrackList = React.createClass({
+module.exports = React.createClass({
     handleFilterChange: function() {
         var filterText = this.refs.searchBox.getDOMNode().value;
         this.props.onFilterChange(filterText);
@@ -17,5 +17,3 @@ var TrackList = React.createClass({
         );
     }
 });
-
-module.exports = TrackList;

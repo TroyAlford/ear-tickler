@@ -1,7 +1,7 @@
 var React = require('react');
-var Helper = require('../Helper.js');
+var Guid = require('../../helpers/Guid.js');
 
-var AudioVolumeBar = React.createClass({
+module.exports = React.createClass({
   handleClick: function(event) {
     var bar_el  = this.refs.volume_bar.getDOMNode(),
         coords  = bar_el.getClientRects()[0],
@@ -57,5 +57,3 @@ var AudioVolumeBar = React.createClass({
     );
   }
 });
-
-module.exports = AudioVolumeBar;

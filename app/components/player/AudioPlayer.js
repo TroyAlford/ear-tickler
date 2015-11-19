@@ -5,7 +5,7 @@ var AudioVolumeBar   = require('./AudioVolumeBar.js');
 
 var Howl = require('howler').Howl;
 
-var AudioPlayer = React.createClass({
+module.exports = React.createClass({
   getInitialState: function() {
     return {
       loop: false,
@@ -155,5 +155,3 @@ var AudioPlayer = React.createClass({
     );
   }
 });
-
-module.exports = AudioPlayer;

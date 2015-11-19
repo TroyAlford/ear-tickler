@@ -1,11 +1,14 @@
 var React = require('react');
-var Ajax = require('./ajax/AjaxHelper.js');
-var FilteredTrackList = require('./navigation/FilteredTrackList.js');
-var Helper = require('./Helper.js');
-var Oscilloscope = require('./visualization/Oscilloscope.js');
-var SoundBoard = require('./soundboard/SoundBoard.js');
+var _ = require('lodash');
 
-var App = React.createClass({
+var FilteredTrackList = require('./components/navigation/FilteredTrackList.js');
+var Oscilloscope = require('./components/visualization/Oscilloscope.js');
+var SoundBoard = require('./components/soundboard/SoundBoard.js');
+
+var Guid = require('./helpers/Guid.js');
+var XHR = require('./helpers/XHR.js');
+
+module.exports = React.createClass({
   getInitialState: function() {
     return ({
       allTracks: [],
@@ -25,8 +28,8 @@ var App = React.createClass({
 
     if (matches.length == 0) return;
 
-    var track = Helper.extend({}, matches[0]);
-    track.player_id = Helper.guid();
+    var track = _.extend({}, matches[0]);
+    track.player_id = Guid.generate();
 
     this.setState({
       loadedTracks: this.state.loadedTracks.concat(track)
@@ -46,8 +49,8 @@ var App = React.createClass({
 
   formatTracks: function (tracks) {
     return tracks.map(function (track) {
-      return Helper.extend({
-        id: Helper.guid(),
+      return _.extend({
+        id: Guid.generate(),
         name: 'New Track',
         origin: ''
       }, track);
@@ -62,7 +65,7 @@ var App = React.createClass({
       raw_tracks = JSON.parse(localStorage.getItem('tracks') || '[]');
       this.setState({ allTracks: this.formatTracks(raw_tracks) });
     } else {
-      Ajax.get('api/tracks', {
+      XHR.get('api/tracks', {
         success: function (response) {
           raw_tracks = response.message;
           this.setState({ allTracks: this.formatTracks(raw_tracks) });
@@ -78,7 +81,7 @@ var App = React.createClass({
     if (this.state.offlineMode) {
       localStorage.setItem('tracks', JSON.stringify(this.state.allTracks));
     } else {
-      Ajax.post('api/tracks', {
+      XHR.post('api/tracks', {
         data: this.tracks
       });
     }
@@ -111,5 +114,3 @@ var App = React.createClass({
     );
   }
 });
-	
-module.exports = App;

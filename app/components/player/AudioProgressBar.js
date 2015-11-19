@@ -1,7 +1,7 @@
 var React = require('react');
-var TimeFormatterMixin = require('../mixins/TimeFormatterMixin.js');
+var TimeFormatterMixin = require('../../mixins/TimeFormatterMixin.js');
 
-var AudioProgressBar = React.createClass({
+module.exports = React.createClass({
   mixins: [TimeFormatterMixin],
   handleClick: function(event) {
     var bar_el  = this.getDOMNode(),
@@ -29,5 +29,3 @@ var AudioProgressBar = React.createClass({
     );
   }
 });
-
-module.exports = AudioProgressBar;

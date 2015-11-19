@@ -1,7 +1,7 @@
 var React = require('react');
 var _ = require('lodash');
 
-var TrackListControls = React.createClass({
+module.exports = React.createClass({
   getBackupUrl: function() {
     var json = JSON.stringify({
       tracks: this.props.tracks
@@ -21,5 +21,3 @@ var TrackListControls = React.createClass({
     );
   }
 });
-
-module.exports = TrackListControls;

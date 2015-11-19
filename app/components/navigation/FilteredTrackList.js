@@ -3,7 +3,7 @@ var TrackList = require('./TrackList.js');
 var TrackListControls = require('./TrackListControls.js');
 var TrackSearchBar = require('./TrackSearchBar.js');
 
-var FilteredTrackList = React.createClass({
+module.exports = React.createClass({
   getInitialState: function() {
     return {
       filterText: ''
@@ -39,5 +39,3 @@ var FilteredTrackList = React.createClass({
     );
   }
 });
-
-module.exports = FilteredTrackList;
