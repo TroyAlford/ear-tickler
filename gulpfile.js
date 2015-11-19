@@ -115,14 +115,16 @@ function rebuildAssets() {
   });
 };
 
-gulp.task('build', function() {
-  gulp.src('./builds').pipe(clean({force:true}));
+gulp.task('clean', function() {
+  return gulp.src('./builds').pipe(clean({force:true}));
+});
+gulp.task('build', ['clean'], function() {
   rebuildAppJs();
   rebuildVendorJs();
   rebuildCss();
   rebuildAssets();
 });
-gulp.task('watch', function() {
+gulp.task('watch', ['build'], function() {
   watchify(bundlerForApplicationJS).on('update', rebuildAppJs);
   watchify(bundlerForVendorJS).on('update', rebuildVendorJs);
   gulp.watch('./styles/**/*.{css,less}', rebuildCss);
@@ -130,4 +132,4 @@ gulp.task('watch', function() {
     gulp.watch(mapping.src, rebuildAssets);
   });
 });
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', ['watch']);
