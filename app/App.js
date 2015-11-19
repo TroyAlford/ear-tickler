@@ -7,11 +7,15 @@ var SoundBoard = require('./soundboard/SoundBoard.js');
 
 var App = React.createClass({
   getInitialState: function() {
-    this.loadTrackList();
     return ({
       allTracks: [],
-      loadedTracks: []
+      loadedTracks: [],
+      offlineMode: false
     });
+  },
+
+  componentWillMount() {
+    this.loadTrackList();
   },
 
   handleAddAudioPlayer: function(track_id) {
@@ -40,41 +44,44 @@ var App = React.createClass({
   handleTrackInsert: function() {},
   handleTrackUpdate: function() {},
 
-  loadTrackList: function () {
-    Ajax.get('api/tracks', {
-      success: function (response) {
-        var raw_tracks = [];
-        if ("string" === typeof(response.message)) {
-          try {
-            raw_tracks = JSON.parse(response.message);
-          } catch (e) {
-            raw_tracks = [];
-          }
-        } else if (Array.isArray(response.message)) {
-          raw_tracks = response.message;
-        }
-
-        var tracks = raw_tracks.map(function (track) {
-          return Helper.extend({
-            id: Helper.guid(),
-            name: 'New Track',
-            origin: ''
-          }, track);
-        }).sort(function (a, b) {
-          return a.name.localeCompare(b.name);
-        });
-
-        this.setState({allTracks: tracks});
-      }.bind(this),
-      failure: function (response) {
-        this.setState({allTracks: []});
-      }.bind(this)
+  formatTracks: function (tracks) {
+    return tracks.map(function (track) {
+      return Helper.extend({
+        id: Helper.guid(),
+        name: 'New Track',
+        origin: ''
+      }, track);
+    }).sort(function (a, b) {
+      return a.name.localeCompare(b.name);
     });
   },
+
+  loadTrackList: function () {
+    var raw_tracks = [];
+    if (this.state.offlineMode) {
+      raw_tracks = JSON.parse(localStorage.getItem('tracks') || '[]');
+      this.setState({ allTracks: this.formatTracks(raw_tracks) });
+    } else {
+      Ajax.get('api/tracks', {
+        success: function (response) {
+          raw_tracks = response.message;
+          this.setState({ allTracks: this.formatTracks(raw_tracks) });
+        }.bind(this),
+        failure: function (response) {
+          this.setState({ offlineMode: true });
+          this.loadTrackList();
+        }.bind(this)
+      });
+    }
+  },
   saveTrackList: function () {
-    Ajax.post('api/tracks', {
-      data: this.tracks
-    });
+    if (this.state.offlineMode) {
+      localStorage.setItem('tracks', JSON.stringify(this.state.allTracks));
+    } else {
+      Ajax.post('api/tracks', {
+        data: this.tracks
+      });
+    }
   },
 
   render: function() {
