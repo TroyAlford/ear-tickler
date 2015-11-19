@@ -13,6 +13,7 @@
     "browserify": "^11.0.0",
     "glob": "^5.0.14",
     "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.0",
     "gulp-cssmin": "^0.1.7",
     "gulp-if": "^1.2.5",

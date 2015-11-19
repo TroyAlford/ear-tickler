@@ -4,6 +4,7 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var babelify = require('babelify');
 var gulpif = require('gulp-if');
+var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 var streamify = require('gulp-streamify');
 var notify = require('gulp-notify');
@@ -22,9 +23,9 @@ var paths = {
 }
 
 var bundlerForApplicationJS = browserify({
-  entries: './app/main.js',   // Only need initial file, browserify finds the rest
-  transform: [babelify],      // We want to convert JSX to normal javascript
-  debug: true,                // Gives us sourcemapping
+  entries: './app/EarTickler.js',   // Only need initial file, browserify finds the rest
+  transform: [babelify],            // We want to convert JSX to normal javascript
+  debug: true,                      // Gives us sourcemapping
 
   cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
 }).external([
@@ -41,18 +42,18 @@ function rebuildAppJs() {
   console.log(startTime + ': Repackaging Application JavaScript...');
   bundlerForApplicationJS.bundle()
     .on('error', gutil.log)
-    .pipe(source('main.js'))
+    .pipe(source('ear-tickler.js'))
     .pipe(gulp.dest(paths.develop + '/js'))
     .pipe(livereload())
     .pipe(notify(function () {
       var finishTime = Date.now();
-      console.log('DEVELOP: main.js produced in ' + (finishTime - startTime) + 'ms');
+      console.log('DEVELOP: ear-tickler.js produced in ' + (finishTime - startTime) + 'ms');
     }))
     .pipe(streamify(uglify()))
     .pipe(gulp.dest(paths.release + '/js'))
     .pipe(notify(function() {
       var finishTime = Date.now();
-      console.log('RELEASE: main.js produced in ' + (finishTime - startTime) + 'ms');
+      console.log('RELEASE: ear-tickler.js produced in ' + (finishTime - startTime) + 'ms');
     }));
 }
 function rebuildVendorJs() {
@@ -79,17 +80,17 @@ function rebuildCss() {
   console.log(startTime + ': Repackaging Application CSS...');
   gulp.src('./styles/**/*.{css,less}')
     .pipe(less())
-    .pipe(concat('main.css'))
+    .pipe(concat('ear-tickler.css'))
     .pipe(gulp.dest(paths.develop + '/css'))
     .pipe(notify(function() {
       var finishTime = Date.now();
-      console.log('DEVELOP: main.css produced in ' + (finishTime - startTime) + 'ms');
+      console.log('DEVELOP: ear-tickler.css produced in ' + (finishTime - startTime) + 'ms');
     }))
     .pipe(cssmin())
     .pipe(gulp.dest(paths.release + '/css'))
     .pipe(notify(function() {
       var finishTime = Date.now();
-      console.log('RELEASE: main.css produced in ' + (finishTime - startTime) + 'ms');
+      console.log('RELEASE: ear-tickler.css produced in ' + (finishTime - startTime) + 'ms');
     }));
 }
 
@@ -115,6 +116,7 @@ function rebuildAssets() {
 };
 
 gulp.task('build', function() {
+  gulp.src('./builds').pipe(clean({force:true}));
   rebuildAppJs();
   rebuildVendorJs();
   rebuildCss();
