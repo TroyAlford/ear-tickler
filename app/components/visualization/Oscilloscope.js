@@ -93,7 +93,7 @@ module.exports = React.createClass({
     this.merger = this.audioContext.createChannelMerger(2);
     this.merger.connect(this.analyzer);
 
-    this.canvas = this.refs.canvas.getDOMNode();
+    this.canvas = this.refs.canvas;
     this.drawingContext = this.canvas.getContext('2d');
     this.drawingContext.imageSmoothingEnabled = true;
     this.drawingContext.lineWidth = 5;

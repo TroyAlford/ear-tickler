@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var source = require('vinyl-source-stream'); // Used to stream bundle for further handling
 var browserify = require('browserify');
+var resolutions = require('browserify-resolutions');
 var watchify = require('watchify');
 var babelify = require('babelify');
 var gulpif = require('gulp-if');
@@ -28,13 +29,14 @@ var bundlerForApplicationJS = browserify({
   debug: true,                      // Gives us sourcemapping
 
   cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
-}).external([
-// Do not rebundle these into main.
-  'react', 'react/addons', 'flux-react'
+}).plugin(resolutions, '*')
+  .external([
+  // Do not rebundle these into main.
+  'react', 'react-dom', 'react/addons', 'fluxxor'
 ]);
 var bundlerForVendorJS = browserify({
   debug: true,
-  require: ['react', 'react/addons', 'flux-react']
+  require: ['react', 'react-dom', 'react/addons', 'fluxxor']
 });
 
 function rebuildAppJs() {

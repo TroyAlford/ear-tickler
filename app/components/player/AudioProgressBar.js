@@ -4,7 +4,7 @@ var TimeFormatterMixin = require('../../mixins/TimeFormatterMixin.js');
 module.exports = React.createClass({
   mixins: [TimeFormatterMixin],
   handleClick: function(event) {
-    var bar_el  = this.getDOMNode(),
+    var bar_el  = this,
         coords  = bar_el.getClientRects()[0],
         click_x = event.pageX - coords.left,
         percent = click_x / (coords.right - coords.left);

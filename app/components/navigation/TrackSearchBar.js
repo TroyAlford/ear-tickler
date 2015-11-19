@@ -2,7 +2,7 @@ var React = require('react');
 
 module.exports = React.createClass({
     handleFilterChange: function() {
-        var filterText = this.refs.searchBox.getDOMNode().value;
+        var filterText = this.refs.searchBox.value;
         this.props.onFilterChange(filterText);
     },
     render: function() {

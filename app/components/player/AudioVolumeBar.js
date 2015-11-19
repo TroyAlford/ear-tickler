@@ -3,7 +3,7 @@ var Guid = require('../../helpers/Guid.js');
 
 module.exports = React.createClass({
   handleClick: function(event) {
-    var bar_el  = this.refs.volume_bar.getDOMNode(),
+    var bar_el  = this.refs.volume_bar,
         coords  = bar_el.getClientRects()[0],
         click_x = event.pageX - coords.left,
         percent = click_x / (coords.right - coords.left);

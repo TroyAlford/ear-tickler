@@ -21,7 +21,7 @@ module.exports = React.createClass({
   },
   handleLoopToggle: function() {
     this.props.onLoopToggle(
-      this.refs.loop_enabled.getDOMNode().checked
+      this.refs.loop_enabled.checked
     );
   },
 
