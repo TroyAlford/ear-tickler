@@ -28,6 +28,7 @@
     "watchify": "^3.3.0"
   },
   "dependencies": {
+    "d3": "^3.5.9",
     "express": "^4.13.3",
     "fluxxor": "^1.7.3",
     "gulp-express": "^0.3.5",
