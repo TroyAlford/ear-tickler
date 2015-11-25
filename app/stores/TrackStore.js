@@ -5,14 +5,14 @@ var Guid = require('../helpers/Guid.js'),
      XHR = require('../helpers/XHR.js');
 
 var messages = {
-  Add:    'store.track.add',
-  Remove: 'store.track.delete',
-  Update: 'store.track.update',
+  AddTrack:    'store.track.add',
+  RemoveTrack: 'store.track.delete',
+  UpdateTrack: 'store.track.update',
 
-  Clear:  'store.tracks.clear',
+  ClearTracks: 'store.tracks.clear',
 
-  LoadList: 'store.track.load-list',
-  SaveList: 'store.track.save-list'
+  LoadTracks:  'store.track.load-list',
+  SaveTracks:  'store.track.save-list'
 };
 
 module.exports = Fluxxor.createStore({
@@ -21,33 +21,36 @@ module.exports = Fluxxor.createStore({
     this.actions = {
       addTrack: function(track) {
         track = track || {};
-        this.dispatch(messages.Add, {
+        this.dispatch(messages.AddTrack, {
           name: track.name,
           url:  track.url || track.origin,
           tags: track.tags || []
         });
+        this.dispatch(messages.SaveTracks);
       },
       clearTracks: function() {
-        this.dispatch(messages.Clear);
+        this.dispatch(messages.ClearTracks);
       },
       removeTrack: function(id) {
-        this.dispatch(messages.Remove, id);
+        this.dispatch(messages.RemoveTrack, id);
+        this.dispatch(messages.SaveTracks);
       },
       updateTrack: function(track) {
         track = track || {};
-        this.dispatch(messages.Update, {
+        this.dispatch(messages.UpdateTrack, {
           id:   track.id,
           name: track.name,
           url:  track.url || track.origin,
           tags: track.tags || []
         });
+        this.dispatch(messages.SaveTracks);
       },
 
       loadTracks: function() {
-        this.dispatch(messages.LoadList);
+        this.dispatch(messages.LoadTracks);
       },
       saveTracks: function() {
-        this.dispatch(messages.SaveList);
+        this.dispatch(messages.SaveTracks);
       }
     };
     Object.keys(this.actions).forEach(function(key) {
@@ -55,13 +58,13 @@ module.exports = Fluxxor.createStore({
     }.bind(this));
 
     this.bindActions(
-      messages.Add,    this.onAddTrack,
-      messages.Clear,  this.onClearTracks,
-      messages.Remove, this.onRemoveTrack,
-      messages.Update, this.onUpdateTrack,
+      messages.AddTrack,    this.onAddTrack,
+      messages.ClearTracks,  this.onClearTracks,
+      messages.RemoveTrack, this.onRemoveTrack,
+      messages.UpdateTrack, this.onUpdateTrack,
 
-      messages.LoadList, this.onLoadTracks,
-      messages.SaveList, this.onSaveTracks
+      messages.LoadTracks, this.onLoadTracks,
+      messages.SaveTracks, this.onSaveTracks
     );
 
     this.onLoadTracks();
@@ -74,28 +77,24 @@ module.exports = Fluxxor.createStore({
     track.id = track.id || Guid.generate();
     this.tracks[track.id] = track;
     this.emit('change');
-    if (!this.loading) {
-      this.actions.saveTracks();
-    }
   },
   onClearTracks: function() {
     this.clearing = true;
     Object.keys(this.tracks).forEach(function(key) {
       this.onRemoveTrack(key);
-    });
+    }.bind(this));
+    this.emit('change');
     this.clearing = false;
   },
   onRemoveTrack: function(id) {
     delete this.tracks[id];
-    this.emit('change');
     if (!this.clearing) {
-      this.actions.saveTracks();
+      this.emit('change');
     }
   },
   onUpdateTrack: function(track) {
     this.tracks[track.id] = track;
     this.emit('change');
-    this.actions.saveTracks();
   },
 
   // Loads the user's list of tracks from the API
@@ -130,12 +129,12 @@ module.exports = Fluxxor.createStore({
   onSaveTracks: function() {
     var tracks = Object.keys(this.tracks).map(function(key) {
       return this.tracks[key];
-    });
+    }.bind(this));
     if (this.useLocalStorage) {
-      localStorage.setItem('tracks', JSON.stringify(this.tracks));
+      localStorage.setItem('tracks', JSON.stringify(tracks));
     } else {
       XHR.post('api/tracks', {
-        data: this.tracks
+        data: tracks
       });
     }
   },

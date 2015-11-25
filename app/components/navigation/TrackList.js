@@ -7,7 +7,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var listItems = this.props.tracks
+    var listItems = _.sortBy(this.props.tracks, 'name')
       .filter(function(track) {
         var filter = this.props.filterText.toLowerCase();
         var trackName = track.name.toLowerCase();

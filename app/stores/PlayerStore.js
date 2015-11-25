@@ -59,14 +59,18 @@ module.exports = Fluxxor.createStore({
     this.emit('change');
   },
   onClearPlayers: function() {
+    this.clearing = true;
     Object.keys(this.players).forEach(function(player) {
-      delete this.players[player.id];
+      this.onRemovePlayer(player.id);
     }.bind(this));
     this.emit('change');
+    this.clearing = false;
   },
   onRemovePlayer: function(id) {
     delete this.players[id];
-    this.emit('change');
+    if (!this.clearing) {
+      this.emit('change');
+    }
   },
   onUpdateTrackInfo: function(player) {
     this.players[player.id] = player;
