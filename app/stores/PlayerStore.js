@@ -18,7 +18,8 @@ module.exports = Fluxxor.createStore({
       addPlayer: function(track) {
         track = track || {};
         this.dispatch(messages.AddPlayer, {
-          track_id: track.id,
+          id: Guid.generate(),
+          track: track,
           title: track.name,
           url: track.url
         });
@@ -54,7 +55,6 @@ module.exports = Fluxxor.createStore({
   },
 
   onAddPlayer: function(player) {
-    player.id = Guid.generate();
     this.players[player.id] = player;
     this.emit('change');
   },

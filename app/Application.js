@@ -53,7 +53,7 @@ module.exports = React.createClass({
           onAddClicked={this.handleAddAudioPlayer}
         />
         <SoundBoard
-          tracks={this._as_array('players')}
+          players={this._as_array('players')}
           onCloseClicked={this.handleCloseAudioPlayer}
         />
       </div>
