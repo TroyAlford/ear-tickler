@@ -29,6 +29,7 @@ module.exports = React.createClass({
   loadAudio: function() {
     this.audio = new Howl({
       urls: [this.props.track.origin],
+      buffer: true, // Force HTML5 Audio & buffered-loading
       loop: this.state.loop,
       volume: this.state.volume,
       onload: this.handleAudioLoaded,
@@ -127,7 +128,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div className={"audio-player " + this.state.playState}>
-        <div className="track-name">{this.props.track.name}</div>
+        <div className="track-name">{this.props.title}</div>
         <i
           className="tickle-close close-button"
           onClick={this.handleClose}>

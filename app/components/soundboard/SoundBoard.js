@@ -17,7 +17,9 @@ module.exports = React.createClass({
         return (
           <AudioPlayer
             id={player.id} key={player.id}
+            title={player.title}
             track={player.track}
+            url={player.url}
             onClose={this.handleCloseClicked.bind(null, player.id)}
           />
         );

@@ -19,8 +19,8 @@ module.exports = Fluxxor.createStore({
         track = track || {};
         this.dispatch(messages.AddPlayer, {
           id: Guid.generate(),
-          track: track,
           title: track.name,
+          track: track,
           url: track.url
         });
       },
