@@ -15,7 +15,7 @@
 @color-inverse-text-disabled: #aaa;
 
 @lo-header-height: 50px;
-@lo-header-title-width: 200px;
+@lo-header-title-width: 225px;
 @lo-sidebar-width: 225px;
 @lo-sidebar-controls-height: 20px;
 @lo-audio-player-width: 200px;
@@ -93,16 +93,11 @@ body {
     left: 0;
     margin: 10px;
   }
-  .audio-visualizer {
-    display: inline-block;
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: @lo-sidebar-width;
-    color: @color-accent-subtle;
-
-    > canvas {
-      height: 100%; width: 100%;
-      z-index: 1;
-    }
+  > .visualizer {
+    display: block;
+    height: 100%; width: 100%;
+    padding-left: @lo-header-title-width;
+    z-index: 1;
   }
 }
 .filtered-track-list {

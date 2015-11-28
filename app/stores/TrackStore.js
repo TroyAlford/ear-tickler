@@ -18,6 +18,7 @@ var messages = {
 module.exports = Fluxxor.createStore({
   initialize: function() {
     this.tracks = {};
+    this.messages = messages;
     this.actions = {
       addTrack: function(track) {
         track = track || {};

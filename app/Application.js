@@ -1,10 +1,11 @@
 var React = require('react');
 var Fluxxor = require('fluxxor');
-var _        = require('lodash');
+var _ = window._ = require('lodash');
 
 var FilteredTrackList = require('./components/navigation/FilteredTrackList.js');
 var Oscilloscope      = require('./components/visualization/Oscilloscope.js');
 var SoundBoard        = require('./components/soundboard/SoundBoard.js');
+var Visualizer        = require('./components/visualization/Visualizer.js');
 
 var Guid     = require('./helpers/Guid.js');
 var XHR      = require('./helpers/XHR.js');
@@ -46,6 +47,9 @@ module.exports = React.createClass({
           <div className="title">
             <i className="tickle-logo"></i> Ear Tickler
           </div>
+          <Visualizer
+            visualizers={this._as_array('visualizers')}
+          />
         </div>
         <FilteredTrackList
           tracks={this._as_array('tracks')}

@@ -3,22 +3,22 @@ var Fluxxor = require('fluxxor'),
 
 var Guid = require('../helpers/Guid.js');
 
-var events = {
-  Add:    'store.visualizer.add',
-  Remove: 'store.visualizer.delete',
-  Update: 'store.visualizer.update'
+var messages = {
+  AddVisualizer:    'store.visualizer.add',
+  RemoveVisualizer: 'store.visualizer.delete',
+  UpdateVisualizer: 'store.visualizer.update'
 };
 
 module.exports = Fluxxor.createStore({
   initialize: function() {
-    this.players = {};
+    this.visualizers = {};
+    this.messages = messages;
     this.actions = {
       addVisualizer: function(visualizer) {
         visualizer = visualizer || {};
         this.dispatch(events.Add, {
-          name: visualizer.name,
-          url:  visualizer.url || visualizer.origin,
-          tags: visualizer.tags || []
+          type: visualizer.type,
+          settings: visualizer.settings || {}
         });
       },
       removeVisualizer: function(id) {
@@ -27,18 +27,16 @@ module.exports = Fluxxor.createStore({
       updateVisualizer: function(visualizer) {
         visualizer = visualizer || {};
         this.dispatch(events.Update, {
-          id:   visualizer.id,
-          name: visualizer.name,
-          url:  visualizer.url || visualizer.origin,
-          tags: visualizer.tags || []
+          type: visualizer.type,
+          settings: visualizer.settings || {}
         });
       }
     };
 
     this.bindActions(
-      events.Add,    this.onAddVisualizer,
-      events.Remove, this.onRemoveVisualizer,
-      events.Update, this.onUpdateVisualizer
+      messages.AddVisualizer,    this.onAddVisualizer,
+      messages.RemoveVisualizer, this.onRemoveVisualizer,
+      messages.UpdateVisualizer, this.onUpdateVisualizer
     );
   },
 

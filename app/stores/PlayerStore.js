@@ -14,6 +14,7 @@ var messages = {
 module.exports = Fluxxor.createStore({
   initialize: function() {
     this.players = {};
+    this.messages = messages;
     this.actions = {
       addPlayer: function(track) {
         track = track || {};

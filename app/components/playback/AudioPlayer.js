@@ -29,7 +29,7 @@ module.exports = React.createClass({
   loadAudio: function() {
     this.audio = new Howl({
       urls: [this.props.track.origin],
-      buffer: true, // Force HTML5 Audio & buffered-loading
+      //buffer: true, // Force HTML5 Audio & buffered-loading
       loop: this.state.loop,
       volume: this.state.volume,
       onload: this.handleAudioLoaded,
