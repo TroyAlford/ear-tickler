@@ -33,7 +33,7 @@
     "fluxxor": "^1.7.3",
     "gulp-express": "^0.3.5",
     "gulp-less": "^3.0.3",
-    "howler": "^1.1.28",
+    "howler": "^2.0.0-beta",
     "lodash": "^3.10.1",
     "react": "^0.14.2",
     "react-dom": "^0.14.2",

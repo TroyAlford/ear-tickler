@@ -48,6 +48,7 @@ module.exports = React.createClass({
             <i className="tickle-logo"></i> Ear Tickler
           </div>
           <Visualizer
+            players={this._as_array('players')}
             visualizers={this._as_array('visualizers')}
           />
         </div>

@@ -38,25 +38,17 @@ module.exports = React.createClass({
 
   uniqueId: 'visualizer.' + Guid.generate(),
 
-  connectAudioNodes: function() {
-    _.flatten(Howler._howls.map(function(howl) {
-      return howl._audioNode;
-    })).filter(function(howl) {
-      return howl.visualizerId !== this.uniqueId;
-    }.bind(this)).forEach(function(node) {
-      if (node.toString() === '[object GainNode]') { 
-        // Node is a WebAudioAPI node
-        node.connect(this.merger);
-        node.visualizerId = this.uniqueId;
-      } else if (!node._webAudio) { 
-        // Node is an <audio> element
-        node.crossOrigin = "anonymous";
-        var mediaElementSource = Howler.ctx.createMediaElementSource(node);
-        node._mediaElementSource = mediaElementSource;
-        mediaElementSource.connect(this.merger);
-        node.visualizerId = this.uniqueId;
+  onAudioLoaded: function(player) {
+    player.howl._sounds.forEach(function(sound) {
+      if (player.howl._webAudio) {
+        sound._node.connect(this.merger);
+      } else if (player.howl._html5) {
+        sound.crossOrigin = "anonymous";
+        sound.webAudioNode = this.audioContext.createMediaElementSource(sound._node);
+        sound.webAudioNode.connect(this.merger);
       }
-    }, this);
+      player._merger = this.merger;
+    }.bind(this));
   },
 
   start: function() {
@@ -89,8 +81,15 @@ module.exports = React.createClass({
     clearInterval(this.refresh || 0);
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    this.props.players.filter(function(player) {
+      return player.howl !== undefined && player._merger === undefined;
+    }.bind(this)).forEach(function(player) {
+      this.onAudioLoaded(player);
+    }.bind(this));
+  },
+
   render: function() {
-    this.connectAudioNodes();
     var gradient_id = "rainbow";
     return (
       <svg className="visualizer" ref="svg">

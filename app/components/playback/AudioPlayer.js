@@ -6,6 +6,10 @@ var AudioVolumeBar   = require('./AudioVolumeBar.js');
 var Howl = require('howler').Howl;
 
 module.exports = React.createClass({
+  dispatch: function(type, payload) {
+    flux.dispatcher.dispatch({type: type, payload: payload});
+  },
+
   getInitialState: function() {
     return {
       loop: false,
@@ -27,14 +31,16 @@ module.exports = React.createClass({
   refresh: null,             // Interval for refreshing play time & progress
 
   loadAudio: function() {
+    var url = this.props.track.origin;
     this.audio = new Howl({
-      urls: [this.props.track.origin],
-      //buffer: true, // Force HTML5 Audio & buffered-loading
+      src: [url],
+      html5: true, // Force HTML5 Audio & buffered-loading
       loop: this.state.loop,
       volume: this.state.volume,
       onload: this.handleAudioLoaded,
       onend: this.handleAudioEnded
     });
+    this.props.player.howl = this.audio;
     this.setState({
       playState: this.audio._loaded ? 'paused' : 'loading',
       duration: this.audio._duration
@@ -73,7 +79,7 @@ module.exports = React.createClass({
     this.refresh = setInterval(this.updatePosition, 100);
   },
   handleSeek: function(percent) {
-    this.audio.pos(this.state.duration * percent);
+    this.audio.seek(this.state.duration * percent);
   },
   handleStop: function() {
     this.setState({ playState: 'stopped' });
@@ -102,7 +108,7 @@ module.exports = React.createClass({
   },
 
   handleAudioEnded: function() {
-    this.audio.pos(0);
+    this.audio.seek(0);
     if (this.state.playState == 'playing' && this.audio.loop() && this.state.forceLoop) {
       // This is necessary due to a bug in Howler.js.
       // * Setting .loop(true) while playing doesn't cause it to loop at the end.
@@ -122,7 +128,7 @@ module.exports = React.createClass({
   },
 
   updatePosition: function() {
-    this.setState({ position: this.audio.pos() });
+    this.setState({ position: this.audio.seek() });
   },
 
   render: function() {
