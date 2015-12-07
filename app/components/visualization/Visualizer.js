@@ -91,10 +91,21 @@ module.exports = React.createClass({
 
   render: function() {
     this.connectAudioNodes();
+    var gradient_id = "rainbow";
     return (
       <svg className="visualizer" ref="svg">
+        <linearGradient id={gradient_id} x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   style={{ stopOpacity: 1, stopColor: "red" }}    />
+          <stop offset="16%"  style={{ stopOpacity: 1, stopColor: "orange" }} />
+          <stop offset="33%"  style={{ stopOpacity: 1, stopColor: "yellow" }} />
+          <stop offset="50%"  style={{ stopOpacity: 1, stopColor: "green" }}  />
+          <stop offset="66%"  style={{ stopOpacity: 1, stopColor: "blue" }}   />
+          <stop offset="83%"  style={{ stopOpacity: 1, stopColor: "indigo" }} />
+          <stop offset="100%" style={{ stopOpacity: 1, stopColor: "violet" }} />
+        </linearGradient>
         <Oscilloscope
           data={this.state.timeData}
+          stroke={'#' + gradient_id}
           height={this.state.height}
           width={this.state.width}
         />
