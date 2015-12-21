@@ -101,6 +101,20 @@ body {
     padding-left: @lo-header-title-width;
     z-index: 1;
   }
+  .social-media {
+    display: inline-block;
+    position: absolute;
+    right: 0; top: 0; bottom: 0; width: 50px;
+    padding: 13px;
+
+    a {
+      color: @color-text;
+      font-size: 24px; line-height: 24px;
+      height: 24px;
+
+      i:before { margin: 0; }
+    }
+  }
 }
 .filtered-track-list {
   background: @color-background-alternate;

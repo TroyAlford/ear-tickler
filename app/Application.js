@@ -57,6 +57,11 @@ module.exports = React.createClass({
             players={this._as_array('players')}
             visualizers={this._as_array('visualizers')}
           />
+          <div className="social-media">
+            <a href="https://github.com/troyalford/ear-tickler" target="_blank">
+              <i className="tickle-github"></i>
+            </a>
+          </div>
         </div>
         <FilteredTrackList
           tracks={this._as_array('tracks')}
