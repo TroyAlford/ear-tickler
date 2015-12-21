@@ -6,17 +6,26 @@ var TrackSearchBar = require('./TrackSearchBar.js');
 module.exports = React.createClass({
   getInitialState: function() {
     return {
-      filterText: ''
+      filterText: '',
+      selected: {}
     };
   },
 
-  handleAddClicked: function(track_id) {
-    this.props.onAddClicked(track_id);
+  handlePlayTrack: function(track_id) {
+    this.props.onPlayTrack(track_id);
+  },
+  handleCancelEdit: function() {
+    this.setState({ selected: {} });
+  },
+  handleUpdateTrack: function(track) {
+    this.props.onUpdateTrack(track);
+    this.setState({ selected: {} });
   },
   handleFilterChange: function(filterText) {
-    this.setState({
-      filterText: filterText
-    });
+    this.setState({ filterText: filterText });
+  },
+  handleSelectTrack: function(track) {
+    this.setState({ selected: track });
   },
 
   render: function() {
@@ -29,11 +38,17 @@ module.exports = React.createClass({
         <TrackList
           filterText={this.state.filterText}
           addedTrackIds={this.props.addedTrackIds}
+          selected={this.state.selected}
           tracks={this.props.tracks}
-          onAddClicked={this.handleAddClicked}
+          onPlayTrack={this.handlePlayTrack}
+          onRemoveTrack={this.props.onRemoveTrack}
+          onSelectTrack={this.handleSelectTrack}
         />
         <TrackListControls
+          selected={this.state.selected}
           tracks={this.props.tracks}
+          onCancelEdit={this.handleCancelEdit}
+          onUpdateTrack={this.handleUpdateTrack}
         />
       </div>
     );

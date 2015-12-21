@@ -1,9 +1,15 @@
-var React = require('react');
-var _ = require('lodash');
+var React = require('react'),
+     Guid = require('../../helpers/Guid.js'),
+        _ = require('lodash')
+;
 
 module.exports = React.createClass({
-  handleAddClicked: function(track) {
-    this.props.onAddClicked(track.id);
+  handleNewTrack: function() {
+    this.props.onSelectTrack({
+      id: Guid.generate(),
+      name: 'New Track...',
+      url: ''
+    });
   },
 
   render: function() {
@@ -14,16 +20,26 @@ module.exports = React.createClass({
         return trackName.indexOf(filter) > -1;
       }, this)
       .map(function(track) {
-        var className = 'tickle-track';
+        var iconClassName = 'tickle-track';
         if (_.includes(this.props.addedTrackIds, track.id))
-          className += '-playing';
+          iconClassName += '-playing';
+
+        var isSelected = (
+          this.props.selected &&
+          this.props.selected.id === track.id
+        );
 
         return (
-          <li key={track.id} track={track}>
-            <i className={className}></i>
+          <li key={track.id} track={track}
+              className={isSelected ? 'selected' : ''}
+              onClick={this.props.onSelectTrack.bind(null, track)}>
+            <i className={iconClassName}></i>
             <span className="track-name">{track.name}</span>
             <i className="tickle-add"
-               onClick={this.handleAddClicked.bind(null, track)}
+               onClick={this.props.onPlayTrack.bind(null, track.id)}
+            ></i>
+            <i className="tickle-remove"
+               onClick={this.props.onRemoveTrack.bind(null, track.id)}
             ></i>
           </li>
         );
@@ -31,7 +47,14 @@ module.exports = React.createClass({
     );
 
     return (
-      <ul>{listItems}</ul>
+      <ul>
+        {listItems}
+        <li key="new" track={{}} className="add-track"
+            onClick={this.handleNewTrack}>
+          <i className="tickle-add"></i>
+          <span className="track-name">Add New...</span>
+        </li>
+      </ul>
     );
   }
 });

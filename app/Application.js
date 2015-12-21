@@ -31,6 +31,12 @@ module.exports = React.createClass({
   handleCloseAudioPlayer: function(player_id) {
     this.getFlux().actions.removePlayer(player_id);
   },
+  handleRemoveTrack: function(track_id) {
+    this.getFlux().actions.removeTrack(track_id);
+  },
+  handleUpdateTrack: function(track) {
+    this.getFlux().actions.updateTrack(track);
+  },
 
   _as_array: function(state_object) {
     return Object.keys(this.state[state_object]).map(function(key) {
@@ -55,7 +61,9 @@ module.exports = React.createClass({
         <FilteredTrackList
           tracks={this._as_array('tracks')}
           addedTrackIds={addedTrackIds}
-          onAddClicked={this.handleAddAudioPlayer}
+          onPlayTrack={this.handleAddAudioPlayer}
+          onRemoveTrack={this.handleRemoveTrack}
+          onUpdateTrack={this.handleUpdateTrack}
         />
         <SoundBoard
           players={this._as_array('players')}

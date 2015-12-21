@@ -10,6 +10,8 @@
 @color-text-highlight: #fff;
 @color-text-disabled: #666;
 
+@color-dangerous: #8b0000;
+
 @color-inverse-text: #666;
 @color-inverse-text-highlight: #000;
 @color-inverse-text-disabled: #aaa;
@@ -17,7 +19,7 @@
 @lo-header-height: 50px;
 @lo-header-title-width: 225px;
 @lo-sidebar-width: 225px;
-@lo-sidebar-controls-height: 20px;
+@lo-sidebar-controls-height: 75px;
 @lo-audio-player-width: 200px;
 
 @keyframes playing {
@@ -122,8 +124,16 @@ body {
     overflow-y: auto;
 
     li {
+      border-radius: 3px;
+      cursor: pointer;
       padding: 3px 0;
       width: 100%;
+
+      &.selected, &:hover {
+        background: lighten(@color-background-alternate, 10%);
+        color: lighten(@color-text, 10%);
+      }
+
       i { margin: 0 5px; }
 
       .track-name {
@@ -133,23 +143,61 @@ body {
         white-space: pre;
         width: @lo-sidebar-width - 60px;
       }
-      .tickle-add {
+      .tickle-add, .tickle-remove {
         color: @color-text-disabled;
         position: absolute;
         right: 0;
 
         &:hover { color: inherit; }
       }
+      .tickle-remove {
+        display: none;
+        right: 16px;
+      }
+      &:hover .tickle-remove {
+        color: @color-dangerous;
+        display: inline-block;
+
+        &:hover { color: lighten(@color-dangerous, 20%); }
+      }
+
+      &.add-track {
+        color: darken(@color-text, 40%);
+        font-style: italic;
+
+        .tickle-add {
+          position: relative;
+        }
+      }
     }
   }
 
   .track-list-controls {
     border-top: 2px groove;
-    display: block;
+    display: none;
+    padding-top: 5px;
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: @lo-sidebar-controls-height;
     text-align: center;
+
+    &.visible { display: block; }
+
+    label {
+      display: block;
+      height: 31px;
+      line-height: 27px;
+      padding: 2px 5px;
+      position: relative;
+      text-align: left;
+      white-space: nowrap;
+
+      input[type=text] {
+        position: absolute;
+        right: 5px;
+        width: 70%;
+      }
+    }
 
     .button {
       color: @color-text;

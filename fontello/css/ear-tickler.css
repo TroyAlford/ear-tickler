@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ear-tickler';
-  src: url('../font/ear-tickler.eot?72980294');
-  src: url('../font/ear-tickler.eot?72980294#iefix') format('embedded-opentype'),
-       url('../font/ear-tickler.woff?72980294') format('woff'),
-       url('../font/ear-tickler.ttf?72980294') format('truetype'),
-       url('../font/ear-tickler.svg?72980294#ear-tickler') format('svg');
+  src: url('../font/ear-tickler.eot?36491227');
+  src: url('../font/ear-tickler.eot?36491227#iefix') format('embedded-opentype'),
+       url('../font/ear-tickler.woff?36491227') format('woff'),
+       url('../font/ear-tickler.ttf?36491227') format('truetype'),
+       url('../font/ear-tickler.svg?36491227#ear-tickler') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'ear-tickler';
-    src: url('../font/ear-tickler.svg?72980294#ear-tickler') format('svg');
+    src: url('../font/ear-tickler.svg?36491227#ear-tickler') format('svg');
   }
 }
 */
@@ -76,3 +76,4 @@
 .tickle-github:before { content: '\e813'; } /* '' */
 .tickle-track:before { content: '\e814'; } /* '' */
 .tickle-add:before { content: '\e815'; } /* '' */
+.tickle-remove:before { content: '\e816'; } /* '' */

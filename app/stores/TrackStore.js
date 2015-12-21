@@ -4,6 +4,13 @@ var Fluxxor = require('fluxxor'),
 var Guid = require('../helpers/Guid.js'),
      XHR = require('../helpers/XHR.js');
 
+var defaults = {
+  track: {
+    name: 'Unnamed Track',
+    url: ''
+  }
+};
+
 var messages = {
   AddTrack:    'store.track.add',
   RemoveTrack: 'store.track.delete',
@@ -24,7 +31,7 @@ module.exports = Fluxxor.createStore({
         track = track || {};
         this.dispatch(messages.AddTrack, {
           name: track.name,
-          url:  track.url || track.origin,
+          url:  track.url,
           tags: track.tags || []
         });
         this.dispatch(messages.SaveTracks);
@@ -41,7 +48,7 @@ module.exports = Fluxxor.createStore({
         this.dispatch(messages.UpdateTrack, {
           id:   track.id,
           name: track.name,
-          url:  track.url || track.origin,
+          url:  track.url,
           tags: track.tags || []
         });
         this.dispatch(messages.SaveTracks);
@@ -60,12 +67,12 @@ module.exports = Fluxxor.createStore({
 
     this.bindActions(
       messages.AddTrack,    this.onAddTrack,
-      messages.ClearTracks,  this.onClearTracks,
+      messages.ClearTracks, this.onClearTracks,
       messages.RemoveTrack, this.onRemoveTrack,
       messages.UpdateTrack, this.onUpdateTrack,
 
-      messages.LoadTracks, this.onLoadTracks,
-      messages.SaveTracks, this.onSaveTracks
+      messages.LoadTracks,  this.onLoadTracks,
+      messages.SaveTracks,  this.onSaveTracks
     );
 
     this.onLoadTracks();
@@ -75,6 +82,9 @@ module.exports = Fluxxor.createStore({
   },
 
   onAddTrack: function(track) {
+    track.name = track.name || defaults.track.name;
+    track.url = track.url || defaults.track.url;
+
     track.id = track.id || Guid.generate();
     this.tracks[track.id] = track;
     this.emit('change');
@@ -94,6 +104,10 @@ module.exports = Fluxxor.createStore({
     }
   },
   onUpdateTrack: function(track) {
+    track.name = track.name || defaults.track.name;
+    track.url = track.url || defaults.track.url;
+    track.id = track.id || Guid.generate();
+
     this.tracks[track.id] = track;
     this.emit('change');
   },
@@ -138,5 +152,5 @@ module.exports = Fluxxor.createStore({
         data: tracks
       });
     }
-  },
+  }
 });
