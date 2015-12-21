@@ -21,3 +21,4 @@
 .tickle-github:before { content: '\e813'; } /* '' */
 .tickle-track:before { content: '\e814'; } /* '' */
 .tickle-add:before { content: '\e815'; } /* '' */
+.tickle-remove:before { content: '\e816'; } /* '' */

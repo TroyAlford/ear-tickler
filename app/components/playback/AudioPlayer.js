@@ -31,7 +31,14 @@ module.exports = React.createClass({
   refresh: null,             // Interval for refreshing play time & progress
 
   loadAudio: function() {
-    var url = this.props.track.origin;
+    var url = this.props.track.url;
+    /*
+     var parser = document.createElement('a');
+     parser.href = url;
+     if (parser.host !== window.location.host) {
+     url = window.location.origin + '/stream?url=' + url;
+     }
+     */
     this.audio = new Howl({
       src: [url],
       html5: true, // Force HTML5 Audio & buffered-loading

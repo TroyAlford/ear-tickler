@@ -6,9 +6,7 @@ var Guid = require('../helpers/Guid.js');
 var messages = {
   AddPlayer:    'store.player.add',
   ClearPlayers: 'store.players.clear',
-  RemovePlayer: 'store.player.remove',
-
-  UpdateTrackInfo: 'store.track.update'
+  RemovePlayer: 'store.player.remove'
 };
 
 module.exports = Fluxxor.createStore({
@@ -30,14 +28,6 @@ module.exports = Fluxxor.createStore({
       },
       removePlayer: function(id) {
         this.dispatch(messages.RemovePlayer, id);
-      },
-      trackUpdated: function(track) {
-        track = track || {};
-        this.dispatch(messages.UpdateTrackInfo, {
-          track_id: track.id,
-          title: track.name,
-          url: track.url
-        });
       }
     };
     Object.keys(this.actions).forEach(function(key) {
@@ -47,8 +37,7 @@ module.exports = Fluxxor.createStore({
     this.bindActions(
       messages.AddPlayer,    this.onAddPlayer,
       messages.ClearPlayers, this.onClearPlayers,
-      messages.RemovePlayer, this.onRemovePlayer,
-      messages.UpdateTrackInfo, this.onUpdateTrackInfo
+      messages.RemovePlayer, this.onRemovePlayer
     );
   },
   dispatch: function(type, payload) {
@@ -72,9 +61,5 @@ module.exports = Fluxxor.createStore({
     if (!this.clearing) {
       this.emit('change');
     }
-  },
-  onUpdateTrackInfo: function(player) {
-    this.players[player.id] = player;
-    this.emit('change');
   }
 });

@@ -28,6 +28,7 @@
     "watchify": "^3.3.0"
   },
   "dependencies": {
+    "classnames": "^2.2.1",
     "d3": "^3.5.9",
     "express": "^4.13.3",
     "fluxxor": "^1.7.3",
