@@ -127,7 +127,7 @@ module.exports = Fluxxor.createStore({
           this.onClearTracks(); // Clear first.
           if (response && Array.isArray(response.message)) {
             response.message.forEach(function(track) {
-              this.onAddTrack(track);
+              flux.actions.addTrack(track);
             });
           }
         }.bind(this),
