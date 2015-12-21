@@ -41,7 +41,7 @@ module.exports = React.createClass({
      */
     this.audio = new Howl({
       src: [url],
-      html5: true, // Force HTML5 Audio & buffered-loading
+      html5: false, // Force HTML5 Audio & buffered-loading
       loop: this.state.loop,
       volume: this.state.volume,
       onload: this.handleAudioLoaded,
