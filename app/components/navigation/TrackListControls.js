@@ -4,8 +4,13 @@ var React = require('react'),
 
 module.exports = React.createClass({
   getInitialState: function() {
-    return { selected: null };
+    return {
+      selected_id: null,
+      selected_name: null,
+      selected_url: null
+    };
   },
+
   componentWillReceiveProps: function(props) {
     if (props.selected && props.selected.id !== this.props.selected.id) {
       this.setState({
@@ -15,11 +20,7 @@ module.exports = React.createClass({
       });
       this.setFocus = true;
     } else if (!props.selected) {
-      this.setState({
-        selected_id: null,
-        selected_name: null,
-        selected_url: null
-      });
+      this.clearSelectedState();
     }
   },
   componentDidUpdate: function() {
@@ -27,6 +28,14 @@ module.exports = React.createClass({
       this.refs.name.focus();
       this.setFocus = false;
     }
+  },
+
+  clearSelectedState: function() {
+    this.setState({
+      selected_id: null,
+      selected_name: null,
+      selected_url: null
+    });
   },
 
   getBackupUrl: function() {
@@ -37,6 +46,9 @@ module.exports = React.createClass({
     return URL.createObjectURL(blob);
   },
 
+  handleBlur: function() {
+    this.props.onCancelEdit();
+  },
   handleChange: function() {
     this.setState({
       selected_id: this.state.selected.id,

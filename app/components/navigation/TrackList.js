@@ -1,7 +1,17 @@
-var React = require('react');
-var _ = require('lodash');
+var React = require('react'),
+     Guid = require('../../helpers/Guid.js'),
+        _ = require('lodash')
+;
 
 module.exports = React.createClass({
+  handleNewTrack: function() {
+    this.props.onSelectTrack({
+      id: Guid.generate(),
+      name: 'New Track...',
+      url: ''
+    });
+  },
+
   render: function() {
     var listItems = _.sortBy(this.props.tracks, 'name')
       .filter(function(track) {
@@ -40,7 +50,7 @@ module.exports = React.createClass({
       <ul>
         {listItems}
         <li key="new" track={{}} className="add-track"
-            onClick={this.props.onSelectTrack.bind(null, { name: 'New Track...', url: '' })}>
+            onClick={this.handleNewTrack}>
           <i className="tickle-add"></i>
           <span className="track-name">Add New...</span>
         </li>
