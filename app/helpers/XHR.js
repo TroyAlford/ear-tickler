@@ -1,6 +1,6 @@
 var _ = require('lodash');
 
-module.exports = {
+module.exports = window.XHR = {
   ajax: function(url, options) {
     options = _.extend({
       verb: 'GET',
