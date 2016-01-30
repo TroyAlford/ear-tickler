@@ -125,8 +125,14 @@ module.exports = Fluxxor.createStore({
       XHR.get('api/tracks', {
         success: function (response) {
           this.onClearTracks(); // Clear first.
-          if (response && Array.isArray(response.message)) {
-            response.message.forEach(function(track) {
+          if (!response || !response.message) {
+            this.useLocalStorage = true;
+            this.onLoadTracks();
+          }
+
+          var tracks = JSON.parse(response.message);
+          if (tracks && Array.isArray(tracks)) {
+            tracks.forEach(function(track) {
               flux.actions.addTrack(track);
             });
           }
