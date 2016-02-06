@@ -9,6 +9,6 @@
 * Run `dev-server.js` for testing. It defaults to port 8080, so you can use `http://localhost:8080`
 
 ## Testing & Releasing
-Grunt will output the following directories:
+Gulp will output the following directories:
 * **builds/develop/**: All assets, compiled - but not minified, for ease in testing.
 * **builds/release/**: All assets, compiled and minified, ready for production.
