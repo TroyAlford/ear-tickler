@@ -1,14 +1,14 @@
-var React = require('react');
-var Fluxxor = require('fluxxor');
-var _ = window._ = require('lodash');
+var React             = require('react');
+var Fluxxor           = require('fluxxor');
+var _ = window._      = require('lodash');
 
-var FilteredTrackList = require('./components/navigation/FilteredTrackList.js');
-var Oscilloscope      = require('./components/visualization/Oscilloscope.js');
-var SoundBoard        = require('./components/soundboard/SoundBoard.js');
-var Visualizer        = require('./components/visualization/Visualizer.js');
+var FilteredTrackList = require('../components/navigation/FilteredTrackList.js');
+var Oscilloscope      = require('../components/visualization/Oscilloscope.js');
+var SoundBoard        = require('../components/soundboard/SoundBoard.js');
+var Visualizer        = require('../components/visualization/Visualizer.js');
 
-var Guid     = require('./helpers/Guid.js');
-var XHR      = require('./helpers/XHR.js');
+var Guid              = require('../helpers/Guid.js');
+var XHR               = require('../helpers/XHR.js');
 
 module.exports = React.createClass({
   mixins: [

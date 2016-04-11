@@ -1,6 +1,5 @@
-var React = require('react'),
-       cx = require('classnames'),
-        _ = require('lodash');
+import React       from 'react'
+import _           from 'lodash'
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -72,12 +71,8 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var classes = cx({
-      'track-list-controls': true,
-      'visible': this.state.selected_id
-    });
     return (
-      <div className={classes}>
+      <div className={`track-list-controls ${this.state.selected_id ? 'visible' : ''}`}>
         <label>
           Name
           <input

@@ -2,42 +2,52 @@
   "name": "ear-tickler",
   "version": "0.1.0",
   "description": "HTML sound mixer, based on Howler.js",
+  "author": "Troy Alford",
   "repository": {
     "type": "git",
     "url": "https://github.com/TroyAlford/ear-tickler"
   },
-  "author": "Troy Alford",
   "license": "MIT",
-  "devDependencies": {
-    "babelify": "^6.1.3",
-    "browserify": "^11.0.0",
-    "browserify-resolutions": "^1.0.6",
-    "glob": "^5.0.14",
-    "gulp": "^3.9.0",
-    "gulp-clean": "^0.3.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-cssmin": "^0.1.7",
-    "gulp-if": "^1.2.5",
-    "gulp-livereload": "^3.8.1",
-    "gulp-notify": "^2.2.0",
-    "gulp-shell": "^0.4.2",
-    "gulp-streamify": "0.0.5",
-    "gulp-uglify": "^1.2.0",
-    "gulp-util": "^3.0.6",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.3.0"
-  },
   "dependencies": {
-    "classnames": "^2.2.1",
-    "d3": "^3.5.9",
+    "del": "^2.2.0",
     "express": "^4.13.3",
     "fluxxor": "^1.7.3",
-    "gulp-express": "^0.3.5",
-    "gulp-less": "^3.0.3",
-    "howler": "^2.0.0-beta",
-    "lodash": "^3.10.1",
-    "react": "^0.14.2",
-    "react-dom": "^0.14.2",
-    "request": "^2.67.0"
+    "howler": "^2.0.0-beta9",
+    "lodash": "^4.10.0",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "browserify-resolutions": "^1.0.6",
+    "concat": "github:azer/concat",
+    "concat-cli": "^4.0.0",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^3.4.2",
+    "nodemon": "^1.9.1"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "scripts": {
+    "develop": "npm run serve & npm run jsx-dep-build & npm run watch-jsx & npm run watch-css",
+    "build": "npm run clean && (npm run build-jsx & npm run build-css)",
+    "build-css": "npm run css-app-build & npm run css-dep-build",
+    "build-jsx": "npm run jsx-app-build & npm run jsx-dep-build",
+    "clean": "rm -rf build",
+    "css-app-build": "mkdirp build/css && npm run css-app-concat && node-sass build/sass/application.scss -o build/css --output-style compressed --source-map true --source-map-embed",
+    "css-app-concat": "mkdirp build/sass && concat-cli -f styles/*.scss -o build/sass/application.scss",
+    "css-dep-build": "node-sass vendor/dependencies.scss -o build/css --output-style compressed --source-map true --source-map-embed",
+    "jsx-app-build": "mkdirp build/js && browserify -x react -x react-dom -x lodash source/application/Application.js > build/js/application.js",
+    "jsx-dep-build": "mkdirp build/js && browserify -r react -r react-dom -r lodash vendor/dependencies.js > build/js/dependencies.js ",
+    "serve": "nodemon --watch ./server --exec babel-node server/server.js -c ../config/config.json",
+    "watch-css": "nodemon --watch styles -e css,scss --exec 'npm run build-css'",
+    "watch-jsx": "nodemon --watch source -e js --exec 'npm run jsx-app-build'"
   }
 }

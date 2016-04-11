@@ -1,48 +1,48 @@
 @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700);
 
-@font: Ubuntu, sans-serif;
-@color-background-main: #000;
-@color-background-alternate: #3d3c4c;
-@color-trim: #2b2951;
-@color-accent-subtle: #596e83;
-@color-accent-bold: #0de5ff;
-@color-text: #eee;
-@color-text-highlight: #fff;
-@color-text-disabled: #666;
+$font: Ubuntu, sans-serif;
+$color-background-main: #000;
+$color-background-alternate: #3d3c4c;
+$color-trim: #2b2951;
+$color-accent-subtle: #596e83;
+$color-accent-bold: #0de5ff;
+$color-text: #eee;
+$color-text-highlight: #fff;
+$color-text-disabled: #666;
 
-@color-dangerous: #8b0000;
+$color-dangerous: #8b0000;
 
-@color-inverse-text: #666;
-@color-inverse-text-highlight: #000;
-@color-inverse-text-disabled: #aaa;
+$color-inverse-text: #666;
+$color-inverse-text-highlight: #000;
+$color-inverse-text-disabled: #aaa;
 
-@lo-header-height: 50px;
-@lo-header-title-width: 225px;
-@lo-sidebar-width: 225px;
-@lo-sidebar-controls-height: 75px;
-@lo-audio-player-width: 200px;
+$lo-header-height: 50px;
+$lo-header-title-width: 225px;
+$lo-sidebar-width: 225px;
+$lo-sidebar-controls-height: 75px;
+$lo-audio-player-width: 200px;
 
 @keyframes playing {
   0% {
     box-shadow:
-      3px  3px 3px @color-accent-bold,
-      3px -3px 3px @color-accent-bold,
-     -3px -3px 3px @color-accent-bold,
-     -3px  3px 3px @color-accent-bold;
+      3px  3px 3px $color-accent-bold,
+      3px -3px 3px $color-accent-bold,
+     -3px -3px 3px $color-accent-bold,
+     -3px  3px 3px $color-accent-bold;
   }
   50% {
     box-shadow:
-      1px  1px 1px @color-accent-bold,
-      1px -1px 1px @color-accent-bold,
-     -1px -1px 1px @color-accent-bold,
-     -1px  1px 1px @color-accent-bold;
+      1px  1px 1px $color-accent-bold,
+      1px -1px 1px $color-accent-bold,
+     -1px -1px 1px $color-accent-bold,
+     -1px  1px 1px $color-accent-bold;
   }
   100% {
     box-shadow:
-      3px  3px 3px @color-accent-bold,
-      3px -3px 3px @color-accent-bold,
-     -3px -3px 3px @color-accent-bold,
-     -3px  3px 3px @color-accent-bold;
+      3px  3px 3px $color-accent-bold,
+      3px -3px 3px $color-accent-bold,
+     -3px -3px 3px $color-accent-bold,
+     -3px  3px 3px $color-accent-bold;
   }
 }
 
@@ -51,7 +51,7 @@ html, body {
   margin: 0; padding: 0;
 }
 body {
-  background: @color-background-main;
+  background: $color-background-main;
 }
 .ear-tickler.application {
   position: relative;
@@ -61,7 +61,7 @@ body {
   }
   .header-bar {
     display: block;
-    top: 0; right: 0; bottom: @lo-header-height; left: 0;
+    top: 0; right: 0; bottom: $lo-header-height; left: 0;
     z-index: 1;
   }
 
@@ -69,19 +69,19 @@ body {
     display: inline-block;
   }
   .filtered-track-list {
-    top: @lo-header-height; width: @lo-sidebar-width; bottom: 0; left: 0;
+    top: $lo-header-height; width: $lo-sidebar-width; bottom: 0; left: 0;
   }
   .sound-board {
     position: absolute;
-    left: @lo-sidebar-width; right: 0;
-    top: @lo-header-height;
+    left: $lo-sidebar-width; right: 0;
+    top: $lo-header-height;
   }
 }
 
 .header-bar {
-  background: @color-background-alternate;
-  color: @color-text;
-  height: @lo-header-height;
+  background: $color-background-alternate;
+  color: $color-text;
+  height: $lo-header-height;
 
   .title, .audio-visualizer {
     position: absolute;
@@ -89,8 +89,8 @@ body {
   }
 
   .title {
-    font-family: @font;
-    font-size: calc(@lo-header-height - 20px);
+    font-family: $font;
+    font-size: $lo-header-height - 20px;
     font-weight: bold;
     left: 0;
     margin: 10px;
@@ -98,7 +98,7 @@ body {
   > .visualizer {
     display: block;
     height: 100%; width: 100%;
-    padding-left: @lo-header-title-width;
+    padding-left: $lo-header-title-width;
     z-index: 1;
   }
   .social-media {
@@ -108,7 +108,7 @@ body {
     padding: 13px;
 
     a {
-      color: @color-text;
+      color: $color-text;
       font-size: 24px; line-height: 24px;
       height: 24px;
 
@@ -117,16 +117,16 @@ body {
   }
 }
 .filtered-track-list {
-  background: @color-background-alternate;
-  color: @color-text;
-  font-family: @font;
+  background: $color-background-alternate;
+  color: $color-text;
+  font-family: $font;
   padding: 0 5px;
 
   input[type=text] {
     border-radius: 5px;
     border: 3px double;
     padding: 3px;
-    width: calc(@lo-sidebar-width - 12px);
+    width: $lo-sidebar-width - 12px;
   }
 
   ul {
@@ -135,7 +135,7 @@ body {
     list-style: none;
     margin: 5px; padding: 0;
     position: absolute;
-    top: 25px; right: 0; bottom: @lo-sidebar-controls-height; left: 0;
+    top: 25px; right: 0; bottom: $lo-sidebar-controls-height; left: 0;
     overflow-y: auto;
 
     li {
@@ -145,8 +145,8 @@ body {
       width: 100%;
 
       &.selected, &:hover {
-        background: lighten(@color-background-alternate, 10%);
-        color: lighten(@color-text, 10%);
+        background: lighten($color-background-alternate, 10%);
+        color: lighten($color-text, 10%);
       }
 
       i { margin: 0 5px; }
@@ -156,10 +156,10 @@ body {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: pre;
-        width: @lo-sidebar-width - 60px;
+        width: $lo-sidebar-width - 60px;
       }
       .tickle-add, .tickle-remove {
-        color: @color-text-disabled;
+        color: $color-text-disabled;
         position: absolute;
         right: 0;
 
@@ -170,14 +170,14 @@ body {
         right: 16px;
       }
       &:hover .tickle-remove {
-        color: @color-dangerous;
+        color: $color-dangerous;
         display: inline-block;
 
-        &:hover { color: lighten(@color-dangerous, 20%); }
+        &:hover { color: lighten($color-dangerous, 20%); }
       }
 
       &.add-track {
-        color: darken(@color-text, 40%);
+        color: darken($color-text, 40%);
         font-style: italic;
 
         .tickle-add {
@@ -193,7 +193,7 @@ body {
     padding-top: 5px;
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: @lo-sidebar-controls-height;
+    height: $lo-sidebar-controls-height;
     text-align: center;
 
     &.visible { display: block; }
@@ -215,7 +215,7 @@ body {
     }
 
     .button {
-      color: @color-text;
+      color: $color-text;
       cursor: pointer;
       display: inline-block;
       font-size: .7rem;
@@ -231,15 +231,15 @@ body {
   padding: 10px;
 
   .audio-player {
-    background: @color-text;
-    border: 1px solid @color-text-disabled;
+    background: $color-text;
+    border: 1px solid $color-text-disabled;
     border-radius: 5px;
     display: inline-block;
-    font-family: @font;
+    font-family: $font;
     position: relative;
     height: 55px;
     margin: 5px;
-    min-width: @lo-audio-player-width;
+    min-width: $lo-audio-player-width;
 
     &.playing {
       animation: playing 1.5s linear infinite;
@@ -266,7 +266,7 @@ body {
       left: 0; right: 0;
 
       > .play-button {
-        border: 1px solid @color-inverse-text;
+        border: 1px solid $color-inverse-text;
         border-radius: 3px 0 0 3px;
         cursor: pointer;
         font-size: .6rem;
@@ -285,7 +285,7 @@ body {
         display: none; // replacing with an icon checkbox
 
         & + .loop-toggle-label {
-          color: @color-inverse-text-disabled;
+          color: $color-inverse-text-disabled;
           content: '&#xf01e;';
           cursor: pointer;
           display: inline-block;
@@ -297,13 +297,13 @@ body {
           text-align: center;
         }
         &:checked + .loop-toggle-label {
-          color: @color-inverse-text;
+          color: $color-inverse-text;
         }
       }
     }
     .audio-progress-bar {
       background: #fff;
-      border: 1px solid @color-trim;
+      border: 1px solid $color-trim;
       cursor: pointer;
       height: 15px;
       margin: 0 auto;
@@ -320,8 +320,8 @@ body {
       }
 
       .audio-progress-bar-fill {
-        background-color: @color-trim;
-        border-right: 1px solid @color-trim;
+        background-color: $color-trim;
+        border-right: 1px solid $color-trim;
         position: absolute;
         left: 0; top: 0; bottom: 0;
         overflow: hidden;
@@ -329,7 +329,7 @@ body {
         .audio-timer {
           padding: 0;
           color: #fff;
-          width: @lo-audio-player-width - 45px;
+          width: $lo-audio-player-width - 45px;
         }
       }
     }
@@ -349,7 +349,7 @@ body {
 
         &[class^=tickle-] {
           position: absolute;
-          color: @color-inverse-text;
+          color: $color-inverse-text;
         }
         &.tickle-volume-mute,
         &.tickle-volume-muted { margin-right: 3px; }
@@ -358,7 +358,7 @@ body {
       }
 
       .audio-volume-bar {
-        border: 1px solid @color-inverse-text-disabled;
+        border: 1px solid $color-inverse-text-disabled;
         cursor: pointer;
         height: 8px; margin: 0;
         left: 30px;
@@ -367,7 +367,7 @@ body {
         position: absolute;
 
         .audio-volume-bar-fill {
-          background: @color-inverse-text;
+          background: $color-inverse-text;
           bottom: 0;
           height: 8px;
           left: 0;
@@ -378,7 +378,3 @@ body {
     }
   }
 }
-
-@import 'scrollbars';
-@import (inline) '../fontello/css/ear-tickler.css';
-@import (inline) '../fontello/css/animation.css';
