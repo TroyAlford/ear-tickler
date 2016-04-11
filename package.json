@@ -9,9 +9,11 @@
   },
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.15.0",
     "del": "^2.2.0",
     "express": "^4.13.3",
     "fluxxor": "^1.7.3",
+    "fs-utils": "^0.7.0",
     "howler": "^2.0.0-beta9",
     "lodash": "^4.10.0",
     "react": "^0.14.8",

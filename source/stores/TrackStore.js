@@ -122,7 +122,7 @@ module.exports = Fluxxor.createStore({
         this.onAddTrack(track);
       }.bind(this))
     } else {
-      XHR.get('api/tracks', {
+      XHR.get('/api/tracks', {
         success: function (response) {
           this.onClearTracks(); // Clear first.
           if (!response || !response.message) {
@@ -154,7 +154,7 @@ module.exports = Fluxxor.createStore({
     if (this.useLocalStorage) {
       localStorage.setItem('tracks', JSON.stringify(tracks));
     } else {
-      XHR.post('api/tracks', {
+      XHR.post('/api/tracks', {
         data: tracks
       });
     }
