@@ -13,6 +13,7 @@ export default class AudioVolumeBar extends Component {
   componentDidMount() {
     const forceUpdate = () => { this.forceUpdate.call(this) }
 
+    this.props.audio.on('load', forceUpdate)
     this.props.audio.on('volume', forceUpdate)
     this.props.audio.on('mute', forceUpdate)
   }
