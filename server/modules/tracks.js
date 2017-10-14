@@ -1,8 +1,8 @@
-import _                  from 'lodash'
-import bodyParser         from 'body-parser'
-import express            from 'express'
-import path               from 'path'
-import utils              from 'fs-utils'
+import bodyParser from 'body-parser'
+import express from 'express'
+import path from 'path'
+import utils from 'fs-utils'
+import uniqBy from '../../source/helpers/uniqBy'
 
 const paths = {
   default_tracks: path.join(__dirname, '../../data/default_tracks.json'),
@@ -10,7 +10,7 @@ const paths = {
 }
 const defaults = utils.exists(paths.default_tracks) ? require(paths.default_tracks) : []
 const currents = utils.exists(paths.current_tracks) ? require(paths.current_tracks) : []
-let tracks   = _.uniqBy([...defaults, ...currents], 'name')
+let tracks = uniqBy([...defaults, ...currents], 'name')
 
 export const getTracks = () => tracks
 
@@ -20,15 +20,15 @@ export default express()
     response.status(200).send(tracks);
   })
   .post('/', (request, response) => {
-    tracks = _.difference(request.body.map(el => {
-      if (!el || (!el.origin && !el.url)) return null;
+    tracks = request.body.map(el => {
+      if (!el || (!el.origin && !el.url)) return undefined;
 
       return {
         name:   el.name || 'Unnamed Track',
         origin: el.origin || el.url,
         tags:   el.tags
       };
-    }), [null]);
+    }).filter(Boolean);
 
     response.status(200).send(tracks);
     utils.writeJSON(paths.current_tracks, tracks);

@@ -1,5 +1,4 @@
 // var Fluxxor = require('fluxxor'),
-//           _ = require('lodash');
 
 // var Guid = require('../helpers/Guid.js');
 

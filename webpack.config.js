@@ -29,7 +29,6 @@ const bundle = {
         loader: 'babel-loader',
         options: {
           plugins: [
-            'lodash',
             'transform-class-properties',
             'transform-object-rest-spread',
           ],
