@@ -37,10 +37,11 @@ export default class AudioPlayer extends Component {
   }
 
   render() {
+    const { player } = this.props
     const playerClassName = `audio-player ${this.audio.playing() ? 'playing' : ''}`
     return (
       <div className={playerClassName}>
-        <div className="track-name">{this.props.title}</div>
+        <div className="track-name">{player.name}</div>
         <i
           className="tickle-close close-button"
           onClick={this.handleClose}>
