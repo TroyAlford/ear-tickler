@@ -1,30 +1,19 @@
-var React = require('react');
-var AudioPlayer = require('../playback/AudioPlayer.js');
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import AudioPlayer from '../playback/AudioPlayer'
 
-module.exports = React.createClass({
-  handleCloseClicked: function(id) {
-    this.props.onCloseClicked(id);
-  },
-
-  render: function() {
+class SoundBoard extends Component {
+  render() {
     return (
-      <div className="sound-board">{this.renderPlayers()}</div>
-    );
-  },
-  renderPlayers: function() {
-    return (
-      this.props.players.map(function(player) {
-        return (
-          <AudioPlayer
-            id={player.id} key={player.id}
-            player={player}
-            title={player.title}
-            track={player.track}
-            url={player.url}
-            onClose={this.handleCloseClicked.bind(null, player.id)}
-          />
-        );
-      }, this)
-    );
+      <div className="sound-board">
+        {this.props.players.map(player =>
+          <AudioPlayer key={player.playerId} player={player} />
+        )}
+      </div>
+    )
   }
-});
+}
+
+export default connect(
+  (state) => ({ players: state.players })
+)(SoundBoard)

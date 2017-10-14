@@ -1,76 +1,83 @@
-import React       from 'react'
-import _           from 'lodash'
+import React, { Component } from 'react'
 
-module.exports = React.createClass({
-  getInitialState: function() {
-    return {
-      selected_id: null,
-      selected_name: null,
-      selected_url: null
-    };
-  },
+export default class TrackListControls extends Component {
+  constructor(props) {
+    super(props)
 
-  componentWillReceiveProps: function(props) {
+    this.clearSelectedState = this.clearSelectedState.bind(this)
+    this.handleBlur = this.handleBlur.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleKeyUp = this.handleKeyUp.bind(this)
+
+    this.state = {
+      selected_id: undefined,
+      selected_name: undefined,
+      selected_url: undefined,
+    }
+  }
+
+  componentWillReceiveProps(props) {
     if (props.selected && props.selected.id !== this.props.selected.id) {
       this.setState({
         selected_id: props.selected.id,
         selected_name: props.selected.name,
-        selected_url: props.selected.url
-      });
-      this.setFocus = true;
+        selected_url: props.selected.url,
+      })
+      this.setFocus = true
     } else if (!props.selected) {
-      this.clearSelectedState();
+      this.clearSelectedState()
     }
-  },
-  componentDidUpdate: function() {
-    if (this.setFocus) {
-      this.refs.name.focus();
-      this.setFocus = false;
-    }
-  },
+  }
 
-  clearSelectedState: function() {
+  componentDidUpdate() {
+    if (this.setFocus) {
+      this.refs.name.focus()
+      this.setFocus = false
+    }
+  }
+
+  clearSelectedState() {
     this.setState({
       selected_id: null,
       selected_name: null,
       selected_url: null
-    });
-  },
+    })
+  }
 
-  getBackupUrl: function() {
+  getBackupUrl() {
     var json = JSON.stringify({
       tracks: this.props.tracks
-    });
-    var blob = new Blob([json], { type: 'octet/stream' });
-    return URL.createObjectURL(blob);
-  },
+    })
+    var blob = new Blob([json], { type: 'octet/stream' })
+    return URL.createObjectURL(blob)
+  }
 
-  handleBlur: function() {
-    this.props.onCancelEdit();
-  },
-  handleChange: function() {
+  handleBlur() {
+    this.props.onCancelEdit()
+  }
+  handleChange() {
     this.setState({
       selected_id: this.state.selected.id,
       selected_name: this.refs.name.value,
       selected_url: this.refs.url.value
-    });
-  },
-  handleKeyUp: function(event) {
+    })
+  }
+  handleKeyUp(event) {
     switch (event.key) {
       case "Enter":  // --> Save
         this.props.onUpdateTrack({
           id: this.props.selected.id,
           name: this.refs.name.value,
-          url: this.refs.url.value
-        });
-        break;
+          url: this.refs.url.value,
+        })
+        break
       case "Escape": // --> Cancel
-        this.props.onCancelEdit();
-        break;
+        this.props.onCancelEdit()
+        break
     }
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div className={`track-list-controls ${this.state.selected_id ? 'visible' : ''}`}>
         <label>
@@ -98,9 +105,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
-
-//<a className="button backup"
-//       download="track-list-backup.json"
-//       href={this.getBackupUrl()}
-//><i className="tickle-download"></i> Export</a>
+}

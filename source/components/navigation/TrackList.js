@@ -1,60 +1,10 @@
-var React = require('react'),
-     Guid = require('../../helpers/Guid.js'),
-        _ = require('lodash')
-;
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import sortBy from '../../helpers/sortBy'
+import TrackListItem from './TrackListItem'
 
-module.exports = React.createClass({
-  handleNewTrack: function() {
-    this.props.onSelectTrack({
-      id: Guid.generate(),
-      name: 'New Track...',
-      url: ''
-    });
-  },
-
-  render: function() {
-    var listItems = _.sortBy(this.props.tracks, 'name')
-      .filter(function(track) {
-        var filter = this.props.filterText.toLowerCase();
-        var trackName = track.name.toLowerCase();
-        return trackName.indexOf(filter) > -1;
-      }, this)
-      .map(function(track) {
-        var iconClassName = 'tickle-track';
-        if (_.includes(this.props.addedTrackIds, track.id))
-          iconClassName += '-playing';
-
-        var isSelected = (
-          this.props.selected &&
-          this.props.selected.id === track.id
-        );
-
-        return (
-          <li key={track.id} track={track}
-              className={isSelected ? 'selected' : ''}
-              onClick={this.props.onSelectTrack.bind(null, track)}>
-            <i className={iconClassName}></i>
-            <span className="track-name">{track.name}</span>
-            <i className="tickle-add"
-               onClick={this.props.onPlayTrack.bind(null, track.id)}
-            ></i>
-            <i className="tickle-remove"
-               onClick={this.props.onRemoveTrack.bind(null, track.id)}
-            ></i>
-          </li>
-        );
-      }, this
-    );
-
-    return (
-      <ul>
-        {listItems}
-        <li key="new" track={{}} className="add-track"
-            onClick={this.handleNewTrack}>
-          <i className="tickle-add"></i>
-          <span className="track-name">Add New...</span>
-        </li>
-      </ul>
-    );
-  }
-});
+export default ({ tracks = [] }) => (
+  <ul>
+    {tracks.map(track => <TrackListItem key={track.trackId} track={track} />)}
+  </ul>
+)

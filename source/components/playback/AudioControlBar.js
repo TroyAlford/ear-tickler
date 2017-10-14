@@ -1,63 +1,58 @@
-var React = require('react');
-var Guid = require('../../helpers/Guid.js');
+import React, { Component } from 'react'
+import guid from '../../helpers/Guid'
 
-module.exports = React.createClass({
-  getInitialState: function() {
-    return {
-      loopToggleId: Guid.generate()
-    };
-  },
+export default class AudioControlBar extends Component {
+  constructor(props) {
+    super(props)
 
-  handleClick: function() {
-    switch (this.props.playState) {
-      case 'loading':
-        break;
-      case 'playing':
-        this.props.onPause();
-        break;
-      default:
-        this.props.onPlay();
-    }
-  },
-  handleLoopToggle: function() {
-    this.props.onLoopToggle(
-      this.refs.loop_enabled.checked
-    );
-  },
+    this.getButtonClass = this.getButtonClass.bind(this)
+    this.handleLoopToggle = this.handleLoopToggle.bind(this)
+    this.handlePlayToggle = this.handlePlayToggle.bind(this)
+  }
 
-  getButtonClass: function() {
-    switch (this.props.playState) {
-      case 'playing':
-        return 'pause';
-      case 'loading':
-        return 'loading animate-spin';
-      case 'paused':
-      case 'stopped':
-      default:
-        return 'play';
-        return 'play';
-    }
-  },
+  componentDidMount() {
+    const forceUpdate = () => { this.forceUpdate.call(this) }
 
-  render: function() {
+    this.props.audio.on('end', forceUpdate)
+    this.props.audio.on('load', forceUpdate)
+    this.props.audio.on('pause', forceUpdate)
+    this.props.audio.on('play', forceUpdate)
+    this.props.audio.on('stop', forceUpdate)
+  }
+
+  handlePlayToggle() {
+    if (this.props.audio.state() !== 'loaded') return undefined
+
+    if (this.props.audio.playing())
+      this.props.audio.pause()
+    else
+      this.props.audio.play()
+  }
+  handleLoopToggle() {
+    const loop = !this.state.loop
+    this.props.audio.loop(loop)
+    this.forceUpdate()
+  }
+
+  getButtonClass() {
+    if (this.props.audio.state() === 'loading')
+      return 'loading animate-spin'
+
+    if (this.props.audio.playing())
+      return 'pause'
+    else
+      return 'play'
+  }
+
+  render() {
+    const buttonClass = `play-button tickle-${this.getButtonClass()}`
     return (
       <div className="audio-control-bar">
-        <i className={"play-button tickle-" + this.getButtonClass()}
-           onClick={this.handleClick}>
-        </i>
-        <input
-          id={this.state.loopToggleId}
-          className="loop-toggle"
-          type="checkbox"
-          ref="loop_enabled"
-          onChange={this.handleLoopToggle}
-        />
-        <label
-          className="loop-toggle-label"
-          htmlFor={this.state.loopToggleId}>
-          <i className="tickle-loop"></i>
+        <i className={buttonClass} onClick={this.handlePlayToggle} />
+        <label className="loop-toggle-label" onClick={this.handleLoopToggle}>
+          <i className="tickle-loop" />
         </label>
       </div>
-    );
+    )
   }
-});
+}

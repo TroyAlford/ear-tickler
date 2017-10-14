@@ -1,56 +1,43 @@
-var React = require('react');
-var TrackList = require('./TrackList.js');
-var TrackListControls = require('./TrackListControls.js');
-var TrackSearchBar = require('./TrackSearchBar.js');
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import TrackList from './TrackList'
 
-module.exports = React.createClass({
-  getInitialState: function() {
-    return {
-      filterText: '',
-      selected: {}
-    };
-  },
+class FilteredTrackList extends Component {
+  constructor(props) {
+    super(props)
+    this.handleFilterChange = this.handleFilterChange.bind(this)
+  }
 
-  handlePlayTrack: function(track_id) {
-    this.props.onPlayTrack(track_id);
-  },
-  handleCancelEdit: function() {
-    this.setState({ selected: {} });
-  },
-  handleUpdateTrack: function(track) {
-    this.props.onUpdateTrack(track);
-    this.setState({ selected: {} });
-  },
-  handleFilterChange: function(filterText) {
-    this.setState({ filterText: filterText });
-  },
-  handleSelectTrack: function(track) {
-    this.setState({ selected: track });
-  },
+  state = { filterText: '' }
 
-  render: function() {
+  handleFilterChange({ target: { value: filterText } }) {
+    if (filterText !== this.state.filterText) {
+      this.setState({ filterText, filter: new RegExp(filterText, 'i') })
+    }
+  }
+
+  render() {
+    const { filterText, filter } = this.state
+    let filteredTracks = this.props.tracks
+    if (filterText.length) {
+      filteredTracks = filteredTracks.filter(track =>
+        track.name.search(filter) !== -1
+      )
+    }
+
     return (
       <div className="filtered-track-list">
-        <TrackSearchBar
-          filterText={this.state.filterText}
-          onFilterChange={this.handleFilterChange}
+        <input
+          type="text" placeholder="Search..."
+          onChange={this.handleFilterChange}
+          value={filterText}
         />
-        <TrackList
-          filterText={this.state.filterText}
-          addedTrackIds={this.props.addedTrackIds}
-          selected={this.state.selected}
-          tracks={this.props.tracks}
-          onPlayTrack={this.handlePlayTrack}
-          onRemoveTrack={this.props.onRemoveTrack}
-          onSelectTrack={this.handleSelectTrack}
-        />
-        <TrackListControls
-          selected={this.state.selected}
-          tracks={this.props.tracks}
-          onCancelEdit={this.handleCancelEdit}
-          onUpdateTrack={this.handleUpdateTrack}
-        />
+        <TrackList tracks={filteredTracks} />
       </div>
-    );
+    )
   }
-});
+}
+
+export default connect(
+  (state) => ({ tracks: state.tracks })
+)(FilteredTrackList)
