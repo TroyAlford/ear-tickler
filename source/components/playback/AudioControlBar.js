@@ -29,7 +29,7 @@ export default class AudioControlBar extends Component {
       this.props.audio.play()
   }
   handleLoopToggle() {
-    const loop = !this.state.loop
+    const loop = !this.props.audio.loop()
     this.props.audio.loop(loop)
     this.forceUpdate()
   }
@@ -46,10 +46,12 @@ export default class AudioControlBar extends Component {
 
   render() {
     const buttonClass = `play-button tickle-${this.getButtonClass()}`
+    const loop = this.props.audio.loop()
+    const loopToggleClass = `loop-toggle loop-${loop ? 'on' : 'off'}`
     return (
       <div className="audio-control-bar">
         <i className={buttonClass} onClick={this.handlePlayToggle} />
-        <label className="loop-toggle-label" onClick={this.handleLoopToggle}>
+        <label className={loopToggleClass} onClick={this.handleLoopToggle}>
           <i className="tickle-loop" />
         </label>
       </div>

@@ -281,24 +281,19 @@ body {
           border: none;
         }
       }
-      > .loop-toggle {
-        display: none; // replacing with an icon checkbox
+      .loop-toggle {
+        color: $color-inverse-text-disabled;
+        content: '&#xf01e;';
+        cursor: pointer;
+        display: inline-block;
+        font: normal normal normal 12px/1 FontAwesome;
+        line-height: 18px;
+        position: absolute;
+        height: 20px; width: 20px;
+        right: 0;
+        text-align: center;
 
-        & + .loop-toggle-label {
-          color: $color-inverse-text-disabled;
-          content: '&#xf01e;';
-          cursor: pointer;
-          display: inline-block;
-          font: normal normal normal 12px/1 FontAwesome;
-          line-height: 18px;
-          position: absolute;
-          height: 20px; width: 20px;
-          right: 0;
-          text-align: center;
-        }
-        &:checked + .loop-toggle-label {
-          color: $color-inverse-text;
-        }
+        &.loop-on  { color: $color-inverse-text; }
       }
     }
     .audio-progress-bar {
