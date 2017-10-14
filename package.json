@@ -16,11 +16,15 @@
     "fs-utils": "^0.7.0",
     "howler": "^2.0.0-beta9",
     "lodash": "^4.10.0",
-    "react": "^0.14.8",
-    "react-dom": "^0.14.8"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babelify": "^7.2.0",
@@ -29,8 +33,10 @@
     "concat": "github:azer/concat",
     "concat-cli": "^4.0.0",
     "mkdirp": "^0.5.1",
-    "node-sass": "^3.4.2",
-    "nodemon": "^1.9.1"
+    "node-sass": "^4.5.3",
+    "node-sass-glob-importer": "^5.0.0-alpha.15",
+    "nodemon": "^1.9.1",
+    "webpack": "^3.7.1"
   },
   "browserify": {
     "transform": [
@@ -38,18 +44,22 @@
     ]
   },
   "scripts": {
-    "develop": "npm run serve & npm run jsx-dep-build & npm run watch-jsx & npm run watch-css",
-    "build": "npm run clean && (npm run build-jsx & npm run build-css)",
-    "build-css": "npm run css-app-build & npm run css-dep-build",
-    "build-jsx": "npm run jsx-app-build & npm run jsx-dep-build",
-    "clean": "rm -rf build",
-    "css-app-build": "mkdirp build/css && npm run css-app-concat && node-sass build/sass/application.scss -o build/css --output-style compressed --source-map true --source-map-embed",
-    "css-app-concat": "mkdirp build/sass && concat-cli -f styles/*.scss -o build/sass/application.scss",
-    "css-dep-build": "node-sass vendor/dependencies.scss -o build/css --output-style compressed --source-map true --source-map-embed",
-    "jsx-app-build": "mkdirp build/js && browserify -x react -x react-dom -x lodash source/application/Application.js > build/js/application.js",
-    "jsx-dep-build": "mkdirp build/js && browserify -r react -r react-dom -r lodash vendor/dependencies.js > build/js/dependencies.js ",
-    "serve": "nodemon --watch ./server --exec babel-node server/server.js -c ../config/config.json",
-    "watch-css": "nodemon --watch styles -e css,scss --exec 'npm run build-css'",
-    "watch-jsx": "nodemon --watch source -e js --exec 'npm run jsx-app-build'"
+    "start": "yarn build-prod && yarn serve-prod",
+    "test": "jest",
+    "develop": "yarn watch & yarn serve-watched",
+    "build": "yarn prebuild && (yarn build-css & yarn webpack)",
+    "build-dev": "yarn build",
+    "build-prod": "NODE_ENV=production yarn build",
+    "build-css": "(yarn build-css-app & yarn build-css-dep)",
+    "build-css-app": "node-sass styles/application.scss --output-style compressed --source-map true --source-map-embed --importer node_modules/node-sass-glob-importer/dist/cli.js -o build/css",
+    "build-css-dep": "node-sass vendor/dependencies.scss --output-style compressed --source-map true --source-map-embed -o build/css ",
+    "prebuild": "rm -rf build/css/* && rm -rf build/js/*",
+    "serve": "babel-node server/server.js",
+    "serve-prod": "NODE_ENV=production yarn serve",
+    "serve-watched": "nodemon --watch ./server --watch ./config -e .js --exec 'yarn serve'",
+    "watch": "SOURCEMAP=true yarn prebuild && (yarn watch-css & yarn webpack -- --watch)",
+    "watch-css": "yarn watch-css-app & yarn watch-css-dep",
+    "watch-css-app": "nodemon --watch ./styles -e scss --exec 'yarn build-css-app'",
+    "watch-css-dep": "nodemon --watch ./vendor -e scss --exec 'yarn build-css-dep'"
   }
 }
