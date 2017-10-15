@@ -6,14 +6,14 @@ import utils from 'fs-utils'
 
 import tracks_api, { getTracks } from './modules/tracks'
 
-let port = 8080;
+const port = 8080;
+const app = express()
 
-let app = express();
-
-app.use('/css',     express.static(path.join(__dirname, '../build/css')));
-app.use('/js',      express.static(path.join(__dirname, '../build/js')));
-app.use('/font',    express.static(path.join(__dirname, '../fontello/font')));
-app.use('/images',  express.static(path.join(__dirname, '../images')));
+app.use('/css',     express.static(path.join(__dirname, '../build/css')))
+app.use('/js',      express.static(path.join(__dirname, '../build/js')))
+app.use('/font',    express.static(path.join(__dirname, '../fontello/font')))
+app.use('/images',  express.static(path.join(__dirname, '../images')))
+app.use('/',        express.static(path.join(__dirname, './service-workers')))
 
 app.use('/api/tracks', tracks_api);
 
