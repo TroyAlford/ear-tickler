@@ -12,4 +12,4 @@ export const addPlayer = (track) => ({
     ...track,
   },
 })
-export const removePlayer = (id) => ({ type: ACTIONS.REMOVE, id })
+export const removePlayer = (playerId) => ({ type: ACTIONS.REMOVE, playerId })

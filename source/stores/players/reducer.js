@@ -7,7 +7,7 @@ export default (state = [], action) => {
       return [...state, action.player]
 
     case ACTIONS.REMOVE:
-      return state.filter(player => player.id !== action.id)
+      return state.filter(player => player.playerId !== action.playerId)
 
     default:
       return state
