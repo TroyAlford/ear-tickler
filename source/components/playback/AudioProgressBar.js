@@ -9,7 +9,6 @@ export default class AudioProgressBar extends Component {
 
   componentDidMount() {
     const forceUpdate = () => { this.forceUpdate.call(this) }
-    const setState = (state) => { this.setState.call(state) }
 
     this.props.audio.on('load', forceUpdate)
     this.props.audio.on('seek', forceUpdate)

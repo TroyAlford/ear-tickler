@@ -7,7 +7,7 @@ class SoundBoard extends Component {
     return (
       <div className="sound-board">
         {this.props.players.map(player =>
-          <AudioPlayer key={player.playerId} player={player} />
+          <AudioPlayer key={player.playerId} {...player} />
         )}
       </div>
     )
