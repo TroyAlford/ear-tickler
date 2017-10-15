@@ -13,7 +13,7 @@ export default class AudioProgressBar extends Component {
     this.props.audio.on('load', forceUpdate)
     this.props.audio.on('seek', forceUpdate)
     this.props.audio.on('play', () => {
-      this.timer = setInterval(forceUpdate, 1000)
+      this.timer = setInterval(forceUpdate, 500)
     })
     this.props.audio.on('pause', () => clearInterval(this.timer))
     this.props.audio.on('stop', () => clearInterval(this.timer))
