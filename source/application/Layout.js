@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 import FilteredTrackList from '../components/navigation/FilteredTrackList'
 import SoundBoard from '../components/soundboard/SoundBoard'
-import Visualizer from '../components/visualization/Visualizer'
 
 export default class Layout extends Component {
   render() {

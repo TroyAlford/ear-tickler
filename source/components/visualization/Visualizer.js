@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Oscilloscope from './Oscilloscope'
-
 class Visualizer extends Component {
   constructor(props) {
     super(props)
