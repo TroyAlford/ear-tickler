@@ -13,7 +13,6 @@ export default class Layout extends Component {
           <div className="title">
             <i className="tickle-logo"></i> Ear Tickler
           </div>
-          <Visualizer />
           <div className="social-media">
             <a href="https://github.com/troyalford/ear-tickler" target="_blank">
               <i className="tickle-github"></i>
