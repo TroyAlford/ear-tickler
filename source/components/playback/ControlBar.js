@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ProgressBar from './ProgressBar'
 import guid from '../../helpers/Guid'
 
 export default class AudioControlBar extends Component {
@@ -13,11 +14,9 @@ export default class AudioControlBar extends Component {
   componentDidMount() {
     const forceUpdate = () => { this.forceUpdate.call(this) }
 
-    this.props.audio.on('end', forceUpdate)
-    this.props.audio.on('load', forceUpdate)
-    this.props.audio.on('pause', forceUpdate)
-    this.props.audio.on('play', forceUpdate)
-    this.props.audio.on('stop', forceUpdate)
+    ['end', 'load', 'pause', 'play', 'stop'].forEach((event) => {
+      this.props.audio.on(event, forceUpdate)
+    })
   }
 
   handlePlayToggle() {
@@ -51,6 +50,7 @@ export default class AudioControlBar extends Component {
     return (
       <div className="audio-control-bar">
         <i className={buttonClass} onClick={this.handlePlayToggle} />
+        <ProgressBar audio={this.props.audio} />
         <label className={loopToggleClass} onClick={this.handleLoopToggle}>
           <i className="tickle-loop" />
         </label>

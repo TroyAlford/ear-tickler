@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Howl } from 'howler'
-import AudioControlBar from './AudioControlBar'
-import AudioProgressBar from './AudioProgressBar'
-import AudioVolumeBar from './AudioVolumeBar'
+import ControlBar from './ControlBar'
+import VolumeBar from './VolumeBar'
 import { removePlayer } from '../../stores/players/actions'
 
 class AudioPlayer extends Component {
@@ -45,9 +44,8 @@ class AudioPlayer extends Component {
       <div className={playerClassName}>
         <div className="track-name">{this.props.name}</div>
         <i className="tickle-close close-button" onClick={this.handleClose} />
-        <AudioControlBar audio={this.audio} />
-        <AudioProgressBar audio={this.audio} />
-        <AudioVolumeBar audio={this.audio} initialVolume={1.0} />
+        <ControlBar audio={this.audio} />
+        <VolumeBar audio={this.audio} initialVolume={1.0} />
       </div>
     )
   }
